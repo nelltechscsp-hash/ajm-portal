@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="carta_header" name="Encabezado de Carta">
+    <div class="ajm-carta-header">
+      <!-- Header content: replace with your real header -->
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h2 style="margin:0;">AJM Insurance</h2>
+          <p style="margin:0;">Policy documents</p>
+        </div>
+        <div class="col-4 text-end">
+          <span t-esc="client and client.name or ''"/>
+        </div>
+      </div>
+      <hr/>
+    </div>
+  </template>
+</odoo>
