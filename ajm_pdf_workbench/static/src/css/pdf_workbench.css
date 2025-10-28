@@ -230,14 +230,14 @@
     .web-only {
         display: none !important;
     }
-    
+
     /* Ajustar página para impresión */
     body {
         margin: 0;
         padding: 0;
         background: white;
     }
-    
+
     .ajm-pdf-page {
         width: 100%;
         min-height: auto;
@@ -246,11 +246,11 @@
         box-shadow: none;
         page-break-after: always;
     }
-    
+
     .ajm-pdf-page:last-child {
         page-break-after: auto;
     }
-    
+
     /* Asegurar que los campos se vean como en pantalla */
     input, textarea, select {
         border: 1px solid #000 !important;
@@ -259,24 +259,24 @@
         -moz-appearance: none;
         appearance: none;
     }
-    
+
     /* Forzar saltos de página donde corresponde */
     .ajm-page-break {
         page-break-before: always;
         break-before: page;
     }
-    
+
     /* Evitar que elementos se corten entre páginas */
     .ajm-no-break {
         page-break-inside: avoid;
         break-inside: avoid;
     }
-    
+
     .ajm-signature-block {
         page-break-inside: avoid;
         break-inside: avoid;
     }
-    
+
     /* Asegurar que las tablas no se corten */
     table {
         page-break-inside: avoid;

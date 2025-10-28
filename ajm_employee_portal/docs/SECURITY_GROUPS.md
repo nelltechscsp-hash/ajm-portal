@@ -1,12 +1,14 @@
 # Guía: Grupos de Seguridad por Portal
 
 ## Resumen
+
 Se han creado **dos grupos de seguridad** para controlar el acceso a los portales de Sales y Cancellations:
 
 - **Sales Portal User**: Solo accede a `/my/sales`
 - **Cancellations Portal User**: Solo accede a `/my/cancellations`
 
 Los usuarios con estos grupos:
+
 - ✅ Pueden acceder a su portal específico
 - ✅ Pueden hacer check-in/check-out en su portal
 - ✅ Solo ven su propia asistencia y datos de empleado
@@ -75,6 +77,7 @@ env.cr.commit()
 Cada grupo tiene reglas que restringen el acceso a:
 
 1. **hr.attendance**: Solo puede ver/crear sus propios registros
+
    - Domain: `[('employee_id.user_id', '=', user.id)]`
    - Permisos: Read ✓, Write ✓, Create ✓, Delete ✗
 
@@ -85,6 +88,7 @@ Cada grupo tiene reglas que restringen el acceso a:
 ### Access Rights (ir.model.access.csv)
 
 Los grupos tienen acceso a los modelos necesarios:
+
 - `hr.attendance`: Read, Write, Create
 - `hr.employee`: Read only
 
@@ -133,16 +137,19 @@ for u in users:
 ## Testing
 
 ### Prueba 1: Usuario con Sales Portal User
+
 1. Login con un usuario que tenga **Sales Portal User**
 2. Navegar a `/my/sales` → ✅ Debería ver el dashboard
 3. Intentar `/my/cancellations` → ❌ Error 403 Forbidden
 
 ### Prueba 2: Usuario con Cancellations Portal User
+
 1. Login con un usuario que tenga **Cancellations Portal User**
 2. Navegar a `/my/cancellations` → ✅ Debería ver el dashboard
 3. Intentar `/my/sales` → ❌ Error 403 Forbidden
 
 ### Prueba 3: Admin
+
 1. Login con admin
 2. Puede acceder a ambos portales sin restricción
 

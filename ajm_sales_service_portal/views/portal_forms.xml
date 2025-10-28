@@ -40,7 +40,7 @@
                 <h2 class="mb-3">Insurance Application</h2>
                 <form action="/my/sales/forms/contract/submit" method="post" enctype="multipart/form-data" id="contract_form">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    
+
                     <!-- Shared Insurance Application body -->
                     <t t-call="ajm_sales_service_portal.portal_insurance_form_body"/>
 
@@ -60,7 +60,7 @@
                     </div>
                 </form>
             </div>
-            
+
             <!-- Shared Insurance Application scripts (tables, JSON, lookups, statuses) -->
             <t t-call="ajm_sales_service_portal.portal_insurance_form_scripts"/>
         </t>

@@ -1,10 +1,10 @@
 // Simple vanilla JS - no Odoo modules needed
 (function() {
     'use strict';
-    
+
     function initAJMPortal() {
         // NO AUTO-REDIRECT - let users navigate manually
-        
+
         // Initialize Bootstrap dropdowns if not already initialized
         if (typeof bootstrap !== 'undefined') {
             var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
@@ -14,7 +14,7 @@
                 }
             });
         }
-        
+
         // Menu navigation now handled natively by website.menu records
 
         const btnCheckIn = document.getElementById('btn-check-in');
@@ -26,7 +26,7 @@
                 try {
                     btnCheckIn.disabled = true;
                     btnCheckIn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i>Checking in...';
-                    
+
                     const response = await fetch('/my/sales/check-in', {
                         method: 'POST',
                         headers: {
@@ -38,10 +38,10 @@
                             params: {}
                         })
                     });
-                    
+
                     const data = await response.json();
                     const result = data.result;
-                    
+
                     if (result && result.success) {
                         location.reload();
                     } else {
@@ -64,11 +64,11 @@
                 if (!confirm('Are you sure you want to check out?')) {
                     return;
                 }
-                
+
                 try {
                     btnCheckOut.disabled = true;
                     btnCheckOut.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i>Checking out...';
-                    
+
                     const response = await fetch('/my/sales/check-out', {
                         method: 'POST',
                         headers: {
@@ -80,10 +80,10 @@
                             params: {}
                         })
                     });
-                    
+
                     const data = await response.json();
                     const result = data.result;
-                    
+
                     if (result && result.success) {
                         location.reload();
                     } else {

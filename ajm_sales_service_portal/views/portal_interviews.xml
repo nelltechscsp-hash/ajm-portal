@@ -111,7 +111,7 @@
             <script type="application/json" id="init_history"><t t-esc="interview.history_json or '[]'"/></script>
             <script type="application/json" id="init_filings"><t t-esc="interview.filings_json or '{}'"/></script>
 
-            
+
 
             <!-- Shared Insurance Application scripts (tables, JSON, lookups, statuses) -->
             <t t-call="ajm_sales_service_portal.portal_insurance_form_scripts"/>

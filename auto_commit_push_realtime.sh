@@ -23,8 +23,13 @@ inotifywait -m -r -e modify,create,delete,move --format '%w%f' . | while read FI
       continue
     fi
     git add "$FILE"
-    MSG="Auto-commit: cambio en $FILE ($(date '+%Y-%m-%d %H:%M:%S'))"
-    git commit -m "$MSG" --allow-empty
-    git push $REMOTE $BRANCH
-    echo "[auto_commit_push_realtime] Commit y push realizados por cambio en $FILE"
+    # Solo commitea si hay cambios reales
+    if ! git diff --cached --quiet; then
+      MSG="Auto-commit: cambio en $FILE ($(date '+%Y-%m-%d %H:%M:%S'))"
+      git commit -m "$MSG"
+      git push $REMOTE $BRANCH
+      echo "[auto_commit_push_realtime] Commit y push realizados por cambio en $FILE"
+    else
+      git reset "$FILE" # Quita el archivo del stage si no hay cambios
+    fi
   done

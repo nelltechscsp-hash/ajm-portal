@@ -1,12 +1,12 @@
 import logging
-import pytz
 from datetime import datetime, timedelta
-from odoo import http, fields
-from odoo.http import request
+
+import pytz
+from odoo import fields, http
 from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.http import request
 from werkzeug.utils import redirect as werkzeug_redirect
 from werkzeug.wrappers import Response
-
 
 _logger = logging.getLogger(__name__)
 
@@ -46,30 +46,30 @@ class AJMLoginRedirect(Home):
     def _login_redirect(self, uid, redirect=None):
         """Redirect users to their department portal after login"""
         user = request.env['res.users'].sudo().browse(uid)
-        
+
         # Admin and internal users go to backend
         if user.has_group('base.group_system') or user.has_group('base.group_user'):
             return super()._login_redirect(uid, redirect)
-        
+
         # Portal users: redirect to their department portal
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', uid)], limit=1)
         if employee:
             route = _get_department_route(employee)
             if route:
                 return route
-        
+
         # Fallback to /my
         return '/my'
 
 
 class AJMEmployeePortal(CustomerPortal):
-    
+
     @http.route(['/my', '/my/home'], type='http', auth='user', website=True)
     def home(self, **kw):
         """Override /my and /my/home - show portal home without redirects"""
         # Simply call the parent portal home method
         return super().home(**kw)
-    
+
     @http.route('/my/sales', type='http', auth='user', website=True, groups='ajm_employee_portal.group_sales_portal_user')
     def sales_dashboard(self, **kw):
         """Sales Department Portal - exclusive dashboard for Sales employees"""
@@ -78,15 +78,15 @@ class AJMEmployeePortal(CustomerPortal):
         is_admin = user.has_group('base.group_system')
         values = self._get_dashboard_values(user, employee, is_admin=is_admin)
         return request.render('ajm_employee_portal.employee_dashboard', values)
-    
+
     def _get_dashboard_values(self, user, employee, is_admin=False):
-        
+
         # Get employee attendance data if exists
         attendance_obj = request.env['hr.attendance'].sudo()
         last_attendance = attendance_obj.search([
             ('employee_id.user_id', '=', user.id)
         ], order='check_in desc', limit=1)
-        
+
         is_checked_in = last_attendance and not last_attendance.check_out
 
         # Use user's timezone (defaults to America/Chicago if not set)
@@ -107,7 +107,7 @@ class AJMEmployeePortal(CustomerPortal):
                 co_display = check_out_local.strftime('%m/%d/%Y %I:%M %p')
         except Exception as e:
             _logger.error('Error formatting datetime: %s', e)
-        
+
         return {
             'user': user,
             'employee': employee,
@@ -120,7 +120,7 @@ class AJMEmployeePortal(CustomerPortal):
             'co_display': co_display,
             'page_name': 'ajm_dashboard',
         }
-    
+
     @http.route('/my/cancellations', type='http', auth='user', website=True, groups='ajm_employee_portal.group_cancellations_portal_user')
     def cancellations_dashboard(self, **kw):
         """Cancellations Department Portal - full dashboard for Cancellations employees"""
@@ -131,7 +131,7 @@ class AJMEmployeePortal(CustomerPortal):
         return request.render('ajm_employee_portal.cancellations_dashboard', values)
 
     # Removed generic department route by request
-    
+
     @http.route('/my/ajm', type='http', auth='user', website=True)
     def ajm_legacy_redirect(self, **kw):
         """Legacy redirect: /my/ajm is deprecated, redirect to /my/department"""
@@ -142,20 +142,20 @@ class AJMEmployeePortal(CustomerPortal):
         """Redirect to the current user's department portal route if mapped, else /my/home."""
         user = request.env.user
         is_admin = user.has_group('base.group_system')
-        
+
         # Admin always goes to Sales (can see all departments)
         if is_admin:
             return werkzeug_redirect('/my/sales')
-        
+
         # Non-admin: redirect based on their employee department
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
         route = _get_department_route(employee) if employee else None
-        
+
         # If no route found, go to /my/home (NOT /my to avoid loops)
         return werkzeug_redirect(route or '/my/home')
 
     # Helper route removed by request: no shortcut assignment to Sales
-    
+
     @http.route('/my/sales/check-in', type='jsonrpc', auth='user')
     def ajm_check_in(self, **kw):
         """Check-in employee"""
@@ -163,19 +163,19 @@ class AJMEmployeePortal(CustomerPortal):
         employee = request.env['hr.employee'].sudo().search([
             ('user_id', '=', user.id)
         ], limit=1)
-        
+
         if not employee:
             return {'error': 'No employee record found for this user'}
-        
+
         # Check if already checked in
         last_attendance = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
             ('check_out', '=', False)
         ], limit=1)
-        
+
         if last_attendance:
             return {'error': 'Already checked in'}
-        
+
         # Create check-in with UTC time
         # Add 5 hours to Houston time to get UTC
         utc_now = datetime.utcnow()
@@ -183,12 +183,12 @@ class AJMEmployeePortal(CustomerPortal):
             'employee_id': employee.id,
             'check_in': utc_now,
         })
-        
+
         return {
             'success': True,
             'check_in': attendance.check_in.strftime('%Y-%m-%d %H:%M:%S')
         }
-    
+
     @http.route('/my/sales/check-out', type='jsonrpc', auth='user')
     def ajm_check_out(self, **kw):
         """Check-out employee"""
@@ -196,25 +196,25 @@ class AJMEmployeePortal(CustomerPortal):
         employee = request.env['hr.employee'].sudo().search([
             ('user_id', '=', user.id)
         ], limit=1)
-        
+
         if not employee:
             return {'error': 'No employee record found for this user'}
-        
+
         # Find open attendance
         attendance = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
             ('check_out', '=', False)
         ], limit=1)
-        
+
         if not attendance:
             return {'error': 'Not checked in'}
-        
+
         # Update check-out with UTC time
         utc_now = datetime.utcnow()
         attendance.sudo().write({
             'check_out': utc_now
         })
-        
+
         return {
             'success': True,
             'check_out': attendance.check_out.strftime('%Y-%m-%d %H:%M:%S'),
@@ -262,7 +262,7 @@ class AJMEmployeePortal(CustomerPortal):
                 attendance.sudo().write({'check_out': utc_now})
 
         return werkzeug_redirect('/my/sales')
-    
+
     @http.route('/my/cancellations/checkin', type='http', auth='user', website=True, csrf=False)
     def cancellations_check_in_http(self, **kw):
         """HTTP fallback: perform check-in and redirect back to cancellations dashboard."""

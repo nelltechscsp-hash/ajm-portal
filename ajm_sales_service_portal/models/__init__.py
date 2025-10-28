@@ -1,3 +1,1 @@
-from . import service_application
-from . import company_lookup
-from . import res_partner
+from . import company_lookup, res_partner, service_application

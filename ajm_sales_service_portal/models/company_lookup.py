@@ -1,8 +1,9 @@
-import requests
-import re
-from lxml import html
-from odoo import models, api
 import logging
+import re
+
+import requests
+from lxml import html
+from odoo import api, models
 
 _logger = logging.getLogger(__name__)
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import api, fields, models
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -25,7 +26,7 @@ class ResPartner(models.Model):
     or_number = fields.Char(string='OR#')
     uiia_number = fields.Char(string='UIIA#')
     ein = fields.Char(string='EIN#')
-    
+
     entity_type = fields.Selection([
         ('individual', 'Individual'),
         ('corporation', 'Corporation'),
@@ -34,7 +35,7 @@ class ResPartner(models.Model):
         ('other', 'Other'),
     ], string='Entity Type')
     entity_type_other = fields.Char(string='Entity Type Other')
-    
+
     carrier_type = fields.Selection([
         ('common_carrier', 'Common Carrier'),
         ('private_property', 'Private Carrier (Property)'),
@@ -49,12 +50,12 @@ class ResPartner(models.Model):
         ('other', 'Other'),
     ], string='Carrier Type')
     carrier_type_other = fields.Char(string='Carrier Type Other')
-    
+
     operation_scope = fields.Selection([
         ('interstate', 'Interstate'),
         ('intrastate', 'Intrastate'),
     ], string='Type of Operation')
-    
+
     trailer_type = fields.Selection([
         ('flatbed', 'Flatbed Operation'),
         ('reefer', 'Reefer Operation'),
@@ -65,13 +66,13 @@ class ResPartner(models.Model):
         ('other', 'Other'),
     ], string='Trailer Type / Operation')
     trailer_type_other = fields.Char(string='Trailer Type Other')
-    
+
     years_in_business = fields.Integer(string='Years in Business')
-    
+
     # Owner/Contact info (for transport companies)
     owner_name = fields.Char(string='Owner Name')
     dba = fields.Char(string='DBA (Doing Business As)')
-    
+
     # Address fields (Odoo already has street, city, state, zip)
     # Physical address
     physical_street = fields.Char(string='Physical Address Street')
@@ -79,14 +80,14 @@ class ResPartner(models.Model):
     physical_state = fields.Char(string='Physical State (Text)')
     physical_state_id = fields.Many2one('res.country.state', string='Physical State')
     physical_zip = fields.Char(string='Physical Zip')
-    
+
     # Garaging address
     garaging_street = fields.Char(string='Garaging Address Street')
     garaging_city = fields.Char(string='Garaging City')
     garaging_state = fields.Char(string='Garaging State (Text)')
     garaging_state_id = fields.Many2one('res.country.state', string='Garaging State')
     garaging_zip = fields.Char(string='Garaging Zip')
-    
+
     # Health-specific fields
     date_of_birth = fields.Date(string='Date of Birth')
     gender = fields.Selection([
@@ -95,14 +96,14 @@ class ResPartner(models.Model):
         ('other', 'Other'),
     ], string='Gender')
     ssn = fields.Char(string='SSN (Last 4 digits only)', help='Store only last 4 digits for security')
-    
+
     # Link to service applications
     application_ids = fields.One2many(
         'ajm.service.application',
         'partner_id',
         string='Insurance Interviews'
     )
-    
+
     @api.model
     def create_or_update_from_application(self, application_data):
         """
@@ -111,18 +112,18 @@ class ResPartner(models.Model):
         """
         # Determine client type (default to transport for now)
         client_type = 'transport'
-        
+
         # Prepare partner values
         vals = {
             'client_type': client_type,
             'is_company': True if client_type == 'transport' else False,
         }
-        
+
         # Name: For transport = company name, for health = person name
         if client_type == 'transport':
             vals['name'] = application_data.get('name_insured') or 'Unnamed Client'
             vals['owner_name'] = application_data.get('owner')
-        
+
         # Transport-specific fields
         if client_type == 'transport':
             vals.update({
@@ -143,13 +144,13 @@ class ResPartner(models.Model):
                 'years_in_business': application_data.get('years_in_business'),
                 'dba': application_data.get('dba'),
             })
-        
+
         # Contact info
         vals.update({
             'phone': application_data.get('phone'),
             'email': application_data.get('email'),
         })
-        
+
         # Mailing address (default Odoo fields)
         vals.update({
             'street': application_data.get('mailing_street'),
@@ -157,7 +158,7 @@ class ResPartner(models.Model):
             'state_id': self._get_state_id(application_data.get('mailing_state')),
             'zip': application_data.get('mailing_zip'),
         })
-        
+
         # Physical address
         vals.update({
             'physical_street': application_data.get('physical_street'),
@@ -165,7 +166,7 @@ class ResPartner(models.Model):
             'physical_state': application_data.get('physical_state'),
             'physical_zip': application_data.get('physical_zip'),
         })
-        
+
         # Garaging address
         vals.update({
             'garaging_street': application_data.get('garaging_street'),
@@ -173,23 +174,23 @@ class ResPartner(models.Model):
             'garaging_state': application_data.get('garaging_state'),
             'garaging_zip': application_data.get('garaging_zip'),
         })
-        
+
         # Try to find existing partner by USDOT or email
         partner = None
         if client_type == 'transport' and vals.get('usdot'):
             partner = self.search([('usdot', '=', vals['usdot'])], limit=1)
         elif vals.get('email'):
             partner = self.search([('email', '=', vals['email'])], limit=1)
-        
+
         if partner:
             # Update existing partner
             partner.write(vals)
         else:
             # Create new partner
             partner = self.create(vals)
-        
+
         return partner
-    
+
     def _get_state_id(self, state_code):
         """Helper to get state_id from code"""
         if not state_code:

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import json
+
 from odoo import http
 from odoo.http import request
-import json
+
 
 class AJMPDFWorkbench(http.Controller):
     @http.route('/my/sales/clients/<int:client_id>/pdf', type='http', auth='user', website=True)
@@ -18,7 +20,7 @@ class AJMPDFWorkbench(http.Controller):
         """
         Partner = request.env['res.partner'].sudo()
         client = Partner.browse(client_id)
-        
+
         cartas = [
             {'id': 'carta1', 'name': 'Carta 1: Cotización y DownPayment'},
             {'id': 'carta2', 'name': 'Carta 2: Endoso de Póliza'},
@@ -35,7 +37,7 @@ class AJMPDFWorkbench(http.Controller):
             {'id': 'qeo_trucking', 'name': 'QEO Trucking Supplemental'},
             {'id': 'quit_quote', 'name': 'Quit Quote v2025'},
         ]
-        
+
         return request.render('ajm_pdf_workbench.cartas_menu_page', {
             'client': client,
             'cartas': cartas,
@@ -88,7 +90,10 @@ class AJMPDFWorkbench(http.Controller):
                     coverages_text = "\n".join(parts)
             except Exception:
                 coverages_data = []
-        
+
+        # 🔑 Construimos el nombre completo del template
+        tpl_name = f"ajm_pdf_workbench.{doc_type}_template"
+
         return request.render('ajm_pdf_workbench.carta_view_page', {
             'client': client,
             'interview': interview,
@@ -98,5 +103,6 @@ class AJMPDFWorkbench(http.Controller):
             'coverages_data': coverages_data,
             'coverages_text': coverages_text,
             'doc_type': doc_type,
+            'tpl_name': tpl_name,   # <-- pasamos el nombre completo
             'company': request.env.company,
         })

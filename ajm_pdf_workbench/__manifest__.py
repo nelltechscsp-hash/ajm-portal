@@ -9,12 +9,16 @@
     'author': 'AJM Insurance & Trucking Services',
     'category': 'Website/Portal',
     'depends': [
-        'base', 'portal', 'website', 'mail'
+        'base',
+        'portal',
+        'website',
+        'mail',
     ],
     'data': [
-    'views/pdf_workbench_sidebar.xml',
-    'views/pdf_workbench_header.xml',
-    'views/pdf_workbench_templates.xml',
+        'views/carta_header_template.xml',   # <-- aquí agregamos tu header
+        'views/pdf_workbench_sidebar.xml',
+        'views/pdf_workbench_header.xml',
+        'views/pdf_workbench_templates.xml',
     ],
     'assets': {
         'web.assets_frontend': [

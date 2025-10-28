@@ -1,5 +1,6 @@
-from odoo import models, fields, api
 import json
+
+from odoo import api, fields, models
 
 
 class AjmServiceApplication(models.Model):
@@ -111,20 +112,20 @@ class AjmServiceApplication(models.Model):
         ('completed', 'Completed'),
         ('archived', 'Archived'),
     ], default='draft', index=True, string='Status')
-    
+
     active = fields.Boolean(default=True, help='Set to false to archive the interview')
 
     def _default_name(self):
         seq = self.env['ir.sequence'].sudo().next_by_code('ajm.service.application')
         return seq or 'Service Application'
-    
+
     @api.model
     def create(self, vals):
         """Override create to auto-generate partner"""
         record = super(AjmServiceApplication, self).create(vals)
         record.create_or_update_partner()
         return record
-    
+
     def write(self, vals):
         """Override write to update partner when interview is modified"""
         result = super(AjmServiceApplication, self).write(vals)
@@ -133,11 +134,11 @@ class AjmServiceApplication(models.Model):
         if any(field in vals for field in significant_fields):
             self.create_or_update_partner()
         return result
-    
+
     def create_or_update_partner(self):
         """Create or update res.partner from interview data"""
         self.ensure_one()
-        
+
         # Prepare data for partner creation
         filings = {}
         if self.filings_json:
@@ -145,7 +146,7 @@ class AjmServiceApplication(models.Model):
                 filings = json.loads(self.filings_json)
             except:
                 pass
-        
+
         application_data = {
             'name_insured': self.name_insured,
             'owner': self.owner,
@@ -175,29 +176,29 @@ class AjmServiceApplication(models.Model):
             'garaging_zip': self.garaging_zip,
             'filings': filings,
         }
-        
+
         # Create or update partner
         partner = self.env['res.partner'].sudo().create_or_update_from_application(application_data)
-        
+
         # Assign agent category
         agent_user = self.user_id or self.env.user
         category_name = f'Agent: {agent_user.name}'
         agent_category = self.env['res.partner.category'].sudo().search([
             ('name', '=', category_name)
         ], limit=1)
-        
+
         if not agent_category:
             agent_category = self.env['res.partner.category'].sudo().create({
                 'name': category_name,
                 'color': (agent_user.id % 11) + 1,  # Random color
             })
-        
+
         partner.sudo().write({
             'agent_category_id': agent_category.id,
         })
-        
+
         # Link partner to this application
         if not self.partner_id:
             self.sudo().write({'partner_id': partner.id})
-        
+
         return partner

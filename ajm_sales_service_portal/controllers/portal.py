@@ -1,6 +1,7 @@
-import json
 import base64
+import json
 import logging
+
 from odoo import http
 from odoo.http import request
 
@@ -136,11 +137,11 @@ class AJMSalesServicePortal(http.Controller):
         """
         Partner = request.env['res.partner'].sudo()
         domain = [('client_type', 'in', ['transport', 'health'])]
-        
+
         # Filter by client type if specified
         if client_type in ['transport', 'health']:
             domain.append(('client_type', '=', client_type))
-        
+
         # Search by USDOT or company name
         if search:
             search_domain = [
@@ -150,14 +151,14 @@ class AJMSalesServicePortal(http.Controller):
                 ('mc_number', 'ilike', search),
             ]
             domain = ['&'] + domain + search_domain
-        
+
         # Get recent clients (last 30 days) or search results
         clients = Partner.search(domain, order='create_date desc', limit=50)
-        
+
         # Count by type
         transport_count = Partner.search_count([('client_type', '=', 'transport')])
         health_count = Partner.search_count([('client_type', '=', 'health')])
-        
+
         return request.render('ajm_sales_service_portal.portal_clients_home', {
             'clients': clients,
             'client_type': client_type,
@@ -165,13 +166,13 @@ class AJMSalesServicePortal(http.Controller):
             'transport_count': transport_count,
             'health_count': health_count,
         })
-    
+
     @http.route('/my/sales/clients/verify-password', type='json', auth='user', methods=['POST'])
     def verify_password(self, password=None, **kw):
         """Verify user password for delete confirmation."""
         if not password:
             return {'valid': False}
-        
+
         user = request.env.user
         try:
             # Try to authenticate with current user and provided password
@@ -184,7 +185,7 @@ class AJMSalesServicePortal(http.Controller):
             return {'valid': valid}
         except Exception:
             return {'valid': False}
-    
+
     @http.route('/my/sales/clients/<int:client_id>/delete', type='http', auth='user', website=True, methods=['POST'], csrf=True)
     def client_delete(self, client_id, **post):
         """Delete a client and all related interviews from the portal."""

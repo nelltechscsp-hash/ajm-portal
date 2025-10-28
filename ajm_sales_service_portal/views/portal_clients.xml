@@ -14,15 +14,15 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="btn-group" role="group">
-                            <a t-att-href="'/my/sales/clients'" 
+                            <a t-att-href="'/my/sales/clients'"
                                t-attf-class="btn btn-#{'' if not client_type else 'outline-'}primary">
                                 All Clients
                             </a>
-                            <a t-att-href="'/my/sales/clients?client_type=transport'" 
+                            <a t-att-href="'/my/sales/clients?client_type=transport'"
                                t-attf-class="btn btn-#{client_type == 'transport' and 'primary' or 'outline-primary'}">
                                 <i class="fa fa-truck"/> Transport (<t t-esc="transport_count"/>)
                             </a>
-                            <a t-att-href="'/my/sales/clients?client_type=health'" 
+                            <a t-att-href="'/my/sales/clients?client_type=health'"
                                t-attf-class="btn btn-#{client_type == 'health' and 'primary' or 'outline-primary'}">
                                 <i class="fa fa-heartbeat"/> Health (<t t-esc="health_count"/>)
                             </a>
@@ -36,9 +36,9 @@
                         <form action="/my/sales/clients" method="get" class="form-inline">
                             <input type="hidden" name="client_type" t-att-value="client_type or ''"/>
                             <div class="input-group w-100">
-                                <input type="text" 
-                                       name="search" 
-                                       class="form-control" 
+                                <input type="text"
+                                       name="search"
+                                       class="form-control"
                                        placeholder="Search by company name, USDOT, or MC number..."
                                        t-att-value="search_term"/>
                                 <div class="input-group-append">
@@ -97,7 +97,7 @@
                         </t>
                         <t t-else="">
                             <div class="alert alert-info">
-                                <i class="fa fa-info-circle"/> 
+                                <i class="fa fa-info-circle"/>
                                 <t t-if="search_term">
                                     No clients found matching "<t t-esc="search_term"/>". Try a different search term.
                                 </t>

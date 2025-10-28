@@ -63,7 +63,7 @@
             <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
                 <input type="hidden" name="doc_type" value="carta1"/>
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                
+
                 <p class="mb-3"><strong>EL DownPayment NUNCA:</strong></p>
                 <ul>
                     <li>Cubrirá su primera y última mensualidad,</li>
@@ -336,7 +336,7 @@
             <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
                 <input type="hidden" name="doc_type" value="carta3"/>
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                
+
                 <div class="mb-3">
                     <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
                     <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
@@ -436,7 +436,7 @@
             <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
                 <input type="hidden" name="doc_type" value="carta4"/>
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                
+
                 <div class="mb-3">
                     <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
                     <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
@@ -735,7 +735,7 @@
             <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
                 <input type="hidden" name="doc_type" value="carta6"/>
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                
+
                 <p class="mb-3"><strong>Fecha:</strong> <input type="date" name="doc_date" class="form-control d-inline-block" style="width: 200px;"/></p>
 
                 <div class="mb-3">
@@ -826,11 +826,11 @@
                 <div class="mb-3">
                     <p><strong>Avisos Importantes (Traducción):</strong></p>
                     <p class="mb-2"><strong>LA AGENCIA RECONOCE QUE SERÁ RESPONSABLE DEL SALDO TOTAL DE CUALQUIER FACTURA PENDIENTE EN CASO DE PROBLEMAS RELACIONADOS CON EL PAGO O FINANCIAMIENTO.</strong> Si ocurre alguna falla de pago, retraso o complicación de financiamiento, la agencia acepta liquidar el saldo restante directamente con Dynamic Specialty Inc. Si hay alguna preocupación o problema, la agencia puede comunicarse con accounting@dynamicmga.com.</p>
-                    
+
                     <p class="mb-2"><strong>TODO EQUIPO Y CONDUCTORES NO REPORTADOS PUEDE RESULTAR EN UNA DENEGACIÓN DE COBERTURA.</strong></p>
-                    
+
                     <p class="mb-2">HE LEÍDO, ENTENDIDO Y ACEPTO CUMPLIR CON TODAS LAS EXENCIONES DE RESPONSABILIDAD Y PAUTAS DE ACEPTACIÓN DE CONDUCTORES DESCRITAS EN ESTA SOLICITUD. RECONOZCO QUE ESTOS TÉRMINOS RIGEN MIS RESPONSABILIDADES Y ACEPTO EL CUMPLIMIENTO TOTAL DE LAS CONDICIONES ESTABLECIDAS.</p>
-                    
+
                     <p class="mb-2">EN RETORNO POR EL PAGO DE LA PRIMA, Y SUJETO A TODOS LOS TÉRMINOS DE ESTE CERTIFICADO, ACEPTAMOS PROPORCIONARLE EL SEGURO COMO SE ESTABLECE EN ESTE CERTIFICADO. SE EMITE UNA PÓLIZA ORIGINAL Y COMPLETA QUE INCLUYE TÉRMINOS, CONDICIONES Y EXCLUSIONES A LA CONTINENTAL TRUCKING ASSOCIATION DONDE ESTÁ DISPONIBLE PARA INSPECCIÓN. EN CASO DE CUALQUIER CONFLICTO ENTRE ESTE RESUMEN DE EVIDENCIA DE SEGURO Y LA PÓLIZA REAL EN VIGOR, LOS TÉRMINOS DE LA PÓLIZA EFECTIVA REAL PREVALECERÁN.</p>
                 </div>
 
@@ -862,11 +862,11 @@
                     <div class="mb-3">
                         <p><strong>Disclaimers:</strong></p>
                         <p class="mb-2"><strong>THE AGENCY ACKNOWLEDGES THAT THEY WILL BE RESPONSIBLE FOR THE FULL BALANCE OF ANY OUTSTANDING INVOICES IN THE EVENT OF ISSUES RELATED TO PAYMENT OR FINANCING.</strong> SHOULD ANY PAYMENT FAILURE, DELAY, OR FINANCING COMPLICATION OCCUR, THE AGENCY AGREES TO PROMPTLY SETTLE THE REMAINING BALANCE DIRECTLY WITH DYNAMIC SPECIALTY INC. IF THERE ARE ANY CONCERNS OR ISSUES, THE AGENCY CAN REACH OUT TO ACCOUNTING@DYNAMICMGA.COM.</p>
-                        
+
                         <p class="mb-2"><strong>ALL UNREPORTED EQUIPMENT AND DRIVERS MAY RESULT IN A DENIAL OF COVERAGE.</strong></p>
-                        
+
                         <p class="mb-2">I HAVE READ, UNDERSTOOD, AND AGREE TO ABIDE BY ALL THE DISCLAIMERS AND DRIVER ACCEPTANCE GUIDELINES OUTLINED IN THIS APPLICATION. I ACKNOWLEDGE THAT THESE TERMS GOVERN MY RESPONSIBILITIES, AND I ACCEPT FULL COMPLIANCE WITH THE STATED CONDITIONS.</p>
-                        
+
                         <p class="mb-2">IN RETURN FOR THE PAYMENT OF THE PREMIUM, AND SUBJECT TO ALL THE TERMS OF THIS CERTIFICATE, WE AGREE WITH YOU TO PROVIDE THE INSURANCE AS STATED IN THIS CERTIFICATE. AN ORIGINAL, COMPLETE POLICY INCLUDING TERMS, CONDITIONS, AND EXCLUSIONS IS ISSUED TO THE CONTINENTAL TRUCKING ASSOCIATION WHERE IT IS AVAILABLE FOR INSPECTION. IN THE EVENT OF ANY CONFLICT BETWEEN THIS EVIDENCE OF INSURANCE SUMMARY AND THE ACTUAL POLICY IN EFFECT, THE TERMS OF THE ACTUAL EFFECTIVE POLICY WILL GOVERN.</p>
                     </div>
 
@@ -900,7 +900,7 @@
             <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
                 <input type="hidden" name="doc_type" value="carta8"/>
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                
+
                 <p class="mb-3">He leído, entendido y acepto cumplir con todas las exenciones de responsabilidad y pautas de aceptación de conductores descritas en esta solicitud. Reconozco que estos términos rigen mis responsabilidades y acepto el cumplimiento total de las condiciones establecidas.</p>
 
                 <div class="mt-4">

@@ -1,2 +1,1 @@
-from . import department_portal
-from . import res_users
+from . import department_portal, res_users

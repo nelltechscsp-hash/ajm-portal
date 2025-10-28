@@ -1,2 +1,1 @@
-from . import gmail
-from . import mail_app
+from . import gmail, mail_app

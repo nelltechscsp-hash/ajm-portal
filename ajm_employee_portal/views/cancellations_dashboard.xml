@@ -8,7 +8,7 @@
             <t t-set="is_public" t-value="False"/>
             <!-- Editable zone for Website Builder (top of Cancellations page) -->
             <section id="cancellations_top_zone" class="oe_structure"/>
-            
+
             <div class="container mt-4" data-oe-model="ir.ui.view" data-oe-id="ajm_employee_portal.cancellations_dashboard">
                 <!-- Header -->
                 <div class="row mb-4">
@@ -51,7 +51,7 @@
                                         </a>
                                     </t>
                                 </div>
-                                
+
                                 <!-- Last attendance info -->
                                 <t t-if="last_attendance and last_attendance.check_out">
                                     <hr/>
@@ -80,7 +80,7 @@
                                         <i class="fa fa-user me-2"/>My Account
                                     </a>
                                     <!-- Gmail links injected by ajm_user_gmail -->
-                                    
+
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <i class="fa fa-ban me-2"/>Cancellation Requests
                                         <span class="badge bg-secondary float-end">Coming soon</span>

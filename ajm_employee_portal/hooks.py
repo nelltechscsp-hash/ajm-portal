@@ -1,4 +1,4 @@
-from odoo import api, SUPERUSER_ID
+from odoo import SUPERUSER_ID, api
 
 
 def _ensure_top_menu(env, website, xmlid, name=None, url=None, sequence=None):

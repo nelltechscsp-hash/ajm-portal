@@ -44,7 +44,7 @@
             <field name="name" position="after">
                 <field name="client_type" widget="badge" decoration-info="client_type=='transport'" decoration-success="client_type=='health'"/>
             </field>
-            
+
             <!-- Add Transport client fields in a new page -->
             <xpath expr="//notebook" position="inside">
                 <page string="Transport Client Info" invisible="client_type != 'transport'">
@@ -76,7 +76,7 @@
                         </group>
                     </group>
                 </page>
-                
+
                 <page string="Health Client Info" invisible="client_type != 'health'">
                     <group>
                         <group string="Health Information">
@@ -86,7 +86,7 @@
                         </group>
                     </group>
                 </page>
-                
+
                 <!-- Link to interviews -->
                 <page string="Interviews" name="interviews">
                     <field name="application_ids">
@@ -114,14 +114,14 @@
                 <field name="mc_number" string="MC Number"/>
                 <field name="phone"/>
                 <field name="email"/>
-                
+
                 <filter string="Transport Clients" name="filter_transport" domain="[('client_type','=','transport')]"/>
                 <filter string="Health Clients" name="filter_health" domain="[('client_type','=','health')]"/>
                 <separator/>
-                <filter string="Recent (Last 30 Days)" name="filter_recent" 
+                <filter string="Recent (Last 30 Days)" name="filter_recent"
                         domain="[('create_date','&gt;=', (context_today() - relativedelta(days=30)).strftime('%%Y-%%m-%%d'))]"/>
                 <separator/>
-                
+
                 <group>
                     <filter string="Client Type" name="group_client_type" context="{'group_by':'client_type'}"/>
                     <filter string="State" name="group_state" context="{'group_by':'state_id'}"/>
@@ -193,19 +193,19 @@
               name="Clients"
               parent="menu_ajm_sales_service_root"
               sequence="5"/>
-    
+
     <menuitem id="menu_all_clients"
               name="All Clients"
               parent="menu_clients"
               action="action_all_clients"
               sequence="1"/>
-    
+
     <menuitem id="menu_transport_clients"
               name="Transport Clients"
               parent="menu_clients"
               action="action_transport_clients"
               sequence="10"/>
-    
+
     <menuitem id="menu_health_clients"
               name="Health Clients"
               parent="menu_clients"

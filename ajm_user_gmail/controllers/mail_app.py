@@ -1,11 +1,12 @@
-import logging
-import socket
-import imaplib
 import base64
 import email
+import imaplib
+import logging
+import socket
 from email.header import decode_header
 from email.utils import getaddresses
 from html import escape as html_escape
+
 from odoo import http
 from odoo.http import request
 

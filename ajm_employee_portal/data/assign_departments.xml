@@ -3,8 +3,8 @@
     <data noupdate="1">
         <!-- Assign Cancellations department to cancellations employee -->
         <function model="hr.employee" name="write">
-            <value eval="[ref('base.user_cancellations') and 
-                         env['hr.employee'].search([('user_id', '=', ref('base.user_cancellations'))]).id or 
+            <value eval="[ref('base.user_cancellations') and
+                         env['hr.employee'].search([('user_id', '=', ref('base.user_cancellations'))]).id or
                          env['hr.employee'].search([('name', '=', 'cancellations')], limit=1).id]"/>
             <value eval="{'department_id': ref('ajm_employee_portal.department_cancellations')}"/>
         </function>

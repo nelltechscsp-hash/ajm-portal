@@ -7,7 +7,7 @@
             <t t-set="tz" t-value="tz or user.tz or 'America/Chicago'"/>
             <!-- Editable zone for Website Builder (top of Sales page) -->
             <section id="sales_top_zone" class="oe_structure"/>
-            
+
             <div class="container mt-4" data-oe-model="ir.ui.view" data-oe-id="ajm_employee_portal.employee_dashboard">
                 <!-- Header -->
                 <div class="row mb-4">
@@ -50,7 +50,7 @@
                                         </a>
                                     </t>
                                 </div>
-                                
+
                                 <!-- Last attendance info -->
                                 <t t-if="last_attendance and last_attendance.check_out">
                                     <hr/>
@@ -79,7 +79,7 @@
                                         <i class="fa fa-home me-2"/>My Account
                                     </a>
                                     <!-- Gmail links injected by ajm_user_gmail -->
-                                    
+
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <i class="fa fa-file-text me-2"/>Forms &amp; Documents
                                         <span class="badge bg-secondary float-end">Coming soon</span>

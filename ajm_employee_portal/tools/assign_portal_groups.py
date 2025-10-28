@@ -24,10 +24,10 @@ user = env['res.users'].search([('login', '=', user_email)], limit=1)
 
 if user:
     sales_group = env.ref('ajm_employee_portal.group_sales_portal_user')
-    
+
     # Agregar al grupo (sin quitar otros grupos)
     user.write({'groups_id': [(4, sales_group.id)]})
-    
+
     print(f"✓ Usuario {user.name} ({user.login}) agregado al grupo: {sales_group.name}")
     print(f"  Grupos actuales: {', '.join([g.name for g in user.groups_id])}")
 else:
@@ -41,10 +41,10 @@ user = env['res.users'].browse(user_id)
 
 if user.exists():
     cancel_group = env.ref('ajm_employee_portal.group_cancellations_portal_user')
-    
+
     # Agregar al grupo
     user.write({'groups_id': [(4, cancel_group.id)]})
-    
+
     print(f"✓ Usuario {user.name} ({user.login}) agregado al grupo: {cancel_group.name}")
     print(f"  Grupos actuales: {', '.join([g.name for g in user.groups_id])}")
 else:
