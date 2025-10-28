@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inject Gmail quick links into Sales dashboard -->
+    <template id="inject_mail_links_sales" inherit_id="ajm_employee_portal.employee_dashboard">
+        <xpath expr="//div[@class='list-group']" position="inside">
+            <a href="/my/mail" class="list-group-item list-group-item-action" rel="noopener">
+                <i class="fa fa-envelope me-2"/>Open Gmail
+            </a>
+            <a href="/my/settings/gmail" class="list-group-item list-group-item-action">
+                <i class="fa fa-cog me-2"/>Gmail Settings
+            </a>
+        </xpath>
+    </template>
+
+    <!-- Inject Gmail quick links into Cancellations dashboard -->
+    <template id="inject_mail_links_cancellations" inherit_id="ajm_employee_portal.cancellations_dashboard">
+        <xpath expr="//div[@class='list-group']" position="inside">
+            <a href="/my/mail" class="list-group-item list-group-item-action" rel="noopener">
+                <i class="fa fa-envelope me-2"/>Open Gmail
+            </a>
+            <a href="/my/settings/gmail" class="list-group-item list-group-item-action">
+                <i class="fa fa-cog me-2"/>Gmail Settings
+            </a>
+        </xpath>
+    </template>
+</odoo>

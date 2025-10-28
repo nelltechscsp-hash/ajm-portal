@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_ajm_service_application_form" model="ir.ui.view">
+        <field name="name">ajm.service.application.form</field>
+        <field name="model">ajm.service.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="service_type"/>
+                            <field name="user_id"/>
+                            <field name="effective_date"/>
+                            <field name="entity_number"/>
+                        </group>
+                        <group>
+                            <field name="name_insured"/>
+                            <field name="dba"/>
+                            <field name="owner"/>
+                            <field name="entity_type"/>
+                            <field name="entity_type_other"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Applicant Details">
+                            <group>
+                                <group>
+                                    <separator string="Contact"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                    <field name="years_in_business"/>
+                                    <field name="ein"/>
+                                </group>
+                                <group>
+                                    <separator string="Agent"/>
+                                    <field name="agent"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Mailing Address">
+                                    <field name="mailing_street"/>
+                                    <field name="mailing_city"/>
+                                    <field name="mailing_state"/>
+                                    <field name="mailing_zip"/>
+                                </group>
+                                <group string="Garaging Address">
+                                    <field name="garaging_street"/>
+                                    <field name="garaging_city"/>
+                                    <field name="garaging_state"/>
+                                    <field name="garaging_zip"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Coverages">
+                            <group>
+                                <field name="coverages_json" widget="text" placeholder="JSON structure from form"/>
+                            </group>
+                        </page>
+                        <page string="Commodities">
+                            <group>
+                                <field name="commodities_json" widget="text" placeholder="JSON structure from form"/>
+                            </group>
+                        </page>
+                        <page string="Drivers &amp; Filings">
+                            <group>
+                                <group string="Filings">
+                                    <field name="filings_json" widget="text" placeholder="JSON: MC, USDOT, CA, TX, OR, UIIA"/>
+                                </group>
+                                <group string="Drivers">
+                                    <field name="drivers_json" widget="text" placeholder="JSON list of drivers"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Vehicles">
+                            <group>
+                                <field name="vehicles_json" widget="text" placeholder="JSON list of vehicles"/>
+                            </group>
+                        </page>
+                        <page string="Insurance History">
+                            <group>
+                                <field name="history_json" widget="text" placeholder="JSON: past 3 years losses"/>
+                            </group>
+                        </page>
+                        <page string="Attachments &amp; Notes">
+                            <group>
+                                <field name="attachment_ids" widget="many2many_tags"/>
+                                <field name="notes" widget="text"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_ajm_service_application_tree" model="ir.ui.view">
+        <field name="name">ajm.service.application.tree</field>
+        <field name="model">ajm.service.application</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="service_type"/>
+                <field name="name_insured"/>
+                <field name="effective_date"/>
+                <field name="user_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_ajm_service_application_search" model="ir.ui.view">
+        <field name="name">ajm.service.application.search</field>
+        <field name="model">ajm.service.application</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="name_insured"/>
+                <field name="user_id"/>
+                <filter string="New" name="new" domain="[('state','=','new')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('state','=','in_progress')]"/>
+                <filter string="Done" name="done" domain="[('state','=','done')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_ajm_service_application" model="ir.actions.act_window">
+        <field name="name">Service Applications</field>
+        <field name="res_model">ajm.service.application</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_new':1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No service applications yet.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu entry in Sales or Portal/Sales -->
+    <menuitem id="menu_ajm_sales_service_root"
+              name="Sales Service Portal"
+              sequence="50"/>
+    <menuitem id="menu_ajm_service_applications"
+              name="Service Applications"
+              parent="menu_ajm_sales_service_root"
+              action="action_ajm_service_application"
+              sequence="10"/>
+</odoo>

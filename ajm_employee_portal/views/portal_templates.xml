@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Department Portal to main portal menu - NO AUTO REDIRECT -->
+    <template id="portal_my_home_menu_ajm" name="Portal My Home Menu - AJM" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="inside">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">My Department</t>
+                <t t-set="url" t-value="'/my/department'"/>
+                <t t-set="placeholder_count" t-value="'department_dashboard'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Redirect action for login -->
+    <record id="portal_redirect_ajm" model="ir.actions.act_url">
+        <field name="name">Department Portal</field>
+        <field name="url">/my/department</field>
+        <field name="target">self</field>
+    </record>
+
+    <!-- Add link to user menu (top right) to access Department Dashboard -->
+    <template id="user_menu_ajm_link" name="User Menu - Department Dashboard Link" inherit_id="portal.user_dropdown">
+        <xpath expr="//a[@href='/my/home']" position="after">
+            <a href="/my/department" role="menuitem" class="dropdown-item ps-3">My Department</a>
+        </xpath>
+    </template>
+</odoo>

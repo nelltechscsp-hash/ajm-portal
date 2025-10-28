@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sales Department -->
+        <record id="department_sales" model="hr.department">
+            <field name="name">Sales</field>
+        </record>
+
+        <!-- Cancellations Department -->
+        <record id="department_cancellations" model="hr.department">
+            <field name="name">Cancellations</field>
+        </record>
+    </data>
+</odoo>

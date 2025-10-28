@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sales Portal User -->
+    <record id="group_sales_portal_user" model="res.groups">
+        <field name="name">Portal / Sales</field>
+        <field name="share" eval="True"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="comment">Portal access for Sales department employees. Can only access /my/sales portal.</field>
+    </record>
+
+    <!-- Cancellations Portal User -->
+    <record id="group_cancellations_portal_user" model="res.groups">
+        <field name="name">Portal / Cancellations</field>
+        <field name="share" eval="True"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="comment">Portal access for Cancellations department employees. Can only access /my/cancellations portal.</field>
+    </record>
+
+    <!-- Record Rules: Sales can only see their own attendance -->
+    <record id="hr_attendance_sales_portal_rule" model="ir.rule">
+        <field name="name">Sales Portal: Own Attendance Only</field>
+        <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_sales_portal_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Record Rules: Cancellations can only see their own attendance -->
+    <record id="hr_attendance_cancellations_portal_rule" model="ir.rule">
+        <field name="name">Cancellations Portal: Own Attendance Only</field>
+        <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_cancellations_portal_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Record Rules: Sales can only see their own employee record -->
+    <record id="hr_employee_sales_portal_rule" model="ir.rule">
+        <field name="name">Sales Portal: Own Employee Record Only</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_sales_portal_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Record Rules: Cancellations can only see their own employee record -->
+    <record id="hr_employee_cancellations_portal_rule" model="ir.rule">
+        <field name="name">Cancellations Portal: Own Employee Record Only</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_cancellations_portal_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

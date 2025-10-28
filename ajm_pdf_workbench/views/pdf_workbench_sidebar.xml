@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pdf_workbench_sidebar" name="PDF Workbench Sidebar">
+        <div class="list-group mb-4">
+            <div class="list-group-item active">Cartas de Compromiso</div>
+            <t t-foreach="cartas" t-as="carta">
+                <a t-att-href="'/my/sales/clients/%d/pdf?doc_type=%s' % (client.id, carta['id'])" t-att-class="'list-group-item list-group-item-action' + (' active' if doc_type == carta['id'] else '')">
+                    <t t-esc="carta['name']"/>
+                </a>
+            </t>
+            <div class="list-group-item active mt-3">Documentos para Rellenar</div>
+            <t t-foreach="docs" t-as="doc">
+                <a t-att-href="'/my/sales/clients/%d/pdf?doc_type=%s' % (client.id, doc['id'])" t-att-class="'list-group-item list-group-item-action' + (' active' if doc_type == doc['id'] else '')">
+                    <t t-esc="doc['name']"/>
+                </a>
+            </t>
+        </div>
+    </template>
+</odoo>

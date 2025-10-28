@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" name="PDF Workbench Assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/ajm_pdf_workbench/static/src/css/pdf_workbench.css"/>
+        </xpath>
+    </template>
+</odoo>

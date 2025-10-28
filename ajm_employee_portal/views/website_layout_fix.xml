@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Guard around website navbar to avoid computing menus on /web/login when no user is set -->
+    <template id="website_layout_navbar_guard" inherit_id="website.layout" name="Website Layout Navbar Guard">
+        <xpath expr="//t[@t-call='website.navbar']" position="replace">
+            <t t-if="request and request.httprequest and request.httprequest.path != '/web/login'">
+                <t t-call="website.navbar"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

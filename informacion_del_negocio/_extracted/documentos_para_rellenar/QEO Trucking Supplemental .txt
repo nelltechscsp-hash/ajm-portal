@@ -1,0 +1,161 @@
+Truckers Supplemental 
+
+APPLICANT INFORMATION: 
+
+Insured Name: 
+
+Has the applicant ever operated under any other name?  If so, state the reason for the name change. 
+
+DOT #: 
+
+MC# 
+
+DESCRIPTION OF OPERATIONS: 
+Carrier Type: 
+
+ Common 
+
+ Contract 
+
+ Private 
+
+ Other: 
+
+Are Federal Filings Required? 
+Are State Filings Required? 
+
+ Yes 
+ Yes 
+
+ No 
+ No 
+
+If yes, list required filings: 
+If yes, list required filings by state: 
+
+COMMODITIES HAULED: 
+List each type of product hauled and percentage associated with same.  (Percentages should total 100%) 
+
+% 
+% 
+% 
+
+% 
+% 
+% 
+
+% 
+% 
+% 
+
+BY TRAILER TYPE:  (Percentages should total 100%) 
+
+Flatbed Operation 
+*Other
+
+%  Reefer Operation 
+%  *If Other, please describe:
+
+%  Tanker Operation 
+
+%  Container Freight 
+
+% 
+% 
+% 
+
+% 
+
+Are Units Equipped with GPS? 
+Are Units Equipped with Dashboard Cameras? 
+
+ Yes 
+ Yes 
+
+ No 
+ No 
+
+SCOPE OF OPERATIONS: 
+Radius by %.  (Percentages should total 100%) 
+51-200 miles 
+
+0-50 miles 
+
+% 
+
+% 
+
+201-500 miles
+
+% 
+
+500+ miles 
+
+% 
+
+Average Trip: 
+
+miles 
+
+Max Trip: 
+
+miles 
+
+Most Common Destination Cities: 
+
+ADDITIONAL UNDERWRITING QUESTIONS: 
+
+Driver Turnover Ratio: 
+
+Are Owner/Operator Units included in the Vehicle Schedule? 
+
+ Yes 
+
+ No 
+
+If so, how many? 
+
+Is there a formal owner/operator lease agreement in place? 
+
+ Yes 
+
+ No
+
+If yes, will owner/operator be exclusively leased to applicant/insured?      
+
+Yes
+
+No 
+
+ 
+Do they require proof of bobtail coverage?
+
+ Yes 
+
+No 
+
+Does the applicant backhaul? 
+
+ Yes 
+
+ No 
+
+If yes, % of revenue generated: 
+
+Does the applicant use electronic log programs to audit driver log books? 
+
+ Yes 
+
+ No 
+
+Does the insured own any trailers (including long term leases) not listed on the application?
+
+Yes 
+
+No 
+
+Does the insured rent out or lease any owned trailers or equipment?          Yes            No
+
+Does the insured haul for Amazon?            Yes            No
+
+

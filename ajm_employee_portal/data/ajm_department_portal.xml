@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Map Sales department to /my/sales -->
+    <record id="department_portal_sales" model="ajm.department.portal">
+        <field name="name">Sales</field>
+        <field name="department_id" ref="ajm_employee_portal.department_sales"/>
+        <field name="route_url">/my/sales</field>
+    </record>
+</odoo>

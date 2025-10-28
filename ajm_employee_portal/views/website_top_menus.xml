@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level menu entries for quick access -->
+    <data noupdate="0">
+        <record id="menu_top_sales" model="website.menu">
+            <field name="name">Sales</field>
+            <field name="url">/my/sales</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="sequence">3</field>
+            <field name="group_ids" eval="[(4, ref('ajm_employee_portal.group_sales_portal_user'))]"/>
+        </record>
+
+        <record id="menu_top_cancellations" model="website.menu">
+            <field name="name">Cancellations</field>
+            <field name="url">/my/cancellations</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="sequence">4</field>
+            <field name="group_ids" eval="[(4, ref('ajm_employee_portal.group_cancellations_portal_user'))]"/>
+        </record>
+
+        <!-- Parent linkage applied via deployment script; functions removed to avoid eval context issues. -->
+    </data>
+</odoo>

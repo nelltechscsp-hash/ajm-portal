@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Completely replace web.login to use our simple login without website.layout -->
+    <template id="override_web_login" name="Override Web Login" inherit_id="web.login" priority="99">
+        <xpath expr="/" position="replace">
+            <t t-call="ajm_employee_portal.simple_login"/>
+        </xpath>
+    </template>
+</odoo>

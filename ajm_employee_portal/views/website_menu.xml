@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Old Departments dropdown - kept for reference but not used -->
+    <!-- Top-level Sales and Cancellations are now managed via website_top_menus.xml + JS injection -->
+</odoo>

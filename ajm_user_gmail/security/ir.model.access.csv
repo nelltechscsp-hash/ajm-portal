@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ajm_mail_template_portal,ajm.mail.template portal,model_ajm_mail_template,base.group_portal,1,1,1,0
+access_ajm_mail_template_manager,ajm.mail.template manager,model_ajm_mail_template,base.group_system,1,1,1,1

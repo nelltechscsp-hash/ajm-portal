@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="simple_login" name="Simple Login (No Website Layout)">
+        <t t-call="web.layout">
+            <t t-set="title">Sign in</t>
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h5 class="mb-0">Sign in</h5>
+                            </div>
+                            <div class="card-body">
+                                <t t-if="error">
+                                    <div class="alert alert-danger">Wrong login/password</div>
+                                </t>
+                                <form action="/web/login" method="post">
+                                    <input type="hidden" name="redirect" t-att-value="redirect or ''"/>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control" name="login" required="required"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" name="password" required="required"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,100 @@
+/* AJM Employee Portal Custom Styles */
+
+.o_portal_wrap {
+    min-height: 500px;
+}
+
+#timecard-container {
+    min-height: 200px;
+}
+
+#timecard-container .btn {
+    min-width: 150px;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+.list-group-item {
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.list-group-item:hover {
+    border-left-color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+.badge.float-end {
+    margin-top: 2px;
+}
+
+/* Loading state */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Departments dropdown styling */
+#departmentsDropdown {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"] {
+    max-height: 400px;
+    overflow-y: auto;
+    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin-top: 0.5rem;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"] .dropdown-item {
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"] .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #0d6efd;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"] .dropdown-item:active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Scrollbar styling for webkit browsers */
+.dropdown-menu[aria-labelledby="departmentsDropdown"]::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"]::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"]::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.dropdown-menu[aria-labelledby="departmentsDropdown"]::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

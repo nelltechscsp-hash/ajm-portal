@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Shared body (no <form>) for Insurance Application create/edit -->
+    <template id="portal_insurance_form_body" name="Insurance Application Body (Shared)">
+        <!-- General Information Header -->
+        <div class="d-flex align-items-center py-2 px-3 mb-0" style="background-color: #ff8c42; color: white; font-weight: 600; border-radius: 0.25rem 0.25rem 0 0;">
+            <i class="fa fa-info-circle me-2"></i>
+            <span>General Information</span>
+        </div>
+        <div class="card mb-3" style="border-top: none; border-radius: 0 0 0.25rem 0.25rem;">
+            <div class="card-body row g-3">
+                <!-- USDOT and Agent/Client -->
+                <div class="col-md-4">
+                    <label class="form-label">USDOT#</label>
+                    <div class="input-group">
+                        <input name="filings_usdot" id="filings_usdot" class="form-control"/>
+                        <button type="button" class="btn btn-outline-secondary" id="btn_lookup_usdot" title="Auto-fill from FMCSA">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Agent</label>
+                    <input name="agent" id="agent" class="form-control" t-att-value="(interview and interview.agent) or request.env.user.name"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Client</label>
+                    <input name="client_name" id="client_name" type="text" class="form-control" t-att-value="(interview and interview.partner_id.name) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Effective Date</label>
+                    <input name="effective_date" type="date" class="form-control" t-att-value="(interview and interview.effective_date) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Entity #</label>
+                    <input name="entity_number" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Name Insured <span class="text-danger">*</span></label>
+                    <input name="name_insured" class="form-control" required="required" t-att-value="(interview and interview.name_insured) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">DBA</label>
+                    <input name="dba" class="form-control" t-att-value="(interview and interview.dba) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Owner</label>
+                    <input name="owner" class="form-control" t-att-value="(interview and interview.owner) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Entity Type</label>
+                    <select name="entity_type" class="form-select">
+                        <option value="">--</option>
+                        <option value="individual" t-att-selected="interview and interview.entity_type=='individual'">Individual</option>
+                        <option value="corporation" t-att-selected="interview and interview.entity_type=='corporation'">Corporation</option>
+                        <option value="llc" t-att-selected="interview and interview.entity_type=='llc'">LLC</option>
+                        <option value="partnership" t-att-selected="interview and interview.entity_type=='partnership'">Partnership</option>
+                        <option value="other" t-att-selected="interview and interview.entity_type=='other'">Other</option>
+                    </select>
+                    <input name="entity_type_other" class="form-control mt-2" placeholder="Other (specify)" t-att-value="(interview and interview.entity_type_other) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Carrier Type</label>
+                    <select name="carrier_type" class="form-select">
+                        <option value="">--</option>
+                        <option value="common_carrier" t-att-selected="interview and interview.carrier_type=='common_carrier'">Common Carrier</option>
+                        <option value="private_property" t-att-selected="interview and interview.carrier_type=='private_property'">Private Carrier (Property)</option>
+                        <option value="exempt_for_hire" t-att-selected="interview and interview.carrier_type=='exempt_for_hire'">Exempt For Hire</option>
+                        <option value="authorized_for_hire" t-att-selected="interview and interview.carrier_type=='authorized_for_hire'">Authorized For Hire</option>
+                        <option value="private_passenger_business" t-att-selected="interview and interview.carrier_type=='private_passenger_business'">Priv. Pass. (Business)</option>
+                        <option value="private_passenger_nonbusiness" t-att-selected="interview and interview.carrier_type=='private_passenger_nonbusiness'">Priv. Pass. (Non-business)</option>
+                        <option value="government" t-att-selected="interview and interview.carrier_type=='government'">State/Local/Federal Gov't</option>
+                        <option value="indian_nation" t-att-selected="interview and interview.carrier_type=='indian_nation'">Indian Nation</option>
+                        <option value="migrant" t-att-selected="interview and interview.carrier_type=='migrant'">Migrant</option>
+                        <option value="us_mail" t-att-selected="interview and interview.carrier_type=='us_mail'">U.S. Mail</option>
+                        <option value="other" t-att-selected="interview and interview.carrier_type=='other'">Other</option>
+                    </select>
+                    <input name="carrier_type_other" class="form-control mt-2" placeholder="Other (specify)" t-att-value="(interview and interview.carrier_type_other) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Type of Operation</label>
+                    <select name="operation_scope" class="form-select">
+                        <option value="">--</option>
+                        <option value="interstate" t-att-selected="interview and interview.operation_scope=='interstate'">Interstate</option>
+                        <option value="intrastate" t-att-selected="interview and interview.operation_scope=='intrastate'">Intrastate</option>
+                    </select>
+                </div>
+                <div class="col-12"><hr/></div>
+                <div class="col-md-6">
+                    <label class="form-label">Mailing Address</label>
+                    <input name="mailing_street" class="form-control" placeholder="Street" t-att-value="(interview and interview.mailing_street) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">City</label>
+                    <input name="mailing_city" class="form-control" t-att-value="(interview and interview.mailing_city) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">State</label>
+                    <input name="mailing_state" class="form-control" t-att-value="(interview and interview.mailing_state) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Zip</label>
+                    <input name="mailing_zip" class="form-control" t-att-value="(interview and interview.mailing_zip) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Physical Address</label>
+                    <input name="physical_street" class="form-control" placeholder="Street" t-att-value="(interview and interview.physical_street) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">City</label>
+                    <input name="physical_city" class="form-control" t-att-value="(interview and interview.physical_city) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">State</label>
+                    <input name="physical_state" class="form-control" t-att-value="(interview and interview.physical_state) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Zip</label>
+                    <input name="physical_zip" class="form-control" t-att-value="(interview and interview.physical_zip) or ''"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Garaging Address</label>
+                    <input name="garaging_street" class="form-control" placeholder="Street" t-att-value="(interview and interview.garaging_street) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">City</label>
+                    <input name="garaging_city" class="form-control" t-att-value="(interview and interview.garaging_city) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">State</label>
+                    <input name="garaging_state" class="form-control" t-att-value="(interview and interview.garaging_state) or ''"/>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Zip</label>
+                    <input name="garaging_zip" class="form-control" t-att-value="(interview and interview.garaging_zip) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Phone</label>
+                    <input name="phone" class="form-control" t-att-value="(interview and interview.phone) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" t-att-value="(interview and interview.email) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Years in Business</label>
+                    <input name="years_in_business" type="number" min="0" class="form-control" t-att-value="(interview and interview.years_in_business) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Trailer Type / Operation</label>
+                    <select name="trailer_type" class="form-select">
+                        <option value="">--</option>
+                        <option value="flatbed" t-att-selected="interview and interview.trailer_type=='flatbed'">Flatbed Operation</option>
+                        <option value="reefer" t-att-selected="interview and interview.trailer_type=='reefer'">Reefer Operation</option>
+                        <option value="dry_van" t-att-selected="interview and interview.trailer_type=='dry_van'">Dry Van</option>
+                        <option value="dump" t-att-selected="interview and interview.trailer_type=='dump'">Dump</option>
+                        <option value="tanker" t-att-selected="interview and interview.trailer_type=='tanker'">Tanker</option>
+                        <option value="lowboy" t-att-selected="interview and interview.trailer_type=='lowboy'">Lowboy</option>
+                        <option value="other" t-att-selected="interview and interview.trailer_type=='other'">Other</option>
+                    </select>
+                    <input name="trailer_type_other" class="form-control mt-2" placeholder="Other (specify)" t-att-value="(interview and interview.trailer_type_other) or ''"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">EIN #</label>
+                    <input name="ein" class="form-control" t-att-value="(interview and interview.ein) or ''"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fa fa-shield me-2"></i>Coverages</span>
+                <span class="badge bg-secondary section-status" data-section="coverages">Incomplete</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="tbl_coverages">
+                        <thead>
+                            <tr><th>Type</th><th>Limit</th><th>Deductible</th><th>Target</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="addRow('coverages')">Add coverage</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fa fa-truck me-2"></i>Commodities</span>
+                <span class="badge bg-secondary section-status" data-section="commodities">Incomplete</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="tbl_commodities">
+                        <thead>
+                            <tr><th>Description</th><th>%</th><th>Reefer Breakdown</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="addRow('commodities')">Add commodity</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fa fa-id-card me-2"></i>Driver Schedule</span>
+                <span class="badge bg-secondary section-status" data-section="drivers">Incomplete</span>
+            </div>
+            <div class="card-body">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-2"><label class="form-label">ICC (MC#)</label><input name="filings_mc" id="filings_mc" class="form-control"/></div>
+                    <div class="col-md-2"><label class="form-label">DMV (CA#)</label><input name="filings_ca" class="form-control"/></div>
+                    <div class="col-md-2">
+                        <label class="form-label">TX#</label>
+                        <div class="input-group">
+                            <input name="filings_tx" id="filings_tx" class="form-control"/>
+                            <button type="button" class="btn btn-outline-secondary" id="btn_lookup_tx" title="Auto-fill from TxDMV">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-2"><label class="form-label">OR#</label><input name="filings_or" class="form-control"/></div>
+                    <div class="col-md-2"><label class="form-label">UIIA#</label><input name="filings_uiia" class="form-control"/></div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="tbl_drivers">
+                        <thead>
+                            <tr><th>Name</th><th>State</th><th>DL#</th><th>CDL#</th><th>DOB</th><th>EXP (yrs)</th><th>Hired</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="addRow('drivers')">Add driver</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fa fa-car me-2"></i>Vehicle Schedule</span>
+                <span class="badge bg-secondary section-status" data-section="vehicles">Incomplete</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="tbl_vehicles">
+                        <thead>
+                            <tr><th>Year</th><th>Make</th><th>Type</th><th>VIN</th><th>GVW</th><th>Radius</th><th>Stated Value</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="addRow('vehicles')">Add vehicle</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fa fa-history me-2"></i>Insurance History (Past 3 Years)</span>
+                <span class="badge bg-secondary section-status" data-section="history">Incomplete</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="tbl_history">
+                        <thead>
+                            <tr><th>Policy Period (MM/YY)</th><th>Liability #</th><th>Liability Amount</th><th>PHD #</th><th>PHD Amount</th><th>Cargo #</th><th>Cargo Amount</th><th>Company Name</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="addRow('history')">Add row</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Notes</label>
+            <textarea name="notes" class="form-control" rows="3" t-esc="(interview and interview.notes) or ''"></textarea>
+        </div>
+
+        <!-- Hidden JSON holders -->
+        <input type="hidden" name="coverages_json" id="coverages_json"/>
+        <input type="hidden" name="commodities_json" id="commodities_json"/>
+        <input type="hidden" name="drivers_json" id="drivers_json"/>
+        <input type="hidden" name="filings_json" id="filings_json"/>
+        <input type="hidden" name="vehicles_json" id="vehicles_json"/>
+        <input type="hidden" name="history_json" id="history_json"/>
+    </template>
+
+    <!-- Shared scripts for dynamic tables, JSON collect, lookups -->
+    <template id="portal_insurance_form_scripts" name="Insurance Application Scripts (Shared)">
+        <t t-jquery="body" t-operation="append">
+            <script><![CDATA[
+            (function(){
+                function row(tds){
+                    const tr = document.createElement('tr');
+                    tds.forEach(td => tr.appendChild(td));
+                    const tdDel = document.createElement('td');
+                    const btn = document.createElement('button');
+                    btn.type = 'button'; btn.className = 'btn btn-sm btn-outline-danger'; btn.innerText = 'Delete';
+                    btn.onclick = function(){ tr.remove(); };
+                    tdDel.appendChild(btn); tr.appendChild(tdDel); return tr;
+                }
+                function tdInput(ph, type, val){ const td=document.createElement('td'); const i=document.createElement('input'); i.className='form-control form-control-sm'; i.placeholder=ph||''; i.type=type||'text'; if(val!=null) i.value=val; td.appendChild(i); return td; }
+                function tdCheckbox(val){ const td=document.createElement('td'); const i=document.createElement('input'); i.type='checkbox'; if(!!val) i.checked=true; td.appendChild(i); return td; }
+                function tdSelect(options, val){ const td=document.createElement('td'); const s=document.createElement('select'); s.className='form-select form-select-sm'; options.forEach(opt=>{const o=document.createElement('option'); o.value=opt; o.textContent=opt; if(val===opt) o.selected=true; s.appendChild(o);}); td.appendChild(s); return td; }
+
+                window.addRow = function(kind, data){
+                    const tbl = document.getElementById('tbl_'+kind).getElementsByTagName('tbody')[0];
+                    let tds=[];
+                    if(kind==='coverages') {
+                        const coverageTypes = ['', 'Auto Liability', 'General Liability', 'Cargo', 'Physical Damage', 'Trailer Interchange', 'Non-Trucking Liability (Bobtail)', 'Occupational Accident', 'Workers Compensation', 'Umbrella/Excess Liability', 'Other'];
+                        tds=[tdSelect(coverageTypes, data?.type||''), tdInput('Limit','text',data?.limit||''), tdInput('Deductible','text',data?.deductible||''), tdInput('Target','text',data?.target||'')];
+                    }
+                    else if(kind==='commodities') {
+                        const commodityTypes=['','General Freight','Building Materials','Metal: sheets, coils, rolls','Logs, Poles, Beams, Lumber','Coal/Coke','Paper Products','Machinery, Large Objects','Construction','Refrigerated Food','Beverages','Fresh Produce','Grain, Feed, Hay','Agricultural/Farm Supplies','Motor Vehicles','Drive/Tow away','Mobile Homes','Chemicals','Liquids/Gases','Oilfield Equipment','Hazardous Materials','Household Goods','Garbage/Refuse','US Mail','Passengers','Utilities','Water Well','Meat','Other'];
+                        tds=[tdSelect(commodityTypes, data?.desc||''), tdInput('%','number',data?.pct||''), tdCheckbox(data?.reefer||false)];
+                    }
+                    else if(kind==='drivers') tds=[tdInput('Name','text',data?.name||''), tdInput('State','text',data?.state||''), tdInput('DL#','text',data?.dl||''), tdInput('CDL#','text',data?.cdl||''), tdInput('DOB','date',data?.dob||''), tdInput('EXP','number',data?.exp||''), tdInput('Hired','date',data?.hired||'')];
+                    else if(kind==='vehicles') tds=[tdInput('Year','number',data?.year||''), tdInput('Make','text',data?.make||''), tdInput('Type','text',data?.type||''), tdInput('VIN','text',data?.vin||''), tdInput('GVW','text',data?.gvw||''), tdInput('Radius','text',data?.radius||''), tdInput('Stated Value','text',data?.stated_value||'')];
+                    else if(kind==='history') tds=[tdInput('MM/YY','text',data?.period||''), tdInput('#','number',data?.liab_n||''), tdInput('Amount','number',data?.liab_amt||''), tdInput('#','number',data?.phd_n||''), tdInput('Amount','number',data?.phd_amt||''), tdInput('#','number',data?.cargo_n||''), tdInput('Amount','number',data?.cargo_amt||''), tdInput('Company','text',data?.company||'')];
+                    tbl.appendChild(row(tds));
+                };
+
+                function parseJSONFrom(id, fb){ try { const el=document.getElementById(id); return el? JSON.parse(el.textContent||fb): JSON.parse(fb); } catch(e){ return JSON.parse(fb); } }
+
+                function prefillFromSeeds(){
+                    const coverages = parseJSONFrom('init_coverages','[]');
+                    const commodities = parseJSONFrom('init_commodities','[]');
+                    const drivers = parseJSONFrom('init_drivers','[]');
+                    const vehicles = parseJSONFrom('init_vehicles','[]');
+                    const history = parseJSONFrom('init_history','[]');
+                    const filings = parseJSONFrom('init_filings','{}');
+                    (coverages.length?coverages:[{}]).forEach(r=>addRow('coverages', r));
+                    (commodities.length?commodities:[{}]).forEach(r=>addRow('commodities', r));
+                    (drivers.length?drivers:[{}]).forEach(r=>addRow('drivers', r));
+                    (vehicles.length?vehicles:[{}]).forEach(r=>addRow('vehicles', r));
+                    (history.length?history:[{}]).forEach(r=>addRow('history', r));
+                    // Prefill filings fields
+                    if (filings) {
+                        ['mc','usdot','ca','tx','or','uiia'].forEach(k=>{ const el = document.querySelector(`[name="filings_${k}"]`); if (el && filings[k]) el.value = filings[k]; });
+                    }
+                }
+
+                function updateSectionStatus(section){
+                    const table = document.getElementById('tbl_' + section);
+                    const badge = document.querySelector(`.section-status[data-section="${section}"]`);
+                    if (badge && table) {
+                        const rowCount = table.querySelectorAll('tbody tr').length;
+                        if (rowCount > 0) { badge.textContent = rowCount + ' item' + (rowCount > 1 ? 's' : ''); badge.className = 'badge bg-success section-status'; }
+                        else { badge.textContent = 'Incomplete'; badge.className = 'badge bg-secondary section-status'; }
+                    }
+                }
+
+                function hookStatus(){
+                    const kinds=['coverages','commodities','drivers','vehicles','history'];
+                    kinds.forEach(kind=>{
+                        updateSectionStatus(kind);
+                        const table = document.getElementById('tbl_' + kind);
+                        if (table) {
+                            const observer = new MutationObserver(()=>updateSectionStatus(kind));
+                            observer.observe(table.querySelector('tbody'), { childList: true });
+                        }
+                    });
+                }
+
+                function bindFormSubmit(){
+                    const form = document.getElementById('interview_edit_form') || document.getElementById('contract_form');
+                    if (!form) return;
+                    form.addEventListener('submit', function(){
+                        function collect(kind){
+                            const out=[]; const rows=document.querySelectorAll('#tbl_'+kind+' tbody tr');
+                            rows.forEach(r=>{ const cells=[...r.querySelectorAll('td')];
+                                if(kind==='coverages') { const typeEl=cells[0].querySelector('select')||cells[0].querySelector('input'); out.push({type:typeEl?.value||'', limit:cells[1].querySelector('input').value||'', deductible:cells[2].querySelector('input').value||'', target:cells[3].querySelector('input').value||''}); }
+                                else if(kind==='commodities') { const descEl=cells[0].querySelector('select')||cells[0].querySelector('input'); out.push({desc:descEl?.value||'', pct:parseFloat(cells[1].querySelector('input').value||0), reefer:cells[2].querySelector('input').checked}); }
+                                else if(kind==='drivers') out.push({name:cells[0].querySelector('input').value||'', state:cells[1].querySelector('input').value||'', dl:cells[2].querySelector('input').value||'', cdl:cells[3].querySelector('input').value||'', dob:cells[4].querySelector('input').value||'', exp:parseFloat(cells[5].querySelector('input').value||0), hired:cells[6].querySelector('input').value||''});
+                                else if(kind==='vehicles') out.push({year:cells[0].querySelector('input').value||'', make:cells[1].querySelector('input').value||'', type:cells[2].querySelector('input').value||'', vin:cells[3].querySelector('input').value||'', gvw:cells[4].querySelector('input').value||'', radius:cells[5].querySelector('input').value||'', stated_value:cells[6].querySelector('input').value||''});
+                                else if(kind==='history') out.push({period:cells[0].querySelector('input').value||'', liab_n:parseFloat(cells[1].querySelector('input').value||0), liab_amt:parseFloat(cells[2].querySelector('input').value||0), phd_n:parseFloat(cells[3].querySelector('input').value||0), phd_amt:parseFloat(cells[4].querySelector('input').value||0), cargo_n:parseFloat(cells[5].querySelector('input').value||0), cargo_amt:parseFloat(cells[6].querySelector('input').value||0), company:cells[7].querySelector('input').value||''});
+                            });
+                            return JSON.stringify(out);
+                        }
+                        document.getElementById('coverages_json').value = collect('coverages');
+                        document.getElementById('commodities_json').value = collect('commodities');
+                        document.getElementById('drivers_json').value = collect('drivers');
+                        document.getElementById('vehicles_json').value = collect('vehicles');
+                        document.getElementById('history_json').value = collect('history');
+                        const filings = {
+                            mc: document.querySelector('input[name="filings_mc"]').value||'',
+                            usdot: document.querySelector('input[name="filings_usdot"]').value||'',
+                            ca: document.querySelector('input[name="filings_ca"]').value||'',
+                            tx: document.querySelector('input[name="filings_tx"]').value||'',
+                            or: document.querySelector('input[name="filings_or"]').value||'',
+                            uiia: document.querySelector('input[name="filings_uiia"]').value||''
+                        };
+                        document.getElementById('filings_json').value = JSON.stringify(filings);
+                    });
+                }
+
+                function showLoading(btn, show){ if (show){ btn.disabled=true; btn.innerHTML='<i class="fa fa-spinner fa-spin"></i>'; } else { btn.disabled=false; btn.innerHTML='<i class="fa fa-search"></i>'; } }
+                function setVal(name, value){ const el=document.querySelector(`[name="${name}"]`); if(el && value && !el.value){ el.value=value; return 1; } return 0; }
+                function fillFormData(data){ let updated=0; if (data.name_insured) updated+=setVal('name_insured',data.name_insured);
+                    if (data.dba) updated+=setVal('dba',data.dba); if (data.owner) updated+=setVal('owner',data.owner);
+                    if (data.entity_type){ const el=document.querySelector('[name="entity_type"]'); if(el && !el.value){ el.value=data.entity_type; updated++; } }
+                    if (data.entity_type_other) updated+=setVal('entity_type_other',data.entity_type_other);
+                    if (data.carrier_type){ const el=document.querySelector('[name="carrier_type"]'); if(el && !el.value){ el.value=data.carrier_type; updated++; } }
+                    if (data.carrier_type_other) updated+=setVal('carrier_type_other',data.carrier_type_other);
+                    if (data.operation_scope){ const el=document.querySelector('[name="operation_scope"]'); let v=data.operation_scope; if(v==='both') v='interstate'; if(el && !el.value){ el.value=v; updated++; } }
+                    ['mailing','physical','garaging'].forEach(prefix=>{ ['street','city','state','zip'].forEach(f=>{ const key=`${prefix}_${f}`; if(data[key]) updated+=setVal(key,data[key]); }); });
+                    if (data.phone) updated+=setVal('phone',data.phone); if (data.email) updated+=setVal('email',data.email); if (data.ein) updated+=setVal('ein',data.ein);
+                    if (data.filings_mc) updated+=setVal('filings_mc', data.filings_mc); if (data.filings_tx) updated+=setVal('filings_tx', data.filings_tx);
+                    return updated; }
+
+                function bindLookups(){
+                    const btnUSDOT=document.getElementById('btn_lookup_usdot'); if(btnUSDOT){ btnUSDOT.addEventListener('click', function(){ const usdot=document.getElementById('filings_usdot').value.trim(); if(!usdot){ alert('Please enter the USDOT# first'); return; } const btn=this; showLoading(btn,true);
+                        fetch('/my/sales/forms/lookup', { method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json; charset=UTF-8','Accept':'application/json'}, body: JSON.stringify({ jsonrpc:'2.0', id:Date.now(), method:'call', params:{ usdot: usdot } }) })
+                        .then(r=>r.json()).then(data=>{ showLoading(btn,false); if (data.result && Object.keys(data.result).length){ const changed=fillFormData(data.result); alert(changed>0 ? 'Information loaded successfully from FMCSA' : 'No new data to fill.'); } else { alert('No information found for this USDOT#'); } })
+                        .catch(err=>{ console.error(err); showLoading(btn,false); alert('Error querying FMCSA. Please try again.'); }); }); }
+                    const btnTX=document.getElementById('btn_lookup_tx'); if(btnTX){ btnTX.addEventListener('click', function(){ const usdot=document.getElementById('filings_usdot').value.trim(); const txdmv=document.getElementById('filings_tx').value.trim(); if(!usdot && !txdmv){ alert('Please enter USDOT# or TX# first'); return; } const btn=this; showLoading(btn,true);
+                        fetch('/my/sales/forms/lookup', { method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json; charset=UTF-8','Accept':'application/json'}, body: JSON.stringify({ jsonrpc:'2.0', id:Date.now(), method:'call', params:{ txdmv: txdmv || undefined, usdot: undefined } }) })
+                        .then(r=>r.json()).then(data=>{ showLoading(btn,false); if (data.result && Object.keys(data.result).length){ const changed=fillFormData(data.result); alert(changed>0 ? 'Information loaded successfully from TxDMV' : 'No new data to fill.'); } else { alert('No information found in TxDMV'); } })
+                        .catch(err=>{ console.error(err); showLoading(btn,false); alert('Error querying TxDMV. Please try again.'); }); }); }
+                }
+
+                // Init
+                prefillFromSeeds();
+                hookStatus();
+                bindFormSubmit();
+                bindLookups();
+            })();
+            ]]></script>
+        </t>
+    </template>
+</odoo>

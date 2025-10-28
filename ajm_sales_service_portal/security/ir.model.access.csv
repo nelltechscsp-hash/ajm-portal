@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ajm_service_application_user,ajm.service.application.user,model_ajm_service_application,base.group_user,1,1,1,0
+access_ajm_service_application_manager,ajm.service.application.manager,model_ajm_service_application,base.group_system,1,1,1,1
+access_ajm_service_application_portal_user,ajm.service.application portal user,model_ajm_service_application,ajm_employee_portal.group_sales_portal_user,1,1,1,0
+access_ajm_service_application_public,ajm.service.application public,model_ajm_service_application,base.group_public,1,1,1,0
+access_res_partner_category_portal_user,res.partner.category portal user,base.model_res_partner_category,ajm_employee_portal.group_sales_portal_user,1,1,1,0

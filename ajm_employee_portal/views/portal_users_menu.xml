@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action to show Portal Users (Sales & Cancellations) -->
+    <record id="action_portal_department_users" model="ir.actions.act_window">
+        <field name="name">Portal Employees</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            '|',
+            ('group_ids', '=', ref('ajm_employee_portal.group_sales_portal_user')),
+            ('group_ids', '=', ref('ajm_employee_portal.group_cancellations_portal_user'))
+        ]</field>
+        <field name="context">{
+            'default_share': True,
+            'search_default_portal': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Portal Employee
+            </p>
+            <p>
+                Create portal users for Sales or Cancellations departments.<br/>
+                These users can only access their specific portal, not the backend.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item under Settings > Users & Companies -->
+    <menuitem
+        id="menu_portal_department_users"
+        name="Portal Employees"
+        parent="base.menu_users"
+        action="action_portal_department_users"
+        sequence="20"
+        groups="base.group_system"/>
+</odoo>

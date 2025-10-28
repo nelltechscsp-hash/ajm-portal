@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Interview Detail (Portal) -->
+    <template id="portal_interview_detail" name="Interview Detail">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <a href="/my/sales/clients" class="btn btn-secondary btn-sm">
+                            <i class="fa fa-arrow-left"/> Back to Clients
+                        </a>
+                    </div>
+                    <div>
+                        <span t-attf-class="badge badge-#{interview.state == 'completed' and 'success' or interview.state == 'draft' and 'info' or 'secondary'}">
+                            <t t-esc="dict(interview._fields['state'].selection).get(interview.state)"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-1">Interview <t t-esc="interview.name"/></h3>
+                        <div class="text-muted">
+                            Client:
+                            <a t-attf-href="/my/sales/clients/#{interview.partner_id.id}">
+                                <t t-esc="interview.partner_id.name"/>
+                            </a>
+                            <span class="mx-2">•</span>
+                            Effective Date: <t t-esc="interview.effective_date or '-'"/>
+                        </div>
+                        <t t-if="status_message">
+                            <div class="alert alert-success mt-3 mb-0">
+                                <i class="fa fa-check"/> <t t-esc="status_message"/>
+                            </div>
+                        </t>
+                        <t t-if="error_message">
+                            <div class="alert alert-warning mt-3 mb-0">
+                                <i class="fa fa-exclamation-circle"/> <t t-esc="error_message"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Single-page edit form mirroring the creation form -->
+                <div class="container o_portal_wrap px-0">
+                    <form t-att-action="'/my/sales/interviews/%d/save' % interview.id" method="post" id="interview_edit_form">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <!-- Shared Insurance Application body -->
+                        <t t-call="ajm_sales_service_portal.portal_insurance_form_body"/>
+
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                    </div>
+                                </form>
+
+                                <!-- Attachments below the main form -->
+                                <div class="card mb-3">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span><i class="fa fa-paperclip me-2"></i>Attachments</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <form t-att-action="'/my/sales/interviews/%d/upload' % interview.id" method="post" enctype="multipart/form-data" class="mb-3">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <div class="input-group">
+                                                <input type="file" name="files" multiple="multiple" class="form-control"/>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-primary" type="submit"><i class="fa fa-upload"/> Upload</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <t t-if="attachments">
+                                            <div class="list-group">
+                                                <t t-foreach="attachments" t-as="att">
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <i class="fa fa-paperclip mr-2"/>
+                                                            <a t-att-href="'/web/content/%d' % att.id" target="_blank"><t t-esc="att.name"/></a>
+                                                            <small class="text-muted ml-2">(<t t-esc="round(att.file_size/1024.0, 1) if att.file_size else 0"/> KB)</small>
+                                                        </div>
+                                                        <div>
+                                                            <a t-att-href="'/web/content/%d?download=true' % att.id" class="btn btn-sm btn-outline-secondary mr-2">
+                                                                <i class="fa fa-download"/> Download
+                                                            </a>
+                                                            <form t-att-action="'/my/sales/interviews/%d/attachment/%d/delete' % (interview.id, att.id)" method="post" style="display:inline">
+                                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                                <button class="btn btn-sm btn-outline-danger" type="submit">
+                                                                    <i class="fa fa-trash"/> Delete
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="alert alert-info mb-0">
+                                                <i class="fa fa-info-circle"/> No attachments yet. Use the upload to add documents.
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            <!-- Seed JSON state -->
+            <script type="application/json" id="init_coverages"><t t-esc="interview.coverages_json or '[]'"/></script>
+            <script type="application/json" id="init_commodities"><t t-esc="interview.commodities_json or '[]'"/></script>
+            <script type="application/json" id="init_drivers"><t t-esc="interview.drivers_json or '[]'"/></script>
+            <script type="application/json" id="init_vehicles"><t t-esc="interview.vehicles_json or '[]'"/></script>
+            <script type="application/json" id="init_history"><t t-esc="interview.history_json or '[]'"/></script>
+            <script type="application/json" id="init_filings"><t t-esc="interview.filings_json or '{}'"/></script>
+
+            
+
+            <!-- Shared Insurance Application scripts (tables, JSON, lookups, statuses) -->
+            <t t-call="ajm_sales_service_portal.portal_insurance_form_scripts"/>
+        </t>
+    </template>
+</odoo>

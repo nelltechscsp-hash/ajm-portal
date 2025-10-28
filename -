@@ -1,0 +1,1571 @@
+2025-10-27 20:33:23,187 9569 DEBUG ? odoo.netsvc: logger level set: "odoo.http.rpc.request:INFO" 
+2025-10-27 20:33:23,188 9569 DEBUG ? odoo.netsvc: logger level set: "odoo.http.rpc.response:INFO" 
+2025-10-27 20:33:23,188 9569 DEBUG ? odoo.netsvc: logger level set: ":INFO" 
+2025-10-27 20:33:23,188 9569 DEBUG ? odoo.netsvc: logger level set: "odoo:DEBUG" 
+2025-10-27 20:33:23,188 9569 DEBUG ? odoo.netsvc: logger level set: "odoo.sql_db:INFO" 
+2025-10-27 20:33:23,188 9569 DEBUG ? odoo.netsvc: logger level set: ":INFO" 
+2025-10-27 20:33:23,188 9569 WARNING ? odoo.tools.config: option db_host reads 'False' in the config file at /etc/odoo/odoo.conf but isn't a boolean option, skip 
+2025-10-27 20:33:23,188 9569 WARNING ? odoo.tools.config: option db_port reads 'False' in the config file at /etc/odoo/odoo.conf but isn't a boolean option, skip 
+2025-10-27 20:33:23,188 9569 WARNING ? odoo.tools.config: option addons_path, no such directory '/opt/odoo/addons', skipped 
+2025-10-27 20:33:23,188 9569 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2025-10-27 20:33:23,188 9569 INFO ? odoo: Odoo version 19.0-20251015 
+2025-10-27 20:33:23,189 9569 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2025-10-27 20:33:23,189 9569 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/.local/share/Odoo/addons/19.0', '/opt/odoo/custom_addons', '/usr/lib/python3/dist-packages/addons']) 
+2025-10-27 20:33:23,189 9569 INFO ? odoo: database: odoo@default:default 
+2025-10-27 20:33:23,512 9569 DEBUG ? odoo.service.server: Setting signal handlers 
+2025-10-27 20:33:23,528 9569 DEBUG ajmdb odoo.registry: Multiprocess load registry signaling: [Registry: 124] [Cache default: 31] [Cache assets: 14] [Cache stable: 14] [Cache templates: 7] [Cache routing: 1] [Cache groups: 1] 
+2025-10-27 20:33:23,548 9569 INFO ajmdb odoo.modules.loading: loading 1 modules... 
+2025-10-27 20:33:23,548 9569 DEBUG ajmdb odoo.modules.loading: Loading module base (1/1) 
+2025-10-27 20:33:23,556 9569 DEBUG ajmdb odoo.modules.loading: Module base loaded in 0.01s, 0 queries 
+2025-10-27 20:33:23,556 9569 INFO ajmdb odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2025-10-27 20:33:23,603 9569 INFO ajmdb odoo.modules.loading: updating modules list 
+2025-10-27 20:33:23,606 9569 INFO ajmdb odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2025-10-27 20:33:23,857 9569 ERROR ajmdb odoo.sql_db: bad query: b'INSERT INTO "ir_model_data" ("create_date", "create_uid", "model", "module", "name", "noupdate", "res_id", "write_date", "write_uid") VALUES (\'2025-10-27T20:33:23.531459\'::timestamp, 1, \'ir.module.module\', \'base\', \'module_ajm_pdf_workbench\', true, 680, \'2025-10-27T20:33:23.531459\'::timestamp, 1) RETURNING "id"'
+ERROR: duplicate key value violates unique constraint "ir_model_data_module_name_uniq_index"
+DETAIL:  Key (module, name)=(base, module_ajm_pdf_workbench) already exists.
+ 
+2025-10-27 20:33:23,862 9569 WARNING ajmdb odoo.modules.loading: Transient module states were reset 
+2025-10-27 20:33:23,862 9569 ERROR ajmdb odoo.registry: Failed to load registry 
+2025-10-27 20:33:23,862 9569 CRITICAL ajmdb odoo.service.server: Failed to initialize database `ajmdb`. 
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/service/server.py", line 1509, in preload_registries
+    registry = Registry.new(dbname, update_module=update_module, install_modules=config['init'], upgrade_modules=config['update'], reinit_modules=config['reinit'])
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 88, in locked
+    return func(inst, *args, **kwargs)
+  File "/usr/lib/python3/dist-packages/odoo/orm/registry.py", line 185, in new
+    load_modules(
+  File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 412, in load_modules
+    Module.update_list()
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_module.py", line 70, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_module.py", line 798, in update_list
+    mod = self.create(dict(name=manifest.name, state=state, **values))
+  File "/usr/lib/python3/dist-packages/odoo/orm/decorators.py", line 365, in create
+    return method(self, vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_module.py", line 763, in create
+    self.env['ir.model.data'].create(module_metadata_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/decorators.py", line 365, in create
+    return method(self, vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_model.py", line 2264, in create
+    res = super().create(vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/decorators.py", line 365, in create
+    return method(self, vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/models.py", line 4706, in create
+    records = self._create(data_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/models.py", line 4882, in _create
+    cr.execute(SQL(
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 426, in execute
+    self._obj.execute(query, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "ir_model_data_module_name_uniq_index"
+DETAIL:  Key (module, name)=(base, module_ajm_pdf_workbench) already exists.
+
+2025-10-27 20:33:23,865 9569 INFO ajmdb odoo.service.server: Initiating shutdown 
+2025-10-27 20:33:23,866 9569 INFO ajmdb odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2025-10-27 20:33:23,866 9569 DEBUG ajmdb odoo.service.server: current thread: <_MainThread(MainThread, started 129046991396864)> 
+2025-10-27 20:33:23,866 9569 DEBUG ajmdb odoo.service.server: process <_MainThread(MainThread, started 129046991396864)> (False) 
+2025-10-27 20:33:23,867 9569 INFO ajmdb odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections  
+2025-10-27 20:33:23,867 9569 DEBUG ajmdb odoo.service.server: -- 
+2025-10-27 20:34:12,473 9655 DEBUG ? odoo.netsvc: logger level set: "odoo.http.rpc.request:INFO" 
+2025-10-27 20:34:12,473 9655 DEBUG ? odoo.netsvc: logger level set: "odoo.http.rpc.response:INFO" 
+2025-10-27 20:34:12,473 9655 DEBUG ? odoo.netsvc: logger level set: ":INFO" 
+2025-10-27 20:34:12,473 9655 DEBUG ? odoo.netsvc: logger level set: "odoo:DEBUG" 
+2025-10-27 20:34:12,473 9655 DEBUG ? odoo.netsvc: logger level set: "odoo.sql_db:INFO" 
+2025-10-27 20:34:12,473 9655 DEBUG ? odoo.netsvc: logger level set: ":INFO" 
+2025-10-27 20:34:12,473 9655 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2025-10-27 20:34:12,474 9655 INFO ? odoo: Odoo version 19.0-20251015 
+2025-10-27 20:34:12,474 9655 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/.local/share/Odoo/addons/19.0', '/opt/odoo/custom_addons', '/usr/lib/python3/dist-packages/addons']) 
+2025-10-27 20:34:12,474 9655 INFO ? odoo: database: default@default:default 
+2025-10-27 20:34:12,761 9655 DEBUG ? odoo.service.server: Setting signal handlers 
+2025-10-27 20:34:12,772 9655 DEBUG ajmdb odoo.registry: Multiprocess load registry signaling: [Registry: 124] [Cache default: 31] [Cache assets: 14] [Cache stable: 14] [Cache templates: 7] [Cache routing: 1] [Cache groups: 1] 
+2025-10-27 20:34:12,787 9655 INFO ajmdb odoo.modules.loading: loading 1 modules... 
+2025-10-27 20:34:12,787 9655 DEBUG ajmdb odoo.modules.loading: Loading module base (1/1) 
+2025-10-27 20:34:12,793 9655 DEBUG ajmdb odoo.modules.loading: Module base loaded in 0.01s, 0 queries 
+2025-10-27 20:34:12,793 9655 INFO ajmdb odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2025-10-27 20:34:12,833 9655 INFO ajmdb odoo.modules.loading: updating modules list 
+2025-10-27 20:34:12,836 9655 INFO ajmdb odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2025-10-27 20:34:13,812 9655 ERROR ajmdb odoo.sql_db: bad query: b'INSERT INTO "ir_model_data" ("create_date", "create_uid", "model", "module", "name", "noupdate", "res_id", "write_date", "write_uid") VALUES (\'2025-10-27T20:34:12.775276\'::timestamp, 1, \'ir.module.module\', \'base\', \'module_ajm_pdf_workbench\', true, 681, \'2025-10-27T20:34:12.775276\'::timestamp, 1) RETURNING "id"'
+ERROR: duplicate key value violates unique constraint "ir_model_data_module_name_uniq_index"
+DETAIL:  Key (module, name)=(base, module_ajm_pdf_workbench) already exists.
+ 
+2025-10-27 20:34:14,930 9655 WARNING ajmdb odoo.modules.loading: Transient module states were reset 
+2025-10-27 20:34:14,931 9655 ERROR ajmdb odoo.registry: Failed to load registry 
+2025-10-27 20:34:14,931 9655 CRITICAL ajmdb odoo.service.server: Failed to initialize database `ajmdb`. 
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/service/server.py", line 1509, in preload_registries
+    registry = Registry.new(dbname, update_module=update_module, install_modules=config['init'], upgrade_modules=config['update'], reinit_modules=config['reinit'])
+  File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 88, in locked
+    return func(inst, *args, **kwargs)
+  File "/usr/lib/python3/dist-packages/odoo/orm/registry.py", line 185, in new
+    load_modules(
+  File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 412, in load_modules
+    Module.update_list()
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_module.py", line 70, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_module.py", line 798, in update_list
+    mod = self.create(dict(name=manifest.name, state=state, **values))
+  File "/usr/lib/python3/dist-packages/odoo/orm/decorators.py", line 365, in create
+    return method(self, vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_module.py", line 763, in create
+    self.env['ir.model.data'].create(module_metadata_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/decorators.py", line 365, in create
+    return method(self, vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_model.py", line 2264, in create
+    res = super().create(vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/decorators.py", line 365, in create
+    return method(self, vals_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/models.py", line 4706, in create
+    records = self._create(data_list)
+  File "/usr/lib/python3/dist-packages/odoo/orm/models.py", line 4882, in _create
+    cr.execute(SQL(
+  File "/usr/lib/python3/dist-packages/odoo/sql_db.py", line 426, in execute
+    self._obj.execute(query, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "ir_model_data_module_name_uniq_index"
+DETAIL:  Key (module, name)=(base, module_ajm_pdf_workbench) already exists.
+
+2025-10-27 20:34:14,934 9655 INFO ajmdb odoo.service.server: Initiating shutdown 
+2025-10-27 20:34:14,934 9655 INFO ajmdb odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2025-10-27 20:34:14,934 9655 DEBUG ajmdb odoo.service.server: current thread: <_MainThread(MainThread, started 137464380977152)> 
+2025-10-27 20:34:14,934 9655 DEBUG ajmdb odoo.service.server: process <_MainThread(MainThread, started 137464380977152)> (False) 
+2025-10-27 20:34:14,936 9655 INFO ajmdb odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections  
+2025-10-27 20:34:14,937 9655 DEBUG ajmdb odoo.service.server: -- 
+2025-10-27 20:34:27,290 9701 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2025-10-27 20:34:27,291 9701 INFO ? odoo: Odoo version 19.0-20251015 
+2025-10-27 20:34:27,291 9701 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/.local/share/Odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2025-10-27 20:34:27,291 9701 INFO ? odoo: database: default@default:default 
+2025-10-27 20:34:27,639 9701 INFO ajmdb odoo.modules.loading: loading 1 modules... 
+2025-10-27 20:34:27,640 9701 INFO ajmdb odoo.modules.loading: Loading module base (1/1) 
+2025-10-27 20:34:27,678 9701 INFO ajmdb odoo.registry: module base: creating or updating database tables 
+2025-10-27 20:34:34,775 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_bank.xml 
+2025-10-27 20:34:34,782 9701 INFO ajmdb odoo.modules.loading: loading base/data/res.lang.csv 
+2025-10-27 20:34:34,931 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_lang_data.xml 
+2025-10-27 20:34:34,967 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_partner_data.xml 
+2025-10-27 20:34:34,986 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_currency_data.xml 
+2025-10-27 20:34:35,110 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_company_data.xml 
+2025-10-27 20:34:35,115 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_users_data.xml 
+2025-10-27 20:34:35,130 9701 INFO ajmdb odoo.modules.loading: loading base/data/report_paperformat_data.xml 
+2025-10-27 20:34:35,137 9701 INFO ajmdb odoo.modules.loading: loading base/data/res_country_data.xml 
+2025-10-27 20:34:35,337 9701 INFO ajmdb odoo.modules.loading: loading base/data/ir_demo_data.xml 
+2025-10-27 20:34:35,395 9701 INFO ajmdb odoo.modules.loading: loading base/security/base_groups.xml 
+2025-10-27 20:34:35,611 9701 INFO ajmdb odoo.modules.loading: loading base/security/base_security.xml 
+2025-10-27 20:34:35,631 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/wizard_ir_model_menu_create_views.xml 
+2025-10-27 20:34:35,647 9701 INFO ajmdb odoo.modules.loading: loading base/views/base_menus.xml 
+2025-10-27 20:34:35,727 9701 INFO ajmdb odoo.modules.loading: loading base/views/decimal_precision_views.xml 
+2025-10-27 20:34:35,762 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_config_views.xml 
+2025-10-27 20:34:35,780 9701 INFO ajmdb odoo.modules.loading: loading base/data/res.country.state.csv 
+2025-10-27 20:34:36,340 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_actions_views.xml 
+2025-10-27 20:34:36,612 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_asset_views.xml 
+2025-10-27 20:34:36,651 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_config_parameter_views.xml 
+2025-10-27 20:34:36,692 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_cron_views.xml 
+2025-10-27 20:34:36,756 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_cron_trigger_views.xml 
+2025-10-27 20:34:36,793 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_filters_views.xml 
+2025-10-27 20:34:36,854 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_mail_server_views.xml 
+2025-10-27 20:34:36,895 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_model_views.xml 
+2025-10-27 20:34:37,156 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_attachment_views.xml 
+2025-10-27 20:34:37,195 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_rule_views.xml 
+2025-10-27 20:34:37,236 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_sequence_views.xml 
+2025-10-27 20:34:37,272 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_ui_menu_views.xml 
+2025-10-27 20:34:37,315 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_ui_view_views.xml 
+2025-10-27 20:34:37,411 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_default_views.xml 
+2025-10-27 20:34:37,447 9701 INFO ajmdb odoo.modules.loading: loading base/data/ir_config_parameter_data.xml 
+2025-10-27 20:34:37,450 9701 INFO ajmdb odoo.modules.loading: loading base/data/ir_cron_data.xml 
+2025-10-27 20:34:37,481 9701 INFO ajmdb odoo.modules.loading: loading base/report/ir_model_report.xml 
+2025-10-27 20:34:37,486 9701 INFO ajmdb odoo.modules.loading: loading base/report/ir_model_templates.xml 
+2025-10-27 20:34:37,501 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_logging_views.xml 
+2025-10-27 20:34:37,538 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_qweb_widget_templates.xml 
+2025-10-27 20:34:37,571 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_module_views.xml 
+2025-10-27 20:34:37,677 9701 INFO ajmdb odoo.modules.loading: loading base/data/ir_module_category_data.xml 
+2025-10-27 20:34:37,726 9701 INFO ajmdb odoo.modules.loading: loading base/data/ir_module_module.xml 
+2025-10-27 20:34:37,758 9701 INFO ajmdb odoo.modules.loading: loading base/report/ir_module_reports.xml 
+2025-10-27 20:34:37,762 9701 INFO ajmdb odoo.modules.loading: loading base/report/ir_module_report_templates.xml 
+2025-10-27 20:34:37,775 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_module_update_views.xml 
+2025-10-27 20:34:37,796 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_language_install_views.xml 
+2025-10-27 20:34:37,823 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_import_language_views.xml 
+2025-10-27 20:34:37,846 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_module_upgrade_views.xml 
+2025-10-27 20:34:37,879 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_module_uninstall_views.xml 
+2025-10-27 20:34:37,892 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_export_language_views.xml 
+2025-10-27 20:34:37,913 9701 INFO ajmdb odoo.modules.loading: loading base/wizard/base_partner_merge_views.xml 
+2025-10-27 20:34:37,946 9701 INFO ajmdb odoo.modules.loading: loading base/data/ir_demo_failure_data.xml 
+2025-10-27 20:34:37,990 9701 INFO ajmdb odoo.modules.loading: loading base/views/ir_profile_views.xml 
+2025-10-27 20:34:38,050 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_company_views.xml 
+2025-10-27 20:34:38,103 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_lang_views.xml 
+2025-10-27 20:34:38,149 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_partner_views.xml 
+2025-10-27 20:34:38,314 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_bank_views.xml 
+2025-10-27 20:34:38,385 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_country_views.xml 
+2025-10-27 20:34:38,481 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_currency_views.xml 
+2025-10-27 20:34:38,592 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_groups_views.xml 
+2025-10-27 20:34:38,666 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_users_views.xml 
+2025-10-27 20:34:38,844 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_users_apikeys_views.xml 
+2025-10-27 20:34:38,854 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_device_views.xml 
+2025-10-27 20:34:38,890 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_users_identitycheck_views.xml 
+2025-10-27 20:34:38,904 9701 INFO ajmdb odoo.modules.loading: loading base/views/res_config_settings_views.xml 
+2025-10-27 20:34:38,926 9701 INFO ajmdb odoo.modules.loading: loading base/views/report_paperformat_views.xml 
+2025-10-27 20:34:38,969 9701 INFO ajmdb odoo.modules.loading: loading base/security/ir.model.access.csv 
+2025-10-27 20:34:39,331 9701 INFO ajmdb odoo.modules.loading: Module base loaded in 11.69s, 5446 queries (+5446 other) 
+2025-10-27 20:34:39,331 9701 INFO ajmdb odoo.modules.loading: 1 modules loaded in 11.69s, 5446 queries (+5446 extra) 
+2025-10-27 20:34:39,334 9701 INFO ajmdb odoo.modules.loading: updating modules list 
+2025-10-27 20:34:39,336 9701 INFO ajmdb odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2025-10-27 20:34:40,696 9701 INFO ajmdb odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['Base'] to user __system__ #1 via n/a 
+2025-10-27 20:34:40,697 9701 INFO ajmdb odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['Base'] to user __system__ #1 via n/a 
+2025-10-27 20:34:41,981 9701 WARNING ajmdb odoo.modules.module: module ajm_employee_portal: manifest not found 
+2025-10-27 20:34:42,002 9701 WARNING ajmdb odoo.modules.module: module ajm_document_generator: manifest not found 
+2025-10-27 20:34:42,003 9701 WARNING ajmdb odoo.modules.module: module ajm_sales_service_portal: manifest not found 
+2025-10-27 20:34:42,003 9701 WARNING ajmdb odoo.modules.module: module ajm_user_gmail: manifest not found 
+2025-10-27 20:34:42,101 9701 INFO ajmdb odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a 
+2025-10-27 20:34:42,717 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_user_gmail: not installable, skipped 
+2025-10-27 20:34:42,718 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_employee_portal: not installable, skipped 
+2025-10-27 20:34:42,718 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_sales_service_portal: not installable, skipped 
+2025-10-27 20:34:42,718 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_document_generator: not installable, skipped 
+2025-10-27 20:34:42,752 9701 INFO ajmdb odoo.modules.loading: loading 106 modules... 
+2025-10-27 20:34:42,752 9701 INFO ajmdb odoo.modules.loading: Loading module rpc (2/106) 
+2025-10-27 20:34:42,780 9701 INFO ajmdb odoo.modules.loading: Module rpc loaded in 0.03s, 10 queries (+10 other) 
+2025-10-27 20:34:42,780 9701 INFO ajmdb odoo.modules.loading: Loading module social_media (3/106) 
+2025-10-27 20:34:42,787 9701 INFO ajmdb odoo.registry: module social_media: creating or updating database tables 
+2025-10-27 20:34:42,837 9701 INFO ajmdb odoo.modules.loading: loading social_media/views/res_company_views.xml 
+2025-10-27 20:34:42,890 9701 INFO ajmdb odoo.modules.loading: Module social_media loaded in 0.11s, 69 queries (+69 other) 
+2025-10-27 20:34:42,890 9701 INFO ajmdb odoo.modules.loading: Loading module uom (4/106) 
+2025-10-27 20:34:42,897 9701 INFO ajmdb odoo.registry: module uom: creating or updating database tables 
+2025-10-27 20:34:42,931 9701 INFO ajmdb odoo.modules.loading: loading uom/data/uom_data.xml 
+2025-10-27 20:34:42,961 9701 INFO ajmdb odoo.modules.loading: loading uom/security/uom_security.xml 
+2025-10-27 20:34:42,965 9701 INFO ajmdb odoo.modules.loading: loading uom/security/ir.model.access.csv 
+2025-10-27 20:34:42,980 9701 INFO ajmdb odoo.modules.loading: loading uom/views/uom_uom_views.xml 
+2025-10-27 20:34:43,065 9701 INFO ajmdb odoo.modules.loading: Module uom loaded in 0.17s, 150 queries (+150 other) 
+2025-10-27 20:34:43,066 9701 INFO ajmdb odoo.modules.loading: Loading module web (5/106) 
+2025-10-27 20:34:43,111 9701 INFO ajmdb odoo.registry: module web: creating or updating database tables 
+2025-10-27 20:34:43,827 9701 INFO ajmdb odoo.modules.loading: loading web/security/ir.model.access.csv 
+2025-10-27 20:34:43,838 9701 INFO ajmdb odoo.modules.loading: loading web/security/web_security.xml 
+2025-10-27 20:34:43,842 9701 INFO ajmdb odoo.modules.loading: loading web/views/webclient_templates.xml 
+2025-10-27 20:34:44,020 9701 INFO ajmdb odoo.modules.loading: loading web/views/report_templates.xml 
+2025-10-27 20:34:44,238 9701 INFO ajmdb odoo.modules.loading: loading web/views/base_document_layout_views.xml 
+2025-10-27 20:34:44,273 9701 INFO ajmdb odoo.modules.loading: loading web/views/partner_view.xml 
+2025-10-27 20:34:44,280 9701 INFO ajmdb odoo.modules.loading: loading web/views/speedscope_template.xml 
+2025-10-27 20:34:44,292 9701 INFO ajmdb odoo.modules.loading: loading web/views/memory_template.xml 
+2025-10-27 20:34:44,309 9701 INFO ajmdb odoo.modules.loading: loading web/views/speedscope_config_wizard.xml 
+2025-10-27 20:34:44,324 9701 INFO ajmdb odoo.modules.loading: loading web/views/neutralize_views.xml 
+2025-10-27 20:34:44,353 9701 INFO ajmdb odoo.modules.loading: loading web/views/ir_ui_view_views.xml 
+2025-10-27 20:34:44,376 9701 INFO ajmdb odoo.modules.loading: loading web/data/ir_attachment.xml 
+2025-10-27 20:34:44,380 9701 INFO ajmdb odoo.modules.loading: loading web/data/report_layout.xml 
+2025-10-27 20:34:44,464 9701 INFO ajmdb odoo.modules.loading: Module web loaded in 1.40s, 1472 queries (+1472 other) 
+2025-10-27 20:34:44,465 9701 INFO ajmdb odoo.modules.loading: Loading module api_doc (6/106) 
+2025-10-27 20:34:44,475 9701 INFO ajmdb odoo.registry: module api_doc: creating or updating database tables 
+2025-10-27 20:34:44,503 9701 INFO ajmdb odoo.modules.loading: loading api_doc/security/res_groups.xml 
+2025-10-27 20:34:44,541 9701 INFO ajmdb odoo.modules.loading: loading api_doc/views/docclient.xml 
+2025-10-27 20:34:44,578 9701 INFO ajmdb odoo.modules.loading: Module api_doc loaded in 0.11s, 69 queries (+69 other) 
+2025-10-27 20:34:44,578 9701 INFO ajmdb odoo.modules.loading: Loading module auth_totp (7/106) 
+2025-10-27 20:34:44,597 9701 INFO ajmdb odoo.registry: module auth_totp: creating or updating database tables 
+2025-10-27 20:34:44,653 9701 INFO ajmdb odoo.modules.loading: loading auth_totp/security/security.xml 
+2025-10-27 20:34:44,686 9701 INFO ajmdb odoo.modules.loading: loading auth_totp/security/ir.model.access.csv 
+2025-10-27 20:34:44,696 9701 INFO ajmdb odoo.modules.loading: loading auth_totp/data/ir_action_data.xml 
+2025-10-27 20:34:44,710 9701 INFO ajmdb odoo.modules.loading: loading auth_totp/views/res_users_views.xml 
+2025-10-27 20:34:44,803 9701 INFO ajmdb odoo.modules.loading: loading auth_totp/views/templates.xml 
+2025-10-27 20:34:44,816 9701 INFO ajmdb odoo.modules.loading: loading auth_totp/wizard/auth_totp_wizard_views.xml 
+2025-10-27 20:34:44,852 9701 INFO ajmdb odoo.modules.loading: Module auth_totp loaded in 0.27s, 218 queries (+218 other) 
+2025-10-27 20:34:44,852 9701 INFO ajmdb odoo.modules.loading: Loading module barcodes (8/106) 
+2025-10-27 20:34:44,863 9701 INFO ajmdb odoo.registry: module barcodes: creating or updating database tables 
+2025-10-27 20:34:44,929 9701 INFO ajmdb odoo.modules.loading: loading barcodes/data/barcodes_data.xml 
+2025-10-27 20:34:44,937 9701 INFO ajmdb odoo.modules.loading: loading barcodes/views/barcodes_view.xml 
+2025-10-27 20:34:44,981 9701 INFO ajmdb odoo.modules.loading: loading barcodes/security/ir.model.access.csv 
+2025-10-27 20:34:45,009 9701 INFO ajmdb odoo.modules.loading: Module barcodes loaded in 0.16s, 123 queries (+123 other) 
+2025-10-27 20:34:45,009 9701 INFO ajmdb odoo.modules.loading: Loading module base_import (9/106) 
+2025-10-27 20:34:45,060 9701 INFO ajmdb odoo.registry: module base_import: creating or updating database tables 
+2025-10-27 20:34:45,814 9701 INFO ajmdb odoo.modules.loading: loading base_import/security/ir.model.access.csv 
+2025-10-27 20:34:45,838 9701 INFO ajmdb odoo.modules.loading: Module base_import loaded in 0.83s, 958 queries (+958 other) 
+2025-10-27 20:34:45,838 9701 INFO ajmdb odoo.modules.loading: Loading module base_import_module (10/106) 
+2025-10-27 20:34:45,849 9701 INFO ajmdb odoo.registry: module base_import_module: creating or updating database tables 
+2025-10-27 20:34:45,915 9701 INFO ajmdb odoo.modules.loading: loading base_import_module/security/ir.model.access.csv 
+2025-10-27 20:34:45,922 9701 INFO ajmdb odoo.modules.loading: loading base_import_module/views/base_import_module_view.xml 
+2025-10-27 20:34:45,955 9701 INFO ajmdb odoo.modules.loading: loading base_import_module/views/ir_module_views.xml 
+2025-10-27 20:34:46,060 9701 INFO ajmdb odoo.modules.loading: Module base_import_module loaded in 0.22s, 190 queries (+190 other) 
+2025-10-27 20:34:46,061 9701 INFO ajmdb odoo.modules.loading: Loading module base_setup (11/106) 
+2025-10-27 20:34:46,074 9701 INFO ajmdb odoo.registry: module base_setup: creating or updating database tables 
+2025-10-27 20:34:46,145 9701 INFO ajmdb odoo.modules.loading: loading base_setup/data/base_setup_data.xml 
+2025-10-27 20:34:46,149 9701 INFO ajmdb odoo.modules.loading: loading base_setup/views/res_config_settings_views.xml 
+2025-10-27 20:34:46,222 9701 INFO ajmdb odoo.modules.loading: loading base_setup/views/res_partner_views.xml 
+2025-10-27 20:34:46,256 9701 INFO ajmdb odoo.modules.loading: Module base_setup loaded in 0.20s, 146 queries (+146 other) 
+2025-10-27 20:34:46,257 9701 INFO ajmdb odoo.modules.loading: Loading module bus (12/106) 
+2025-10-27 20:34:46,284 9701 INFO ajmdb odoo.registry: module bus: creating or updating database tables 
+2025-10-27 20:34:46,414 9701 INFO ajmdb odoo.modules.loading: loading bus/security/ir.model.access.csv 
+2025-10-27 20:34:46,434 9701 INFO ajmdb odoo.modules.loading: Module bus loaded in 0.18s, 142 queries (+142 other) 
+2025-10-27 20:34:46,434 9701 INFO ajmdb odoo.modules.loading: Loading module http_routing (13/106) 
+2025-10-27 20:34:46,444 9701 INFO ajmdb odoo.registry: module http_routing: creating or updating database tables 
+2025-10-27 20:34:46,480 9701 INFO ajmdb odoo.modules.loading: loading http_routing/views/http_routing_template.xml 
+2025-10-27 20:34:46,577 9701 INFO ajmdb odoo.modules.loading: loading http_routing/views/res_lang_views.xml 
+2025-10-27 20:34:46,644 9701 INFO ajmdb odoo.modules.loading: Module http_routing loaded in 0.21s, 194 queries (+194 other) 
+2025-10-27 20:34:46,644 9701 INFO ajmdb odoo.modules.loading: Loading module onboarding (14/106) 
+2025-10-27 20:34:46,655 9701 INFO ajmdb odoo.registry: module onboarding: creating or updating database tables 
+2025-10-27 20:34:46,715 9701 INFO ajmdb odoo.modules.loading: loading onboarding/views/onboarding_templates.xml 
+2025-10-27 20:34:46,750 9701 INFO ajmdb odoo.modules.loading: loading onboarding/views/onboarding_views.xml 
+2025-10-27 20:34:46,807 9701 INFO ajmdb odoo.modules.loading: loading onboarding/views/onboarding_menus.xml 
+2025-10-27 20:34:46,818 9701 INFO ajmdb odoo.modules.loading: loading onboarding/security/ir.model.access.csv 
+2025-10-27 20:34:46,868 9701 INFO ajmdb odoo.modules.loading: Module onboarding loaded in 0.22s, 197 queries (+197 other) 
+2025-10-27 20:34:46,868 9701 INFO ajmdb odoo.modules.loading: Loading module resource (15/106) 
+2025-10-27 20:34:46,888 9701 INFO ajmdb odoo.registry: module resource: creating or updating database tables 
+2025-10-27 20:34:47,000 9701 INFO ajmdb odoo.modules.loading: loading resource/data/resource_data.xml 
+2025-10-27 20:34:47,007 9701 INFO ajmdb odoo.modules.loading: loading resource/security/ir.model.access.csv 
+2025-10-27 20:34:47,024 9701 INFO ajmdb odoo.modules.loading: loading resource/security/resource_security.xml 
+2025-10-27 20:34:47,029 9701 INFO ajmdb odoo.modules.loading: loading resource/views/resource_resource_views.xml 
+2025-10-27 20:34:47,076 9701 INFO ajmdb odoo.modules.loading: loading resource/views/resource_calendar_leaves_views.xml 
+2025-10-27 20:34:47,127 9701 INFO ajmdb odoo.modules.loading: loading resource/views/resource_calendar_attendance_views.xml 
+2025-10-27 20:34:47,147 9701 INFO ajmdb odoo.modules.loading: loading resource/views/resource_calendar_views.xml 
+2025-10-27 20:34:47,191 9701 INFO ajmdb odoo.modules.loading: loading resource/views/menuitems.xml 
+2025-10-27 20:34:47,226 9701 INFO ajmdb odoo.modules.loading: Module resource loaded in 0.36s, 322 queries (+322 other) 
+2025-10-27 20:34:47,226 9701 INFO ajmdb odoo.modules.loading: Loading module utm (16/106) 
+2025-10-27 20:34:47,238 9701 INFO ajmdb odoo.registry: module utm: creating or updating database tables 
+2025-10-27 20:34:47,295 9701 INFO ajmdb odoo.modules.loading: loading utm/data/utm_medium_data.xml 
+2025-10-27 20:34:47,311 9701 INFO ajmdb odoo.modules.loading: loading utm/data/utm_source_data.xml 
+2025-10-27 20:34:47,329 9701 INFO ajmdb odoo.modules.loading: loading utm/data/utm_stage_data.xml 
+2025-10-27 20:34:47,336 9701 INFO ajmdb odoo.modules.loading: loading utm/data/utm_tag_data.xml 
+2025-10-27 20:34:47,342 9701 INFO ajmdb odoo.modules.loading: loading utm/views/utm_campaign_views.xml 
+2025-10-27 20:34:47,411 9701 INFO ajmdb odoo.modules.loading: loading utm/views/utm_medium_views.xml 
+2025-10-27 20:34:47,453 9701 INFO ajmdb odoo.modules.loading: loading utm/views/utm_source_views.xml 
+2025-10-27 20:34:47,476 9701 INFO ajmdb odoo.modules.loading: loading utm/views/utm_stage_views.xml 
+2025-10-27 20:34:47,502 9701 INFO ajmdb odoo.modules.loading: loading utm/views/utm_tag_views.xml 
+2025-10-27 20:34:47,517 9701 INFO ajmdb odoo.modules.loading: loading utm/views/utm_menus.xml 
+2025-10-27 20:34:47,547 9701 INFO ajmdb odoo.modules.loading: loading utm/security/ir.model.access.csv 
+2025-10-27 20:34:47,613 9701 INFO ajmdb odoo.modules.loading: Module utm loaded in 0.39s, 361 queries (+361 other) 
+2025-10-27 20:34:47,614 9701 INFO ajmdb odoo.modules.loading: Loading module web_hierarchy (17/106) 
+2025-10-27 20:34:47,701 9701 INFO ajmdb odoo.registry: module web_hierarchy: creating or updating database tables 
+2025-10-27 20:34:48,684 9701 INFO ajmdb odoo.modules.loading: Module web_hierarchy loaded in 1.07s, 1083 queries (+1083 other) 
+2025-10-27 20:34:48,684 9701 INFO ajmdb odoo.modules.loading: Loading module web_tour (18/106) 
+2025-10-27 20:34:48,699 9701 INFO ajmdb odoo.registry: module web_tour: creating or updating database tables 
+2025-10-27 20:34:48,758 9701 INFO ajmdb odoo.modules.loading: loading web_tour/security/ir.model.access.csv 
+2025-10-27 20:34:48,772 9701 INFO ajmdb odoo.modules.loading: loading web_tour/views/tour_views.xml 
+2025-10-27 20:34:48,846 9701 INFO ajmdb odoo.modules.loading: Module web_tour loaded in 0.16s, 143 queries (+143 other) 
+2025-10-27 20:34:48,847 9701 INFO ajmdb odoo.modules.loading: Loading module auth_passkey (19/106) 
+2025-10-27 20:34:48,896 9701 INFO ajmdb odoo.registry: module auth_passkey: creating or updating database tables 
+2025-10-27 20:34:48,955 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey/views/auth_passkey_key_views.xml 
+2025-10-27 20:34:49,007 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey/views/auth_passkey_login_templates.xml 
+2025-10-27 20:34:49,046 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey/views/res_users_identitycheck_views.xml 
+2025-10-27 20:34:49,069 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey/views/res_users_views.xml 
+2025-10-27 20:34:49,140 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey/security/ir.model.access.csv 
+2025-10-27 20:34:49,164 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey/security/security.xml 
+2025-10-27 20:34:49,247 9701 INFO ajmdb odoo.modules.loading: Module auth_passkey loaded in 0.40s, 226 queries (+226 other) 
+2025-10-27 20:34:49,247 9701 INFO ajmdb odoo.modules.loading: Loading module base_geolocalize (20/106) 
+2025-10-27 20:34:49,270 9701 INFO ajmdb odoo.registry: module base_geolocalize: creating or updating database tables 
+2025-10-27 20:34:49,383 9701 INFO ajmdb odoo.modules.loading: loading base_geolocalize/security/ir.model.access.csv 
+2025-10-27 20:34:49,391 9701 INFO ajmdb odoo.modules.loading: loading base_geolocalize/views/geo_provider_view.xml 
+2025-10-27 20:34:49,418 9701 INFO ajmdb odoo.modules.loading: loading base_geolocalize/views/res_partner_views.xml 
+2025-10-27 20:34:49,467 9701 INFO ajmdb odoo.modules.loading: loading base_geolocalize/views/res_config_settings_views.xml 
+2025-10-27 20:34:49,513 9701 INFO ajmdb odoo.modules.loading: loading base_geolocalize/data/data.xml 
+2025-10-27 20:34:49,538 9701 INFO ajmdb odoo.modules.loading: Module base_geolocalize loaded in 0.29s, 165 queries (+165 other) 
+2025-10-27 20:34:49,539 9701 INFO ajmdb odoo.modules.loading: Loading module google_recaptcha (21/106) 
+2025-10-27 20:34:49,548 9701 INFO ajmdb odoo.registry: module google_recaptcha: creating or updating database tables 
+2025-10-27 20:34:49,586 9701 INFO ajmdb odoo.modules.loading: loading google_recaptcha/views/res_config_settings_view.xml 
+2025-10-27 20:34:49,677 9701 INFO ajmdb odoo.modules.loading: Module google_recaptcha loaded in 0.14s, 73 queries (+73 other) 
+2025-10-27 20:34:49,677 9701 INFO ajmdb odoo.modules.loading: Loading module html_editor (22/106) 
+2025-10-27 20:34:49,919 9701 INFO ajmdb odoo.registry: module html_editor: creating or updating database tables 
+2025-10-27 20:34:50,847 9701 INFO ajmdb odoo.modules.loading: loading html_editor/security/ir.model.access.csv 
+2025-10-27 20:34:50,881 9701 INFO ajmdb odoo.modules.loading: Module html_editor loaded in 1.20s, 1146 queries (+1146 other) 
+2025-10-27 20:34:50,881 9701 INFO ajmdb odoo.modules.loading: Loading module iap (23/106) 
+2025-10-27 20:34:50,890 9701 INFO ajmdb odoo.registry: module iap: creating or updating database tables 
+2025-10-27 20:34:50,941 9701 INFO ajmdb odoo.modules.loading: loading iap/data/services.xml 
+2025-10-27 20:34:50,949 9701 INFO ajmdb odoo.modules.loading: loading iap/security/ir.model.access.csv 
+2025-10-27 20:34:50,971 9701 INFO ajmdb odoo.modules.loading: loading iap/security/ir_rule.xml 
+2025-10-27 20:34:50,974 9701 INFO ajmdb odoo.modules.loading: loading iap/views/iap_views.xml 
+2025-10-27 20:34:51,040 9701 INFO ajmdb odoo.modules.loading: loading iap/views/res_config_settings.xml 
+2025-10-27 20:34:51,114 9701 INFO ajmdb odoo.modules.loading: Module iap loaded in 0.23s, 160 queries (+160 other) 
+2025-10-27 20:34:51,115 9701 INFO ajmdb odoo.modules.loading: Loading module mail (24/106) 
+2025-10-27 20:34:51,218 9701 INFO ajmdb odoo.registry: module mail: creating or updating database tables 
+2025-10-27 20:34:52,630 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_groups.xml 
+2025-10-27 20:34:52,637 9701 INFO ajmdb odoo.modules.loading: loading mail/wizard/mail_activity_schedule_views.xml 
+2025-10-27 20:34:52,671 9701 INFO ajmdb odoo.modules.loading: loading mail/wizard/mail_blacklist_remove_views.xml 
+2025-10-27 20:34:52,682 9701 INFO ajmdb odoo.modules.loading: loading mail/wizard/mail_compose_message_views.xml 
+2025-10-27 20:34:52,722 9701 INFO ajmdb odoo.modules.loading: loading mail/wizard/mail_template_preview_views.xml 
+2025-10-27 20:34:52,740 9701 INFO ajmdb odoo.modules.loading: loading mail/wizard/mail_followers_edit_views.xml 
+2025-10-27 20:34:52,770 9701 INFO ajmdb odoo.modules.loading: loading mail/wizard/mail_template_reset_views.xml 
+2025-10-27 20:34:52,785 9701 INFO ajmdb odoo.modules.loading: loading mail/views/fetchmail_views.xml 
+2025-10-27 20:34:52,831 9701 INFO ajmdb odoo.modules.loading: loading mail/views/ir_cron_views.xml 
+2025-10-27 20:34:52,877 9701 INFO ajmdb odoo.modules.loading: loading mail/views/ir_filters_views.xml 
+2025-10-27 20:34:52,931 9701 INFO ajmdb odoo.modules.loading: loading mail/views/ir_mail_server_views.xml 
+2025-10-27 20:34:52,958 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_message_subtype_views.xml 
+2025-10-27 20:34:53,009 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_tracking_value_views.xml 
+2025-10-27 20:34:53,038 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_notification_views.xml 
+2025-10-27 20:34:53,072 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_message_views.xml 
+2025-10-27 20:34:53,135 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_message_schedule_views.xml 
+2025-10-27 20:34:53,170 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_mail_views.xml 
+2025-10-27 20:34:53,214 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_followers_views.xml 
+2025-10-27 20:34:53,241 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_ice_server_views.xml 
+2025-10-27 20:34:53,296 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss_channel_member_views.xml 
+2025-10-27 20:34:53,331 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss_channel_rtc_session_views.xml 
+2025-10-27 20:34:53,365 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_link_preview_views.xml 
+2025-10-27 20:34:53,413 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss/discuss_gif_favorite_views.xml 
+2025-10-27 20:34:53,437 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss_channel_views.xml 
+2025-10-27 20:34:53,500 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_canned_response_views.xml 
+2025-10-27 20:34:53,552 9701 INFO ajmdb odoo.modules.loading: loading mail/views/res_role_views.xml 
+2025-10-27 20:34:53,584 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_activity_views.xml 
+2025-10-27 20:34:53,775 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_activity_plan_views.xml 
+2025-10-27 20:34:53,877 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_activity_plan_template_views.xml 
+2025-10-27 20:34:53,901 9701 INFO ajmdb odoo.modules.loading: loading mail/views/res_config_settings_views.xml 
+2025-10-27 20:34:53,967 9701 INFO ajmdb odoo.modules.loading: loading mail/data/ir_config_parameter_data.xml 
+2025-10-27 20:34:53,972 9701 INFO ajmdb odoo.modules.loading: loading mail/data/res_partner_data.xml 
+2025-10-27 20:34:53,977 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_message_subtype_data.xml 
+2025-10-27 20:34:53,982 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_templates_chatter.xml 
+2025-10-27 20:34:54,030 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_templates_email_layouts.xml 
+2025-10-27 20:34:54,079 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_templates_mailgateway.xml 
+2025-10-27 20:34:54,141 9701 INFO ajmdb odoo.modules.loading: loading mail/data/discuss_channel_data.xml 
+2025-10-27 20:34:54,170 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_activity_type_data.xml 
+2025-10-27 20:34:54,181 9701 INFO ajmdb odoo.modules.loading: loading mail/data/security_notifications_templates.xml 
+2025-10-27 20:34:54,197 9701 INFO ajmdb odoo.modules.loading: loading mail/data/ir_cron_data.xml 
+2025-10-27 20:34:54,212 9701 INFO ajmdb odoo.modules.loading: loading mail/data/ir_actions_client.xml 
+2025-10-27 20:34:54,219 9701 INFO ajmdb odoo.modules.loading: loading mail/security/mail_security.xml 
+2025-10-27 20:34:54,249 9701 INFO ajmdb odoo.modules.loading: loading mail/security/ir.model.access.csv 
+2025-10-27 20:34:54,382 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss_public_templates.xml 
+2025-10-27 20:34:54,393 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_alias_domain_views.xml 
+2025-10-27 20:34:54,427 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_alias_views.xml 
+2025-10-27 20:34:54,467 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_gateway_allowed_views.xml 
+2025-10-27 20:34:54,498 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_guest_views.xml 
+2025-10-27 20:34:54,522 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_message_reaction_views.xml 
+2025-10-27 20:34:54,546 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_templates_public.xml 
+2025-10-27 20:34:54,566 9701 INFO ajmdb odoo.modules.loading: loading mail/views/res_users_views.xml 
+2025-10-27 20:34:54,662 9701 INFO ajmdb odoo.modules.loading: loading mail/views/res_users_settings_views.xml 
+2025-10-27 20:34:54,708 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_template_views.xml 
+2025-10-27 20:34:54,751 9701 INFO ajmdb odoo.modules.loading: loading mail/views/ir_actions_server_views.xml 
+2025-10-27 20:34:54,805 9701 INFO ajmdb odoo.modules.loading: loading mail/views/ir_model_views.xml 
+2025-10-27 20:34:54,904 9701 INFO ajmdb odoo.modules.loading: loading mail/views/res_partner_views.xml 
+2025-10-27 20:34:55,041 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_blacklist_views.xml 
+2025-10-27 20:34:55,077 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_menus.xml 
+2025-10-27 20:34:55,289 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss/discuss_menus.xml 
+2025-10-27 20:34:55,297 9701 INFO ajmdb odoo.modules.loading: loading mail/views/discuss/discuss_call_history_views.xml 
+2025-10-27 20:34:55,330 9701 INFO ajmdb odoo.modules.loading: loading mail/views/res_company_views.xml 
+2025-10-27 20:34:55,360 9701 INFO ajmdb odoo.modules.loading: loading mail/views/mail_scheduled_message_views.xml 
+2025-10-27 20:34:55,376 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_canned_response_data.xml 
+2025-10-27 20:34:55,382 9701 INFO ajmdb odoo.modules.loading: loading mail/data/mail_templates_invite.xml 
+2025-10-27 20:34:55,425 9701 INFO ajmdb odoo.modules.loading: loading mail/data/web_tour_tour.xml 
+2025-10-27 20:34:55,511 9701 INFO ajmdb odoo.modules.loading: Module mail loaded in 4.40s, 3995 queries (+3995 other) 
+2025-10-27 20:34:55,511 9701 INFO ajmdb odoo.modules.loading: Loading module web_unsplash (25/106) 
+2025-10-27 20:34:55,537 9701 INFO ajmdb odoo.registry: module web_unsplash: creating or updating database tables 
+2025-10-27 20:34:55,620 9701 INFO ajmdb odoo.modules.loading: loading web_unsplash/views/res_config_settings_view.xml 
+2025-10-27 20:34:55,732 9701 INFO ajmdb odoo.modules.loading: Module web_unsplash loaded in 0.22s, 126 queries (+126 other) 
+2025-10-27 20:34:55,732 9701 INFO ajmdb odoo.modules.loading: Loading module analytic (26/106) 
+2025-10-27 20:34:55,752 9701 INFO ajmdb odoo.registry: module analytic: creating or updating database tables 
+2025-10-27 20:34:55,842 9701 INFO ajmdb odoo.modules.loading: loading analytic/security/analytic_security.xml 
+2025-10-27 20:34:55,850 9701 INFO ajmdb odoo.modules.loading: loading analytic/security/ir.model.access.csv 
+2025-10-27 20:34:55,865 9701 INFO ajmdb odoo.modules.loading: loading analytic/views/analytic_line_views.xml 
+2025-10-27 20:34:55,951 9701 INFO ajmdb odoo.modules.loading: loading analytic/views/analytic_account_views.xml 
+2025-10-27 20:34:56,018 9701 INFO ajmdb odoo.modules.loading: loading analytic/views/analytic_plan_views.xml 
+2025-10-27 20:34:56,052 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [65, 66] 
+2025-10-27 20:34:56,063 9701 INFO ajmdb odoo.modules.loading: loading analytic/views/analytic_distribution_model_views.xml 
+2025-10-27 20:34:56,095 9701 INFO ajmdb odoo.modules.loading: loading analytic/data/analytic_data.xml 
+2025-10-27 20:34:56,130 9701 INFO ajmdb odoo.modules.loading: Module analytic loaded in 0.40s, 326 queries (+326 other) 
+2025-10-27 20:34:56,130 9701 INFO ajmdb odoo.modules.loading: Loading module auth_signup (27/106) 
+2025-10-27 20:34:56,155 9701 INFO ajmdb odoo.registry: module auth_signup: creating or updating database tables 
+2025-10-27 20:34:56,273 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/data/ir_config_parameter_data.xml 
+2025-10-27 20:34:56,277 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/data/ir_cron_data.xml 
+2025-10-27 20:34:56,311 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/data/mail_template_data.xml 
+2025-10-27 20:34:56,323 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/views/res_config_settings_views.xml 
+2025-10-27 20:34:56,401 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/views/res_users_views.xml 
+2025-10-27 20:34:56,478 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/views/auth_signup_login_templates.xml 
+2025-10-27 20:34:56,550 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/views/auth_signup_templates_email.xml 
+2025-10-27 20:34:56,562 9701 INFO ajmdb odoo.modules.loading: loading auth_signup/views/webclient_templates.xml 
+2025-10-27 20:34:56,627 9701 INFO ajmdb odoo.modules.loading: Module auth_signup loaded in 0.50s, 285 queries (+285 other) 
+2025-10-27 20:34:56,627 9701 INFO ajmdb odoo.modules.loading: Loading module auth_totp_mail (28/106) 
+2025-10-27 20:34:56,650 9701 INFO ajmdb odoo.registry: module auth_totp_mail: creating or updating database tables 
+2025-10-27 20:34:56,717 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_mail/data/ir_action_data.xml 
+2025-10-27 20:34:56,743 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_mail/data/mail_template_data.xml 
+2025-10-27 20:34:56,748 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_mail/data/security_notifications_template.xml 
+2025-10-27 20:34:56,776 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_mail/views/res_config_settings_views.xml 
+2025-10-27 20:34:56,870 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_mail/views/res_users_views.xml 
+2025-10-27 20:34:56,944 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_mail/views/templates.xml 
+2025-10-27 20:34:57,000 9701 INFO ajmdb odoo.modules.loading: Module auth_totp_mail loaded in 0.37s, 214 queries (+214 other) 
+2025-10-27 20:34:57,000 9701 INFO ajmdb odoo.modules.loading: Loading module base_install_request (29/106) 
+2025-10-27 20:34:57,014 9701 INFO ajmdb odoo.registry: module base_install_request: creating or updating database tables 
+2025-10-27 20:34:57,073 9701 INFO ajmdb odoo.modules.loading: loading base_install_request/security/ir.model.access.csv 
+2025-10-27 20:34:57,091 9701 INFO ajmdb odoo.modules.loading: loading base_install_request/wizard/base_module_install_request_views.xml 
+2025-10-27 20:34:57,127 9701 INFO ajmdb odoo.modules.loading: loading base_install_request/data/mail_template_data.xml 
+2025-10-27 20:34:57,135 9701 INFO ajmdb odoo.modules.loading: loading base_install_request/data/mail_templates_module_install.xml 
+2025-10-27 20:34:57,147 9701 INFO ajmdb odoo.modules.loading: loading base_install_request/views/ir_module_module_views.xml 
+2025-10-27 20:34:57,193 9701 INFO ajmdb odoo.modules.loading: Module base_install_request loaded in 0.19s, 143 queries (+143 other) 
+2025-10-27 20:34:57,193 9701 INFO ajmdb odoo.modules.loading: Loading module calendar (30/106) 
+2025-10-27 20:34:57,244 9701 INFO ajmdb odoo.registry: module calendar: creating or updating database tables 
+2025-10-27 20:34:57,509 9701 INFO ajmdb odoo.modules.loading: loading calendar/security/ir.model.access.csv 
+2025-10-27 20:34:57,541 9701 INFO ajmdb odoo.modules.loading: loading calendar/security/calendar_security.xml 
+2025-10-27 20:34:57,546 9701 INFO ajmdb odoo.modules.loading: loading calendar/data/calendar_cron.xml 
+2025-10-27 20:34:57,551 9701 INFO ajmdb odoo.modules.loading: loading calendar/data/mail_template_data.xml 
+2025-10-27 20:34:57,560 9701 INFO ajmdb odoo.modules.loading: loading calendar/data/calendar_data.xml 
+2025-10-27 20:34:57,577 9701 INFO ajmdb odoo.modules.loading: loading calendar/data/mail_activity_type_data.xml 
+2025-10-27 20:34:57,585 9701 INFO ajmdb odoo.modules.loading: loading calendar/data/mail_message_subtype_data.xml 
+2025-10-27 20:34:57,590 9701 INFO ajmdb odoo.modules.loading: loading calendar/views/mail_activity_views.xml 
+2025-10-27 20:34:57,640 9701 INFO ajmdb odoo.modules.loading: loading calendar/views/calendar_templates.xml 
+2025-10-27 20:34:57,654 9701 INFO ajmdb odoo.modules.loading: loading calendar/views/calendar_views.xml 
+2025-10-27 20:34:57,918 9701 INFO ajmdb odoo.modules.loading: loading calendar/views/res_config_settings_views.xml 
+2025-10-27 20:34:57,982 9701 INFO ajmdb odoo.modules.loading: loading calendar/views/res_partner_views.xml 
+2025-10-27 20:34:58,030 9701 INFO ajmdb odoo.modules.loading: loading calendar/views/res_users_views.xml 
+2025-10-27 20:34:58,103 9701 INFO ajmdb odoo.modules.loading: loading calendar/wizard/calendar_provider_config.xml 
+2025-10-27 20:34:58,116 9701 INFO ajmdb odoo.modules.loading: loading calendar/wizard/calendar_popover_delete_wizard.xml 
+2025-10-27 20:34:58,146 9701 INFO ajmdb odoo.modules.loading: loading calendar/wizard/mail_activity_schedule_views.xml 
+2025-10-27 20:34:58,214 9701 INFO ajmdb odoo.modules.loading: Module calendar loaded in 1.02s, 735 queries (+735 other) 
+2025-10-27 20:34:58,214 9701 INFO ajmdb odoo.modules.loading: Loading module contacts (31/106) 
+2025-10-27 20:34:58,238 9701 INFO ajmdb odoo.registry: module contacts: creating or updating database tables 
+2025-10-27 20:34:58,357 9701 INFO ajmdb odoo.modules.loading: loading contacts/views/contact_views.xml 
+2025-10-27 20:34:58,462 9701 INFO ajmdb odoo.modules.loading: Module contacts loaded in 0.25s, 201 queries (+201 other) 
+2025-10-27 20:34:58,462 9701 INFO ajmdb odoo.modules.loading: Loading module google_gmail (32/106) 
+2025-10-27 20:34:58,487 9701 INFO ajmdb odoo.registry: module google_gmail: creating or updating database tables 
+2025-10-27 20:34:58,590 9701 INFO ajmdb odoo.modules.loading: loading google_gmail/views/fetchmail_server_views.xml 
+2025-10-27 20:34:58,637 9701 INFO ajmdb odoo.modules.loading: loading google_gmail/views/ir_mail_server_views.xml 
+2025-10-27 20:34:58,662 9701 INFO ajmdb odoo.modules.loading: loading google_gmail/views/res_config_settings_views.xml 
+2025-10-27 20:34:58,725 9701 INFO ajmdb odoo.modules.loading: loading google_gmail/views/templates.xml 
+2025-10-27 20:34:58,759 9701 INFO ajmdb odoo.modules.loading: Module google_gmail loaded in 0.30s, 178 queries (+178 other) 
+2025-10-27 20:34:58,759 9701 INFO ajmdb odoo.modules.loading: Loading module html_builder (33/106) 
+2025-10-27 20:34:58,802 9701 INFO ajmdb odoo.modules.loading: Module html_builder loaded in 0.04s, 11 queries (+11 other) 
+2025-10-27 20:34:58,802 9701 INFO ajmdb odoo.modules.loading: Loading module iap_mail (34/106) 
+2025-10-27 20:34:58,815 9701 INFO ajmdb odoo.registry: module iap_mail: creating or updating database tables 
+2025-10-27 20:34:58,902 9701 INFO ajmdb odoo.modules.loading: loading iap_mail/data/mail_templates.xml 
+2025-10-27 20:34:58,920 9701 INFO ajmdb odoo.modules.loading: loading iap_mail/views/iap_views.xml 
+2025-10-27 20:34:58,975 9701 INFO ajmdb odoo.modules.loading: Module iap_mail loaded in 0.17s, 79 queries (+79 other) 
+2025-10-27 20:34:58,975 9701 INFO ajmdb odoo.modules.loading: Loading module mail_bot (35/106) 
+2025-10-27 20:34:58,999 9701 INFO ajmdb odoo.registry: module mail_bot: creating or updating database tables 
+2025-10-27 20:34:59,073 9701 INFO ajmdb odoo.modules.loading: loading mail_bot/views/res_users_views.xml 
+2025-10-27 20:34:59,135 9701 INFO ajmdb odoo.modules.loading: loading mail_bot/data/mailbot_data.xml 
+2025-10-27 20:34:59,157 9701 INFO ajmdb odoo.modules.loading: Module mail_bot loaded in 0.18s, 109 queries (+109 other) 
+2025-10-27 20:34:59,157 9701 INFO ajmdb odoo.modules.loading: Loading module microsoft_outlook (36/106) 
+2025-10-27 20:34:59,184 9701 INFO ajmdb odoo.registry: module microsoft_outlook: creating or updating database tables 
+2025-10-27 20:34:59,290 9701 INFO ajmdb odoo.modules.loading: loading microsoft_outlook/views/fetchmail_server_views.xml 
+2025-10-27 20:34:59,336 9701 INFO ajmdb odoo.modules.loading: loading microsoft_outlook/views/ir_mail_server_views.xml 
+2025-10-27 20:34:59,367 9701 INFO ajmdb odoo.modules.loading: loading microsoft_outlook/views/res_config_settings_views.xml 
+2025-10-27 20:34:59,427 9701 INFO ajmdb odoo.modules.loading: loading microsoft_outlook/views/templates.xml 
+2025-10-27 20:34:59,456 9701 INFO ajmdb odoo.modules.loading: Module microsoft_outlook loaded in 0.30s, 179 queries (+179 other) 
+2025-10-27 20:34:59,456 9701 INFO ajmdb odoo.modules.loading: Loading module phone_validation (37/106) 
+2025-10-27 20:34:59,581 9701 INFO ajmdb odoo.registry: module phone_validation: creating or updating database tables 
+2025-10-27 20:35:00,939 9701 INFO ajmdb odoo.modules.loading: loading phone_validation/security/ir.model.access.csv 
+2025-10-27 20:35:00,957 9701 INFO ajmdb odoo.modules.loading: loading phone_validation/views/phone_blacklist_views.xml 
+2025-10-27 20:35:01,023 9701 INFO ajmdb odoo.modules.loading: loading phone_validation/views/res_partner_views.xml 
+2025-10-27 20:35:01,055 9701 INFO ajmdb odoo.modules.loading: loading phone_validation/wizard/phone_blacklist_remove_view.xml 
+2025-10-27 20:35:01,087 9701 INFO ajmdb odoo.modules.loading: Module phone_validation loaded in 1.63s, 1884 queries (+1884 other) 
+2025-10-27 20:35:01,088 9701 INFO ajmdb odoo.modules.loading: Loading module privacy_lookup (38/106) 
+2025-10-27 20:35:01,117 9701 INFO ajmdb odoo.registry: module privacy_lookup: creating or updating database tables 
+2025-10-27 20:35:01,226 9701 INFO ajmdb odoo.modules.loading: loading privacy_lookup/wizard/privacy_lookup_wizard_views.xml 
+2025-10-27 20:35:01,290 9701 INFO ajmdb odoo.modules.loading: loading privacy_lookup/views/privacy_log_views.xml 
+2025-10-27 20:35:01,322 9701 INFO ajmdb odoo.modules.loading: loading privacy_lookup/security/ir.model.access.csv 
+2025-10-27 20:35:01,350 9701 INFO ajmdb odoo.modules.loading: loading privacy_lookup/data/ir_actions_server_data.xml 
+2025-10-27 20:35:01,406 9701 INFO ajmdb odoo.modules.loading: Module privacy_lookup loaded in 0.32s, 243 queries (+243 other) 
+2025-10-27 20:35:01,406 9701 INFO ajmdb odoo.modules.loading: Loading module product (39/106) 
+2025-10-27 20:35:01,472 9701 INFO ajmdb odoo.registry: module product: creating or updating database tables 
+2025-10-27 20:35:01,826 9701 INFO ajmdb odoo.modules.loading: loading product/data/product_data.xml 
+2025-10-27 20:35:01,847 9701 INFO ajmdb odoo.modules.loading: loading product/security/product_security.xml 
+2025-10-27 20:35:01,905 9701 INFO ajmdb odoo.modules.loading: loading product/security/ir.model.access.csv 
+2025-10-27 20:35:01,983 9701 INFO ajmdb odoo.modules.loading: loading product/wizard/product_label_layout_views.xml 
+2025-10-27 20:35:02,008 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [67] 
+2025-10-27 20:35:02,014 9701 INFO ajmdb odoo.modules.loading: loading product/wizard/update_product_attribute_value_views.xml 
+2025-10-27 20:35:02,028 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_tag_views.xml 
+2025-10-27 20:35:02,053 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_views.xml 
+2025-10-27 20:35:02,141 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [68, 69, 70] 
+2025-10-27 20:35:02,260 9701 INFO ajmdb odoo.modules.loading: loading product/views/res_config_settings_views.xml 
+2025-10-27 20:35:02,327 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_attribute_views.xml 
+2025-10-27 20:35:02,408 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_attribute_value_views.xml 
+2025-10-27 20:35:02,418 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_category_views.xml 
+2025-10-27 20:35:02,451 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_combo_views.xml 
+2025-10-27 20:35:02,480 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_document_views.xml 
+2025-10-27 20:35:02,523 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_pricelist_item_views.xml 
+2025-10-27 20:35:02,609 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_pricelist_views.xml 
+2025-10-27 20:35:02,662 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_supplierinfo_views.xml 
+2025-10-27 20:35:02,719 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_template_attribute_line_views.xml 
+2025-10-27 20:35:02,729 9701 INFO ajmdb odoo.modules.loading: loading product/views/product_template_views.xml 
+2025-10-27 20:35:02,855 9701 INFO ajmdb odoo.modules.loading: loading product/views/res_country_group_views.xml 
+2025-10-27 20:35:02,883 9701 INFO ajmdb odoo.modules.loading: loading product/views/res_partner_views.xml 
+2025-10-27 20:35:02,924 9701 INFO ajmdb odoo.modules.loading: loading product/views/uom_views.xml 
+2025-10-27 20:35:02,958 9701 INFO ajmdb odoo.modules.loading: loading product/report/product_reports.xml 
+2025-10-27 20:35:02,977 9701 INFO ajmdb odoo.modules.loading: loading product/report/product_product_templates.xml 
+2025-10-27 20:35:03,045 9701 INFO ajmdb odoo.modules.loading: loading product/report/product_template_templates.xml 
+2025-10-27 20:35:03,087 9701 INFO ajmdb odoo.modules.loading: loading product/report/product_packaging.xml 
+2025-10-27 20:35:03,098 9701 INFO ajmdb odoo.modules.loading: loading product/report/product_pricelist_report_templates.xml 
+2025-10-27 20:35:03,185 9701 INFO ajmdb odoo.modules.loading: Module product loaded in 1.78s, 1447 queries (+1447 other) 
+2025-10-27 20:35:03,185 9701 INFO ajmdb odoo.modules.loading: Loading module rating (40/106) 
+2025-10-27 20:35:03,246 9701 INFO ajmdb odoo.registry: module rating: creating or updating database tables 
+2025-10-27 20:35:03,542 9701 INFO ajmdb odoo.modules.loading: loading rating/views/rating_rating_views.xml 
+2025-10-27 20:35:03,676 9701 INFO ajmdb odoo.modules.loading: loading rating/views/rating_templates.xml 
+2025-10-27 20:35:03,715 9701 INFO ajmdb odoo.modules.loading: loading rating/views/mail_message_views.xml 
+2025-10-27 20:35:03,742 9701 INFO ajmdb odoo.modules.loading: loading rating/security/ir.model.access.csv 
+2025-10-27 20:35:03,782 9701 INFO ajmdb odoo.modules.loading: Module rating loaded in 0.60s, 468 queries (+468 other) 
+2025-10-27 20:35:03,783 9701 INFO ajmdb odoo.modules.loading: Loading module resource_mail (41/106) 
+2025-10-27 20:35:03,800 9701 INFO ajmdb odoo.registry: module resource_mail: creating or updating database tables 
+2025-10-27 20:35:03,862 9701 INFO ajmdb odoo.modules.loading: Module resource_mail loaded in 0.08s, 34 queries (+34 other) 
+2025-10-27 20:35:03,862 9701 INFO ajmdb odoo.modules.loading: Loading module sales_team (42/106) 
+2025-10-27 20:35:03,888 9701 INFO ajmdb odoo.registry: module sales_team: creating or updating database tables 
+2025-10-27 20:35:03,995 9701 INFO ajmdb odoo.modules.loading: loading sales_team/security/sales_team_security.xml 
+2025-10-27 20:35:04,115 9701 INFO ajmdb odoo.modules.loading: loading sales_team/security/ir.model.access.csv 
+2025-10-27 20:35:04,157 9701 INFO ajmdb odoo.modules.loading: loading sales_team/data/crm_team_data.xml 
+2025-10-27 20:35:04,173 9701 INFO ajmdb odoo.modules.loading: loading sales_team/views/crm_tag_views.xml 
+2025-10-27 20:35:04,218 9701 INFO ajmdb odoo.modules.loading: loading sales_team/views/crm_team_views.xml 
+2025-10-27 20:35:04,318 9701 INFO ajmdb odoo.modules.loading: loading sales_team/views/crm_team_member_views.xml 
+2025-10-27 20:35:04,415 9701 INFO ajmdb odoo.modules.loading: loading sales_team/views/mail_activity_views.xml 
+2025-10-27 20:35:04,443 9701 INFO ajmdb odoo.modules.loading: Module sales_team loaded in 0.58s, 358 queries (+358 other) 
+2025-10-27 20:35:04,443 9701 INFO ajmdb odoo.modules.loading: Loading module base_address_extended (43/106) 
+2025-10-27 20:35:04,474 9701 INFO ajmdb odoo.registry: module base_address_extended: creating or updating database tables 
+2025-10-27 20:35:04,600 9701 INFO ajmdb odoo.modules.loading: loading base_address_extended/security/ir.model.access.csv 
+2025-10-27 20:35:04,611 9701 INFO ajmdb odoo.modules.loading: loading base_address_extended/views/base_address_extended.xml 
+2025-10-27 20:35:04,676 9701 INFO ajmdb odoo.modules.loading: loading base_address_extended/views/res_city_view.xml 
+2025-10-27 20:35:04,704 9701 INFO ajmdb odoo.modules.loading: loading base_address_extended/views/res_country_view.xml 
+2025-10-27 20:35:04,747 9701 INFO ajmdb odoo.modules.loading: Module base_address_extended loaded in 0.30s, 207 queries (+207 other) 
+2025-10-27 20:35:04,747 9701 INFO ajmdb odoo.modules.loading: Loading module partner_autocomplete (44/106) 
+2025-10-27 20:35:04,783 9701 INFO ajmdb odoo.registry: module partner_autocomplete: creating or updating database tables 
+2025-10-27 20:35:04,930 9701 INFO ajmdb odoo.modules.loading: loading partner_autocomplete/views/res_company_views.xml 
+2025-10-27 20:35:04,973 9701 INFO ajmdb odoo.modules.loading: loading partner_autocomplete/views/res_config_settings_views.xml 
+2025-10-27 20:35:05,040 9701 INFO ajmdb odoo.modules.loading: loading partner_autocomplete/data/iap_service_data.xml 
+2025-10-27 20:35:05,064 9701 INFO ajmdb odoo.modules.loading: Module partner_autocomplete loaded in 0.32s, 175 queries (+175 other) 
+2025-10-27 20:35:05,064 9701 INFO ajmdb odoo.modules.loading: Loading module portal (45/106) 
+2025-10-27 20:35:05,151 9701 INFO ajmdb odoo.registry: module portal: creating or updating database tables 
+2025-10-27 20:35:05,470 9701 INFO ajmdb odoo.modules.loading: loading portal/security/ir.model.access.csv 
+2025-10-27 20:35:05,487 9701 INFO ajmdb odoo.modules.loading: loading portal/data/mail_templates.xml 
+2025-10-27 20:35:05,498 9701 INFO ajmdb odoo.modules.loading: loading portal/views/address_templates.xml 
+2025-10-27 20:35:05,618 9701 INFO ajmdb odoo.modules.loading: loading portal/views/mail_templates_public.xml 
+2025-10-27 20:35:05,640 9701 INFO ajmdb odoo.modules.loading: loading portal/views/portal_templates.xml 
+2025-10-27 20:35:05,971 9701 INFO ajmdb odoo.modules.loading: loading portal/views/res_config_settings_views.xml 
+2025-10-27 20:35:06,052 9701 INFO ajmdb odoo.modules.loading: loading portal/wizard/portal_share_views.xml 
+2025-10-27 20:35:06,071 9701 INFO ajmdb odoo.modules.loading: loading portal/wizard/portal_wizard_views.xml 
+2025-10-27 20:35:06,135 9701 INFO ajmdb odoo.modules.loading: Module portal loaded in 1.07s, 869 queries (+869 other) 
+2025-10-27 20:35:06,135 9701 INFO ajmdb odoo.modules.loading: Loading module sms (46/106) 
+2025-10-27 20:35:06,312 9701 INFO ajmdb odoo.registry: module sms: creating or updating database tables 
+2025-10-27 20:35:07,931 9701 INFO ajmdb odoo.modules.loading: loading sms/data/iap_service_data.xml 
+2025-10-27 20:35:07,936 9701 INFO ajmdb odoo.modules.loading: loading sms/data/ir_cron_data.xml 
+2025-10-27 20:35:07,939 9701 INFO ajmdb odoo.modules.loading: loading sms/wizard/sms_account_code_views.xml 
+2025-10-27 20:35:07,972 9701 INFO ajmdb odoo.modules.loading: loading sms/wizard/sms_account_phone_views.xml 
+2025-10-27 20:35:07,987 9701 INFO ajmdb odoo.modules.loading: loading sms/wizard/sms_account_sender_views.xml 
+2025-10-27 20:35:07,999 9701 INFO ajmdb odoo.modules.loading: loading sms/wizard/sms_composer_views.xml 
+2025-10-27 20:35:08,020 9701 INFO ajmdb odoo.modules.loading: loading sms/wizard/sms_template_preview_views.xml 
+2025-10-27 20:35:08,036 9701 INFO ajmdb odoo.modules.loading: loading sms/wizard/sms_template_reset_views.xml 
+2025-10-27 20:35:08,053 9701 INFO ajmdb odoo.modules.loading: loading sms/views/ir_actions_server_views.xml 
+2025-10-27 20:35:08,113 9701 INFO ajmdb odoo.modules.loading: loading sms/views/mail_notification_views.xml 
+2025-10-27 20:35:08,163 9701 INFO ajmdb odoo.modules.loading: loading sms/views/res_config_settings_views.xml 
+2025-10-27 20:35:08,236 9701 INFO ajmdb odoo.modules.loading: loading sms/views/res_partner_views.xml 
+2025-10-27 20:35:08,302 9701 INFO ajmdb odoo.modules.loading: loading sms/views/iap_account_views.xml 
+2025-10-27 20:35:08,336 9701 INFO ajmdb odoo.modules.loading: loading sms/views/sms_sms_views.xml 
+2025-10-27 20:35:08,418 9701 INFO ajmdb odoo.modules.loading: loading sms/views/sms_template_views.xml 
+2025-10-27 20:35:08,470 9701 INFO ajmdb odoo.modules.loading: loading sms/security/ir.model.access.csv 
+2025-10-27 20:35:08,538 9701 INFO ajmdb odoo.modules.loading: loading sms/security/sms_security.xml 
+2025-10-27 20:35:08,600 9701 INFO ajmdb odoo.modules.loading: Module sms loaded in 2.47s, 2477 queries (+2477 other) 
+2025-10-27 20:35:08,600 9701 INFO ajmdb odoo.modules.loading: Loading module snailmail (47/106) 
+2025-10-27 20:35:08,764 9701 INFO ajmdb odoo.registry: module snailmail: creating or updating database tables 
+2025-10-27 20:35:09,130 9701 INFO ajmdb odoo.modules.loading: loading snailmail/data/iap_service_data.xml 
+2025-10-27 20:35:09,246 9701 INFO ajmdb odoo.modules.loading: loading snailmail/data/snailmail_data.xml 
+2025-10-27 20:35:09,324 9701 INFO ajmdb odoo.modules.loading: loading snailmail/views/report_assets.xml 
+2025-10-27 20:35:09,405 9701 INFO ajmdb odoo.modules.loading: loading snailmail/views/snailmail_views.xml 
+2025-10-27 20:35:09,466 9701 INFO ajmdb odoo.modules.loading: loading snailmail/security/ir.model.access.csv 
+2025-10-27 20:35:09,513 9701 INFO ajmdb odoo.modules.loading: Module snailmail loaded in 0.91s, 446 queries (+446 other) 
+2025-10-27 20:35:09,513 9701 INFO ajmdb odoo.modules.loading: Loading module auth_passkey_portal (48/106) 
+2025-10-27 20:35:09,559 9701 INFO ajmdb odoo.modules.loading: loading auth_passkey_portal/views/templates.xml 
+2025-10-27 20:35:09,596 9701 INFO ajmdb odoo.modules.loading: Module auth_passkey_portal loaded in 0.08s, 32 queries (+32 other) 
+2025-10-27 20:35:09,596 9701 INFO ajmdb odoo.modules.loading: Loading module auth_totp_portal (49/106) 
+2025-10-27 20:35:09,620 9701 INFO ajmdb odoo.registry: module auth_totp_portal: creating or updating database tables 
+2025-10-27 20:35:09,691 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_portal/security/security.xml 
+2025-10-27 20:35:09,710 9701 INFO ajmdb odoo.modules.loading: loading auth_totp_portal/views/templates.xml 
+2025-10-27 20:35:09,768 9701 INFO ajmdb odoo.modules.loading: Module auth_totp_portal loaded in 0.17s, 78 queries (+78 other) 
+2025-10-27 20:35:09,768 9701 INFO ajmdb odoo.modules.loading: Loading module calendar_sms (50/106) 
+2025-10-27 20:35:09,787 9701 INFO ajmdb odoo.registry: module calendar_sms: creating or updating database tables 
+2025-10-27 20:35:09,850 9701 INFO ajmdb odoo.modules.loading: loading calendar_sms/data/sms_data.xml 
+2025-10-27 20:35:09,871 9701 INFO ajmdb odoo.modules.loading: loading calendar_sms/views/calendar_views.xml 
+2025-10-27 20:35:09,988 9701 INFO ajmdb odoo.modules.loading: Module calendar_sms loaded in 0.22s, 109 queries (+109 other) 
+2025-10-27 20:35:09,988 9701 INFO ajmdb odoo.modules.loading: Loading module digest (51/106) 
+2025-10-27 20:35:10,018 9701 INFO ajmdb odoo.registry: module digest: creating or updating database tables 
+2025-10-27 20:35:10,113 9701 INFO ajmdb odoo.modules.loading: loading digest/security/ir.model.access.csv 
+2025-10-27 20:35:10,133 9701 INFO ajmdb odoo.modules.loading: loading digest/data/digest_data.xml 
+2025-10-27 20:35:10,144 9701 INFO ajmdb odoo.modules.loading: loading digest/data/digest_tips_data.xml 
+2025-10-27 20:35:10,172 9701 INFO ajmdb odoo.modules.loading: loading digest/data/ir_cron_data.xml 
+2025-10-27 20:35:10,198 9701 INFO ajmdb odoo.modules.loading: loading digest/data/res_config_settings_data.xml 
+2025-10-27 20:35:10,204 9701 INFO ajmdb odoo.modules.loading: loading digest/views/digest_views.xml 
+2025-10-27 20:35:10,293 9701 INFO ajmdb odoo.modules.loading: loading digest/views/digest_templates.xml 
+2025-10-27 20:35:10,322 9701 INFO ajmdb odoo.modules.loading: loading digest/views/res_config_settings_views.xml 
+2025-10-27 20:35:10,483 9701 INFO ajmdb odoo.modules.loading: Module digest loaded in 0.50s, 319 queries (+319 other) 
+2025-10-27 20:35:10,484 9701 INFO ajmdb odoo.modules.loading: Loading module payment (52/106) 
+2025-10-27 20:35:10,542 9701 INFO ajmdb odoo.registry: module payment: creating or updating database tables 
+2025-10-27 20:35:10,756 9701 INFO ajmdb odoo.modules.loading: loading payment/data/ir_actions_server_data.xml 
+2025-10-27 20:35:10,766 9701 INFO ajmdb odoo.modules.loading: loading payment/data/payment_method_data.xml 
+2025-10-27 20:35:10,899 9701 INFO ajmdb odoo.modules.loading: loading payment/data/payment_provider_data.xml 
+2025-10-27 20:35:11,066 9701 INFO ajmdb odoo.modules.loading: loading payment/data/payment_cron.xml 
+2025-10-27 20:35:11,119 9701 INFO ajmdb odoo.modules.loading: loading payment/views/express_checkout_templates.xml 
+2025-10-27 20:35:11,204 9701 INFO ajmdb odoo.modules.loading: loading payment/views/payment_form_templates.xml 
+2025-10-27 20:35:11,350 9701 INFO ajmdb odoo.modules.loading: loading payment/views/portal_templates.xml 
+2025-10-27 20:35:11,469 9701 INFO ajmdb odoo.modules.loading: loading payment/views/payment_provider_views.xml 
+2025-10-27 20:35:11,549 9701 INFO ajmdb odoo.modules.loading: loading payment/views/payment_method_views.xml 
+2025-10-27 20:35:11,589 9701 INFO ajmdb odoo.modules.loading: loading payment/views/payment_transaction_views.xml 
+2025-10-27 20:35:11,651 9701 INFO ajmdb odoo.modules.loading: loading payment/views/payment_token_views.xml 
+2025-10-27 20:35:11,699 9701 INFO ajmdb odoo.modules.loading: loading payment/views/res_partner_views.xml 
+2025-10-27 20:35:11,748 9701 INFO ajmdb odoo.modules.loading: loading payment/security/ir.model.access.csv 
+2025-10-27 20:35:11,782 9701 INFO ajmdb odoo.modules.loading: loading payment/security/payment_security.xml 
+2025-10-27 20:35:11,788 9701 INFO ajmdb odoo.modules.loading: loading payment/wizards/payment_capture_wizard_views.xml 
+2025-10-27 20:35:11,803 9701 INFO ajmdb odoo.modules.loading: loading payment/wizards/payment_link_wizard_views.xml 
+2025-10-27 20:35:11,869 9701 INFO ajmdb odoo.modules.loading: Module payment loaded in 1.39s, 1148 queries (+1148 other) 
+2025-10-27 20:35:11,870 9701 INFO ajmdb odoo.modules.loading: Loading module portal_rating (53/106) 
+2025-10-27 20:35:11,894 9701 INFO ajmdb odoo.registry: module portal_rating: creating or updating database tables 
+2025-10-27 20:35:11,979 9701 INFO ajmdb odoo.modules.loading: loading portal_rating/views/rating_rating_views.xml 
+2025-10-27 20:35:12,036 9701 INFO ajmdb odoo.modules.loading: loading portal_rating/views/portal_templates.xml 
+2025-10-27 20:35:12,068 9701 INFO ajmdb odoo.modules.loading: loading portal_rating/views/rating_templates.xml 
+2025-10-27 20:35:12,160 9701 INFO ajmdb odoo.modules.loading: Module portal_rating loaded in 0.29s, 145 queries (+145 other) 
+2025-10-27 20:35:12,160 9701 INFO ajmdb odoo.modules.loading: Loading module spreadsheet (54/106) 
+2025-10-27 20:35:12,180 9701 INFO ajmdb odoo.registry: module spreadsheet: creating or updating database tables 
+2025-10-27 20:35:12,248 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet/views/public_readonly_spreadsheet_templates.xml 
+2025-10-27 20:35:12,378 9701 INFO ajmdb odoo.modules.loading: Module spreadsheet loaded in 0.22s, 87 queries (+87 other) 
+2025-10-27 20:35:12,378 9701 INFO ajmdb odoo.modules.loading: Loading module account (55/106) 
+2025-10-27 20:35:12,558 9701 INFO ajmdb odoo.registry: module account: creating or updating database tables 
+2025-10-27 20:35:13,851 9701 INFO ajmdb odoo.modules.loading: loading account/security/account_security.xml 
+2025-10-27 20:35:14,058 9701 INFO ajmdb odoo.modules.loading: loading account/security/ir.model.access.csv 
+2025-10-27 20:35:14,231 9701 INFO ajmdb odoo.modules.loading: loading account/data/account_data.xml 
+2025-10-27 20:35:14,250 9701 INFO ajmdb odoo.modules.loading: loading account/data/digest_data.xml 
+2025-10-27 20:35:14,261 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_report.xml 
+2025-10-27 20:35:14,283 9701 INFO ajmdb odoo.modules.loading: loading account/data/mail_template_data.xml 
+2025-10-27 20:35:14,294 9701 INFO ajmdb odoo.modules.loading: loading account/data/onboarding_data.xml 
+2025-10-27 20:35:14,323 9701 INFO ajmdb odoo.modules.loading: loading account/data/account_tour.xml 
+2025-10-27 20:35:14,327 9701 INFO ajmdb odoo.modules.loading: loading account/data/ir_sequence.xml 
+2025-10-27 20:35:14,332 9701 INFO ajmdb odoo.modules.loading: loading account/data/res_country_group.xml 
+2025-10-27 20:35:14,337 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_payment_view.xml 
+2025-10-27 20:35:14,466 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_automatic_entry_wizard_views.xml 
+2025-10-27 20:35:14,494 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_autopost_bills_wizard.xml 
+2025-10-27 20:35:14,509 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_unreconcile_view.xml 
+2025-10-27 20:35:14,519 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_move_reversal_view.xml 
+2025-10-27 20:35:14,555 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_resequence_views.xml 
+2025-10-27 20:35:14,571 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_payment_register_views.xml 
+2025-10-27 20:35:14,592 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_move_views.xml 
+2025-10-27 20:35:17,773 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/setup_wizards_view.xml 
+2025-10-27 20:35:17,842 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_account_views.xml 
+2025-10-27 20:35:17,924 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_group_views.xml 
+2025-10-27 20:35:17,981 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_journal_views.xml 
+2025-10-27 20:35:18,091 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [71, 72, 73] 
+2025-10-27 20:35:18,121 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_account_tag_views.xml 
+2025-10-27 20:35:18,167 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_bank_statement_views.xml 
+2025-10-27 20:35:18,211 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_reconcile_model_views.xml 
+2025-10-27 20:35:18,250 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_tax_views.xml 
+2025-10-27 20:35:18,385 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_full_reconcile_views.xml 
+2025-10-27 20:35:18,412 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_payment_term_views.xml 
+2025-10-27 20:35:18,472 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_payment_method.xml 
+2025-10-27 20:35:18,491 9701 INFO ajmdb odoo.modules.loading: loading account/views/res_partner_bank_views.xml 
+2025-10-27 20:35:18,547 9701 INFO ajmdb odoo.modules.loading: loading account/views/report_statement.xml 
+2025-10-27 20:35:18,596 9701 INFO ajmdb odoo.modules.loading: loading account/views/terms_template.xml 
+2025-10-27 20:35:18,629 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_validate_move_view.xml 
+2025-10-27 20:35:18,654 9701 INFO ajmdb odoo.modules.loading: loading account/views/res_company_views.xml 
+2025-10-27 20:35:18,709 9701 INFO ajmdb odoo.modules.loading: loading account/views/product_view.xml 
+2025-10-27 20:35:18,774 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [75, 76, 77, 78] 
+2025-10-27 20:35:18,789 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [79, 80, 81, 82] 
+2025-10-27 20:35:18,872 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_analytic_plan_views.xml 
+2025-10-27 20:35:18,906 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_analytic_account_views.xml 
+2025-10-27 20:35:18,954 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_analytic_distribution_model_views.xml 
+2025-10-27 20:35:19,005 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_analytic_line_views.xml 
+2025-10-27 20:35:19,091 9701 INFO ajmdb odoo.modules.loading: loading account/views/report_invoice.xml 
+2025-10-27 20:35:19,185 9701 INFO ajmdb odoo.modules.loading: loading account/report/account_invoice_report_view.xml 
+2025-10-27 20:35:19,278 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_cash_rounding_view.xml 
+2025-10-27 20:35:19,310 9701 INFO ajmdb odoo.modules.loading: loading account/views/ir_actions_views.xml 
+2025-10-27 20:35:19,339 9701 INFO ajmdb odoo.modules.loading: loading account/views/ir_module_views.xml 
+2025-10-27 20:35:19,370 9701 INFO ajmdb odoo.modules.loading: loading account/views/base_document_layout_views.xml 
+2025-10-27 20:35:19,398 9701 INFO ajmdb odoo.modules.loading: loading account/views/res_config_settings_views.xml 
+2025-10-27 20:35:19,590 9701 INFO ajmdb odoo.modules.loading: loading account/views/partner_view.xml 
+2025-10-27 20:35:19,838 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_journal_dashboard_view.xml 
+2025-10-27 20:35:19,888 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_portal_templates.xml 
+2025-10-27 20:35:20,060 9701 INFO ajmdb odoo.modules.loading: loading account/views/report_payment_receipt_templates.xml 
+2025-10-27 20:35:20,096 9701 INFO ajmdb odoo.modules.loading: loading account/data/service_cron.xml 
+2025-10-27 20:35:20,165 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_incoterms_view.xml 
+2025-10-27 20:35:20,198 9701 INFO ajmdb odoo.modules.loading: loading account/data/account_incoterms_data.xml 
+2025-10-27 20:35:20,214 9701 INFO ajmdb odoo.modules.loading: loading account/views/digest_views.xml 
+2025-10-27 20:35:20,246 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_move_send_wizard.xml 
+2025-10-27 20:35:20,265 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_move_send_batch_wizard.xml 
+2025-10-27 20:35:20,279 9701 INFO ajmdb odoo.modules.loading: loading account/report/account_hash_integrity_templates.xml 
+2025-10-27 20:35:20,295 9701 INFO ajmdb odoo.modules.loading: loading account/views/res_currency.xml 
+2025-10-27 20:35:20,329 9701 INFO ajmdb odoo.modules.loading: loading account/views/res_country_group_view.xml 
+2025-10-27 20:35:20,365 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_menuitem.xml 
+2025-10-27 20:35:20,659 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_secure_entries_wizard.xml 
+2025-10-27 20:35:20,678 9701 INFO ajmdb odoo.modules.loading: loading account/views/mail_message_views.xml 
+2025-10-27 20:35:20,712 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/accrued_orders.xml 
+2025-10-27 20:35:20,728 9701 INFO ajmdb odoo.modules.loading: loading account/views/bill_preview_template.xml 
+2025-10-27 20:35:20,774 9701 INFO ajmdb odoo.modules.loading: loading account/data/account_reports_data.xml 
+2025-10-27 20:35:20,808 9701 INFO ajmdb odoo.modules.loading: loading account/views/uom_uom_views.xml 
+2025-10-27 20:35:20,831 9701 INFO ajmdb odoo.modules.loading: loading account/views/product_views.xml 
+2025-10-27 20:35:20,877 9701 INFO ajmdb odoo.modules.loading: loading account/views/tests_shared_js_python.xml 
+2025-10-27 20:35:20,890 9701 INFO ajmdb odoo.modules.loading: loading account/views/account_lock_exception_views.xml 
+2025-10-27 20:35:20,905 9701 INFO ajmdb odoo.modules.loading: loading account/views/report_templates.xml 
+2025-10-27 20:35:20,961 9701 INFO ajmdb odoo.modules.loading: loading account/wizard/account_merge_wizard_views.xml 
+2025-10-27 20:35:21,195 9701 INFO ajmdb odoo.modules.loading: Module account loaded in 8.82s, 4475 queries (+4475 other) 
+2025-10-27 20:35:21,195 9701 INFO ajmdb odoo.modules.loading: Loading module crm (56/106) 
+2025-10-27 20:35:21,282 9701 INFO ajmdb odoo.registry: module crm: creating or updating database tables 
+2025-10-27 20:35:21,620 9701 INFO ajmdb odoo.modules.loading: loading crm/security/crm_security.xml 
+2025-10-27 20:35:21,656 9701 INFO ajmdb odoo.modules.loading: loading crm/security/ir.model.access.csv 
+2025-10-27 20:35:21,719 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_lead_merge_template.xml 
+2025-10-27 20:35:21,745 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_lead_prediction_data.xml 
+2025-10-27 20:35:21,774 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_lost_reason_data.xml 
+2025-10-27 20:35:21,781 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_stage_data.xml 
+2025-10-27 20:35:21,792 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_team_data.xml 
+2025-10-27 20:35:21,799 9701 INFO ajmdb odoo.modules.loading: loading crm/data/digest_data.xml 
+2025-10-27 20:35:21,862 9701 INFO ajmdb odoo.modules.loading: loading crm/data/ir_action_data.xml 
+2025-10-27 20:35:21,923 9701 INFO ajmdb odoo.modules.loading: loading crm/data/ir_cron_data.xml 
+2025-10-27 20:35:21,946 9701 INFO ajmdb odoo.modules.loading: loading crm/data/mail_message_subtype_data.xml 
+2025-10-27 20:35:21,991 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_recurring_plan_data.xml 
+2025-10-27 20:35:22,048 9701 INFO ajmdb odoo.modules.loading: loading crm/data/crm_tour.xml 
+2025-10-27 20:35:22,055 9701 INFO ajmdb odoo.modules.loading: loading crm/wizard/crm_lead_lost_views.xml 
+2025-10-27 20:35:22,085 9701 INFO ajmdb odoo.modules.loading: loading crm/wizard/crm_lead_to_opportunity_views.xml 
+2025-10-27 20:35:22,108 9701 INFO ajmdb odoo.modules.loading: loading crm/wizard/crm_lead_to_opportunity_mass_views.xml 
+2025-10-27 20:35:22,127 9701 INFO ajmdb odoo.modules.loading: loading crm/wizard/crm_merge_opportunities_views.xml 
+2025-10-27 20:35:22,150 9701 INFO ajmdb odoo.modules.loading: loading crm/wizard/crm_lead_pls_update_views.xml 
+2025-10-27 20:35:22,166 9701 INFO ajmdb odoo.modules.loading: loading crm/views/calendar_views.xml 
+2025-10-27 20:35:22,191 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_recurring_plan_views.xml 
+2025-10-27 20:35:22,217 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_lost_reason_views.xml 
+2025-10-27 20:35:22,255 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_stage_views.xml 
+2025-10-27 20:35:22,312 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_lead_views.xml 
+2025-10-27 20:35:22,761 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_team_member_views.xml 
+2025-10-27 20:35:22,856 9701 INFO ajmdb odoo.modules.loading: loading crm/views/digest_views.xml 
+2025-10-27 20:35:22,897 9701 INFO ajmdb odoo.modules.loading: loading crm/views/mail_activity_plan_views.xml 
+2025-10-27 20:35:22,939 9701 INFO ajmdb odoo.modules.loading: loading crm/views/mail_activity_views.xml 
+2025-10-27 20:35:22,945 9701 INFO ajmdb odoo.modules.loading: loading crm/views/res_config_settings_views.xml 
+2025-10-27 20:35:23,050 9701 INFO ajmdb odoo.modules.loading: loading crm/views/res_partner_views.xml 
+2025-10-27 20:35:23,126 9701 INFO ajmdb odoo.modules.loading: loading crm/views/utm_campaign_views.xml 
+2025-10-27 20:35:23,189 9701 INFO ajmdb odoo.modules.loading: loading crm/report/crm_activity_report_views.xml 
+2025-10-27 20:35:23,234 9701 INFO ajmdb odoo.modules.loading: loading crm/report/crm_opportunity_report_views.xml 
+2025-10-27 20:35:23,610 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [51, 52, 53] 
+2025-10-27 20:35:23,627 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [54, 55, 56, 57] 
+2025-10-27 20:35:23,637 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_team_views.xml 
+2025-10-27 20:35:23,929 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [58, 59] 
+2025-10-27 20:35:24,055 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_menu_views.xml 
+2025-10-27 20:35:24,719 9701 INFO ajmdb odoo.modules.loading: loading crm/views/crm_helper_templates.xml 
+2025-10-27 20:35:26,300 9701 INFO ajmdb odoo.modules.loading: Module crm loaded in 5.10s, 1739 queries (+1739 other) 
+2025-10-27 20:35:26,300 9701 INFO ajmdb odoo.modules.loading: Loading module hr (57/106) 
+2025-10-27 20:35:26,611 9701 INFO ajmdb odoo.registry: module hr: creating or updating database tables 
+2025-10-27 20:35:30,122 9701 INFO ajmdb odoo.modules.loading: loading hr/security/hr_security.xml 
+2025-10-27 20:35:30,210 9701 INFO ajmdb odoo.modules.loading: loading hr/security/ir.model.access.csv 
+2025-10-27 20:35:30,272 9701 INFO ajmdb odoo.modules.loading: loading hr/data/digest_data.xml 
+2025-10-27 20:35:30,280 9701 INFO ajmdb odoo.modules.loading: loading hr/data/report_paperformat.xml 
+2025-10-27 20:35:30,286 9701 INFO ajmdb odoo.modules.loading: loading hr/wizard/hr_departure_wizard_views.xml 
+2025-10-27 20:35:30,303 9701 INFO ajmdb odoo.modules.loading: loading hr/wizard/hr_contract_template_wizard.views.xml 
+2025-10-27 20:35:30,320 9701 INFO ajmdb odoo.modules.loading: loading hr/wizard/mail_activity_schedule_views.xml 
+2025-10-27 20:35:30,351 9701 INFO ajmdb odoo.modules.loading: loading hr/wizard/hr_bank_account_allocation_wizard.xml 
+2025-10-27 20:35:30,365 9701 INFO ajmdb odoo.modules.loading: loading hr/wizard/hr_bank_account_allocation_wizard_line.xml 
+2025-10-27 20:35:30,377 9701 INFO ajmdb odoo.modules.loading: loading hr/views/mail_activity_plan_views.xml 
+2025-10-27 20:35:30,486 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_version_views.xml 
+2025-10-27 20:35:30,549 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [113, 114, 115] 
+2025-10-27 20:35:30,556 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_contract_template_views.xml 
+2025-10-27 20:35:30,586 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [116, 117] 
+2025-10-27 20:35:30,592 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_departure_reason_views.xml 
+2025-10-27 20:35:30,615 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_contract_type_views.xml 
+2025-10-27 20:35:30,645 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_job_views.xml 
+2025-10-27 20:35:30,693 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_employee_category_views.xml 
+2025-10-27 20:35:30,720 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_employee_public_views.xml 
+2025-10-27 20:35:30,784 9701 INFO ajmdb odoo.modules.loading: loading hr/report/hr_employee_badge.xml 
+2025-10-27 20:35:30,802 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_employee_views.xml 
+2025-10-27 20:35:31,039 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [127] 
+2025-10-27 20:35:31,060 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_department_views.xml 
+2025-10-27 20:35:31,117 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_work_location_views.xml 
+2025-10-27 20:35:31,142 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_views.xml 
+2025-10-27 20:35:31,265 9701 INFO ajmdb odoo.modules.loading: loading hr/views/res_config_settings_views.xml 
+2025-10-27 20:35:31,382 9701 INFO ajmdb odoo.modules.loading: loading hr/views/res_partner_views.xml 
+2025-10-27 20:35:31,470 9701 INFO ajmdb odoo.modules.loading: loading hr/views/res_partner_bank_views.xml 
+2025-10-27 20:35:31,506 9701 INFO ajmdb odoo.modules.loading: loading hr/views/discuss_channel_views.xml 
+2025-10-27 20:35:31,535 9701 INFO ajmdb odoo.modules.loading: loading hr/views/res_users.xml 
+2025-10-27 20:35:31,732 9701 INFO ajmdb odoo.modules.loading: loading hr/views/hr_templates.xml 
+2025-10-27 20:35:31,744 9701 INFO ajmdb odoo.modules.loading: loading hr/data/hr_data.xml 
+2025-10-27 20:35:31,844 9701 INFO ajmdb odoo.modules.loading: Module hr loaded in 5.54s, 4234 queries (+4234 other) 
+2025-10-27 20:35:31,844 9701 INFO ajmdb odoo.modules.loading: Loading module project (58/106) 
+2025-10-27 20:35:31,937 9701 INFO ajmdb odoo.registry: module project: creating or updating database tables 
+2025-10-27 20:35:32,317 9701 INFO ajmdb odoo.modules.loading: loading project/security/project_security.xml 
+2025-10-27 20:35:32,441 9701 INFO ajmdb odoo.modules.loading: loading project/security/ir.model.access.csv 
+2025-10-27 20:35:32,521 9701 INFO ajmdb odoo.modules.loading: loading project/security/ir.model.access.xml 
+2025-10-27 20:35:32,526 9701 INFO ajmdb odoo.modules.loading: loading project/data/digest_data.xml 
+2025-10-27 20:35:32,542 9701 INFO ajmdb odoo.modules.loading: loading project/report/project_task_burndown_chart_report_views.xml 
+2025-10-27 20:35:32,580 9701 INFO ajmdb odoo.modules.loading: loading project/views/account_analytic_account_views.xml 
+2025-10-27 20:35:32,638 9701 INFO ajmdb odoo.modules.loading: loading project/views/digest_digest_views.xml 
+2025-10-27 20:35:32,667 9701 INFO ajmdb odoo.modules.loading: loading project/views/rating_rating_views.xml 
+2025-10-27 20:35:32,801 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_update_views.xml 
+2025-10-27 20:35:32,843 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_update_templates.xml 
+2025-10-27 20:35:32,870 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_project_stage_views.xml 
+2025-10-27 20:35:32,940 9701 INFO ajmdb odoo.modules.loading: loading project/wizard/project_share_wizard_views.xml 
+2025-10-27 20:35:32,976 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_task_type_views.xml 
+2025-10-27 20:35:33,059 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_project_views.xml 
+2025-10-27 20:35:33,459 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [184, 185] 
+2025-10-27 20:35:33,600 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_task_views.xml 
+2025-10-27 20:35:34,458 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_role_views.xml 
+2025-10-27 20:35:34,501 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_tags_views.xml 
+2025-10-27 20:35:34,534 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_milestone_views.xml 
+2025-10-27 20:35:34,593 9701 INFO ajmdb odoo.modules.loading: loading project/views/res_partner_views.xml 
+2025-10-27 20:35:34,658 9701 INFO ajmdb odoo.modules.loading: loading project/views/res_config_settings_views.xml 
+2025-10-27 20:35:34,769 9701 INFO ajmdb odoo.modules.loading: loading project/views/mail_activity_plan_views.xml 
+2025-10-27 20:35:34,811 9701 INFO ajmdb odoo.modules.loading: loading project/views/mail_activity_type_views.xml 
+2025-10-27 20:35:34,818 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_sharing_project_task_views.xml 
+2025-10-27 20:35:34,986 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_portal_project_project_templates.xml 
+2025-10-27 20:35:35,047 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_portal_project_task_templates.xml 
+2025-10-27 20:35:35,156 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_task_templates.xml 
+2025-10-27 20:35:35,168 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_sharing_project_task_templates.xml 
+2025-10-27 20:35:35,180 9701 INFO ajmdb odoo.modules.loading: loading project/report/project_report_views.xml 
+2025-10-27 20:35:35,247 9701 INFO ajmdb odoo.modules.loading: loading project/data/ir_cron_data.xml 
+2025-10-27 20:35:35,250 9701 INFO ajmdb odoo.modules.loading: loading project/data/mail_message_subtype_data.xml 
+2025-10-27 20:35:35,266 9701 INFO ajmdb odoo.modules.loading: loading project/data/mail_template_data.xml 
+2025-10-27 20:35:35,272 9701 INFO ajmdb odoo.modules.loading: loading project/data/project_data.xml 
+2025-10-27 20:35:35,288 9701 INFO ajmdb odoo.modules.loading: loading project/data/project_tour.xml 
+2025-10-27 20:35:35,293 9701 INFO ajmdb odoo.modules.loading: loading project/wizard/project_task_type_delete_views.xml 
+2025-10-27 20:35:35,322 9701 INFO ajmdb odoo.modules.loading: loading project/wizard/project_task_share_wizard_views.xml 
+2025-10-27 20:35:35,342 9701 INFO ajmdb odoo.modules.loading: loading project/wizard/project_project_stage_delete_views.xml 
+2025-10-27 20:35:35,363 9701 INFO ajmdb odoo.modules.loading: loading project/wizard/project_template_create_wizard.xml 
+2025-10-27 20:35:35,383 9701 INFO ajmdb odoo.modules.loading: loading project/views/project_menus.xml 
+2025-10-27 20:35:35,581 9701 INFO ajmdb odoo.modules.loading: Module project loaded in 3.74s, 2816 queries (+2816 other) 
+2025-10-27 20:35:35,581 9701 INFO ajmdb odoo.modules.loading: Loading module spreadsheet_dashboard (59/106) 
+2025-10-27 20:35:35,614 9701 INFO ajmdb odoo.registry: module spreadsheet_dashboard: creating or updating database tables 
+2025-10-27 20:35:35,699 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard/security/security.xml 
+2025-10-27 20:35:35,805 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard/security/ir.model.access.csv 
+2025-10-27 20:35:35,821 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard/views/spreadsheet_dashboard_views.xml 
+2025-10-27 20:35:35,882 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard/views/menu_views.xml 
+2025-10-27 20:35:35,916 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard/data/dashboard.xml 
+2025-10-27 20:35:35,956 9701 INFO ajmdb odoo.modules.loading: Module spreadsheet_dashboard loaded in 0.37s, 257 queries (+257 other) 
+2025-10-27 20:35:35,956 9701 INFO ajmdb odoo.modules.loading: Loading module website (60/106) 
+2025-10-27 20:35:36,318 9701 INFO ajmdb odoo.registry: module website: creating or updating database tables 
+2025-10-27 20:35:38,804 9701 INFO ajmdb odoo.modules.loading: loading website/security/website_security.xml 
+2025-10-27 20:35:38,959 9701 INFO ajmdb odoo.modules.loading: loading website/security/ir.model.access.csv 
+2025-10-27 20:35:39,025 9701 INFO ajmdb odoo.modules.loading: loading website/data/image_library.xml 
+2025-10-27 20:35:39,343 9701 INFO ajmdb odoo.modules.loading: loading website/data/ir_asset.xml 
+2025-10-27 20:35:39,359 9701 INFO ajmdb odoo.modules.loading: loading website/data/ir_cron_data.xml 
+2025-10-27 20:35:39,391 9701 INFO ajmdb odoo.modules.loading: loading website/data/mail_mail_data.xml 
+2025-10-27 20:35:39,403 9701 INFO ajmdb odoo.modules.loading: loading website/data/website_data.xml 
+2025-10-27 20:35:39,613 9701 INFO ajmdb odoo.modules.loading: loading website/data/website_visitor_cron.xml 
+2025-10-27 20:35:39,636 9701 INFO ajmdb odoo.modules.loading: loading website/data/digest_data.xml 
+2025-10-27 20:35:39,654 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_technical_views.xml 
+2025-10-27 20:35:39,687 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_templates.xml 
+2025-10-27 20:35:44,821 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/snippets.xml 
+2025-10-27 20:35:44,882 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_announcement_scroll.xml 
+2025-10-27 20:35:44,901 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_framed_intro.xml 
+2025-10-27 20:35:44,916 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_title.xml 
+2025-10-27 20:35:44,933 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cover.xml 
+2025-10-27 20:35:44,952 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_text_cover.xml 
+2025-10-27 20:35:44,969 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_text_box.xml 
+2025-10-27 20:35:44,990 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_striped_top.xml 
+2025-10-27 20:35:45,010 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_text_image.xml 
+2025-10-27 20:35:45,028 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_text.xml 
+2025-10-27 20:35:45,046 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mockup_image.xml 
+2025-10-27 20:35:45,061 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_instagram_page.xml 
+2025-10-27 20:35:45,077 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_text_overlap.xml 
+2025-10-27 20:35:45,091 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_banner.xml 
+2025-10-27 20:35:45,110 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_bento_block.xml 
+2025-10-27 20:35:45,124 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_snippet_group.xml 
+2025-10-27 20:35:45,139 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_text_block.xml 
+2025-10-27 20:35:45,159 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_features.xml 
+2025-10-27 20:35:45,181 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_features_wall.xml 
+2025-10-27 20:35:45,198 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_three_columns.xml 
+2025-10-27 20:35:45,220 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_key_benefits.xml 
+2025-10-27 20:35:45,240 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_picture.xml 
+2025-10-27 20:35:45,257 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_punchy.xml 
+2025-10-27 20:35:45,276 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_bento_grid.xml 
+2025-10-27 20:35:45,295 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_carousel.xml 
+2025-10-27 20:35:45,318 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_carousel_intro.xml 
+2025-10-27 20:35:45,338 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_carousel_cards.xml 
+2025-10-27 20:35:45,357 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_alert.xml 
+2025-10-27 20:35:45,373 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_motto.xml 
+2025-10-27 20:35:45,389 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_card.xml 
+2025-10-27 20:35:45,411 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cards_grid.xml 
+2025-10-27 20:35:45,426 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cards_soft.xml 
+2025-10-27 20:35:45,441 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_share.xml 
+2025-10-27 20:35:45,458 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_social_media.xml 
+2025-10-27 20:35:45,478 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_rating.xml 
+2025-10-27 20:35:45,495 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_hr.xml 
+2025-10-27 20:35:45,511 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_closer_look.xml 
+2025-10-27 20:35:45,536 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_facebook_page.xml 
+2025-10-27 20:35:45,550 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_gallery.xml 
+2025-10-27 20:35:45,594 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_countdown.xml 
+2025-10-27 20:35:45,612 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_product_catalog.xml 
+2025-10-27 20:35:45,649 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_comparisons.xml 
+2025-10-27 20:35:45,677 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_comparisons_horizontal.xml 
+2025-10-27 20:35:45,699 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team.xml 
+2025-10-27 20:35:45,725 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team_basic.xml 
+2025-10-27 20:35:45,747 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team_shapes.xml 
+2025-10-27 20:35:45,770 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team_detail.xml 
+2025-10-27 20:35:45,791 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team_spotlight.xml 
+2025-10-27 20:35:45,810 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team_grid.xml 
+2025-10-27 20:35:45,827 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_company_team_card.xml 
+2025-10-27 20:35:45,845 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_call_to_action.xml 
+2025-10-27 20:35:45,866 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_references.xml 
+2025-10-27 20:35:45,889 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_references_social.xml 
+2025-10-27 20:35:45,909 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_references_grid.xml 
+2025-10-27 20:35:45,929 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_popup.xml 
+2025-10-27 20:35:45,948 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_faq_list.xml 
+2025-10-27 20:35:45,963 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_faq_collapse.xml 
+2025-10-27 20:35:45,983 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_features_grid.xml 
+2025-10-27 20:35:46,006 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_features_wave.xml 
+2025-10-27 20:35:46,025 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_tabs.xml 
+2025-10-27 20:35:46,046 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_tabs_images.xml 
+2025-10-27 20:35:46,063 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_table_of_content.xml 
+2025-10-27 20:35:46,085 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_images_constellation.xml 
+2025-10-27 20:35:46,104 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_chart.xml 
+2025-10-27 20:35:46,121 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_parallax.xml 
+2025-10-27 20:35:46,139 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_quotes_carousel.xml 
+2025-10-27 20:35:46,165 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers_grid.xml 
+2025-10-27 20:35:46,185 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_quotes_carousel_minimal.xml 
+2025-10-27 20:35:46,205 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_quotes_carousel_compact.xml 
+2025-10-27 20:35:46,227 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers.xml 
+2025-10-27 20:35:46,254 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_contact_info.xml 
+2025-10-27 20:35:46,276 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers_boxed.xml 
+2025-10-27 20:35:46,296 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cta_box.xml 
+2025-10-27 20:35:46,314 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers_framed.xml 
+2025-10-27 20:35:46,330 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_masonry_block.xml 
+2025-10-27 20:35:46,436 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_sidegrid.xml 
+2025-10-27 20:35:46,460 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_media_list.xml 
+2025-10-27 20:35:46,487 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_showcase.xml 
+2025-10-27 20:35:46,515 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_faq_horizontal.xml 
+2025-10-27 20:35:46,532 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_floating_blocks.xml 
+2025-10-27 20:35:46,556 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_opening_hours.xml 
+2025-10-27 20:35:46,572 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_timeline.xml 
+2025-10-27 20:35:46,595 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_timeline_images.xml 
+2025-10-27 20:35:46,611 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_timeline_list.xml 
+2025-10-27 20:35:46,628 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_process_steps.xml 
+2025-10-27 20:35:46,650 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_accordion.xml 
+2025-10-27 20:35:46,666 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_website_form_info.xml 
+2025-10-27 20:35:46,684 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers_showcase.xml 
+2025-10-27 20:35:46,704 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers_charts.xml 
+2025-10-27 20:35:46,738 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_accordion_image.xml 
+2025-10-27 20:35:46,758 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_pricelist_boxed.xml 
+2025-10-27 20:35:46,801 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_adventure.xml 
+2025-10-27 20:35:46,821 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_title.xml 
+2025-10-27 20:35:46,843 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_key_images.xml 
+2025-10-27 20:35:46,866 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_kickoff.xml 
+2025-10-27 20:35:46,881 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_discovery.xml 
+2025-10-27 20:35:46,903 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_bento_banner.xml 
+2025-10-27 20:35:46,919 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_striped.xml 
+2025-10-27 20:35:46,941 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_intro_pill.xml 
+2025-10-27 20:35:46,959 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_big_number.xml 
+2025-10-27 20:35:46,978 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_wavy_grid.xml 
+2025-10-27 20:35:46,995 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_images_mosaic.xml 
+2025-10-27 20:35:47,012 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_shape_image.xml 
+2025-10-27 20:35:47,028 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_empowerment.xml 
+2025-10-27 20:35:47,049 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_split_intro.xml 
+2025-10-27 20:35:47,067 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_text_highlight.xml 
+2025-10-27 20:35:47,083 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_pricelist_cafe.xml 
+2025-10-27 20:35:47,114 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_progress_bar.xml 
+2025-10-27 20:35:47,134 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_blockquote.xml 
+2025-10-27 20:35:47,154 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_badge.xml 
+2025-10-27 20:35:47,175 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_color_blocks_2.xml 
+2025-10-27 20:35:47,200 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_attributes_horizontal.xml 
+2025-10-27 20:35:47,219 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_attributes_vertical.xml 
+2025-10-27 20:35:47,240 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_product_list.xml 
+2025-10-27 20:35:47,261 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_multi_menus.xml 
+2025-10-27 20:35:47,286 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_menu_image_menu.xml 
+2025-10-27 20:35:47,302 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_thumbnails.xml 
+2025-10-27 20:35:47,339 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_little_icons.xml 
+2025-10-27 20:35:47,360 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_images_subtitles.xml 
+2025-10-27 20:35:47,397 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_menus_logos.xml 
+2025-10-27 20:35:47,420 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_odoo_menu.xml 
+2025-10-27 20:35:47,440 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_big_icons_subtitles.xml 
+2025-10-27 20:35:47,474 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_mega_menu_cards.xml 
+2025-10-27 20:35:47,504 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_google_map.xml 
+2025-10-27 20:35:47,527 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cta_mockups.xml 
+2025-10-27 20:35:47,544 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_map.xml 
+2025-10-27 20:35:47,575 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_dynamic_snippet.xml 
+2025-10-27 20:35:47,621 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_dynamic_snippet_carousel.xml 
+2025-10-27 20:35:47,648 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_banner_product.xml 
+2025-10-27 20:35:47,666 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_embed_code.xml 
+2025-10-27 20:35:47,687 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_website_form.xml 
+2025-10-27 20:35:47,717 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_website_form_overlay.xml 
+2025-10-27 20:35:47,732 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_title_form.xml 
+2025-10-27 20:35:47,757 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_searchbar.xml 
+2025-10-27 20:35:47,799 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_inline_text.xml 
+2025-10-27 20:35:47,814 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_button.xml 
+2025-10-27 20:35:47,829 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_freegrid.xml 
+2025-10-27 20:35:47,850 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_card_offset.xml 
+2025-10-27 20:35:47,868 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image.xml 
+2025-10-27 20:35:47,882 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_video.xml 
+2025-10-27 20:35:47,897 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cta_badge.xml 
+2025-10-27 20:35:47,909 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_unveil.xml 
+2025-10-27 20:35:47,928 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_hexagonal.xml 
+2025-10-27 20:35:47,942 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_striped_center_top.xml 
+2025-10-27 20:35:47,960 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_numbers_list.xml 
+2025-10-27 20:35:47,975 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_quadrant.xml 
+2025-10-27 20:35:47,994 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cta_card.xml 
+2025-10-27 20:35:48,014 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_image_frame.xml 
+2025-10-27 20:35:48,026 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_cta_mobile.xml 
+2025-10-27 20:35:48,041 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_reviews_wall.xml 
+2025-10-27 20:35:48,064 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_website_form_cover.xml 
+2025-10-27 20:35:48,079 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_form_aside.xml 
+2025-10-27 20:35:48,094 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_banner_connected.xml 
+2025-10-27 20:35:48,109 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_ecomm_categories_showcase.xml 
+2025-10-27 20:35:48,127 9701 INFO ajmdb odoo.modules.loading: loading website/views/snippets/s_banner_categories.xml 
+2025-10-27 20:35:48,146 9701 INFO ajmdb odoo.modules.loading: loading website/views/new_page_template_templates.xml 
+2025-10-27 20:35:51,408 9701 INFO ajmdb odoo.addons.website.models.ir_module_module: Updated 39 primary page templates for 'website' 
+2025-10-27 20:35:51,409 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_views.xml 
+2025-10-27 20:35:51,690 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [103, 104] 
+2025-10-27 20:35:51,793 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_pages_views.xml 
+2025-10-27 20:35:51,913 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [105, 106] 
+2025-10-27 20:35:51,971 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_controller_pages_views.xml 
+2025-10-27 20:35:52,032 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_visitor_views.xml 
+2025-10-27 20:35:52,093 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [107, 108] 
+2025-10-27 20:35:52,213 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [109, 110] 
+2025-10-27 20:35:52,232 9701 INFO ajmdb odoo.modules.loading: loading website/views/res_config_settings_views.xml 
+2025-10-27 20:35:52,565 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_rewrite.xml 
+2025-10-27 20:35:52,648 9701 INFO ajmdb odoo.modules.loading: loading website/views/ir_actions_server_views.xml 
+2025-10-27 20:35:52,739 9701 INFO ajmdb odoo.modules.loading: loading website/views/ir_asset_views.xml 
+2025-10-27 20:35:52,799 9701 INFO ajmdb odoo.modules.loading: loading website/views/ir_attachment_views.xml 
+2025-10-27 20:35:52,852 9701 INFO ajmdb odoo.modules.loading: loading website/views/ir_model_views.xml 
+2025-10-27 20:35:52,934 9701 INFO ajmdb odoo.modules.loading: loading website/views/res_partner_views.xml 
+2025-10-27 20:35:53,006 9701 INFO ajmdb odoo.modules.loading: loading website/views/neutralize_views.xml 
+2025-10-27 20:35:53,076 9701 INFO ajmdb odoo.modules.loading: loading website/wizard/base_language_install_views.xml 
+2025-10-27 20:35:53,105 9701 INFO ajmdb odoo.modules.loading: loading website/wizard/blocked_third_party_domains.xml 
+2025-10-27 20:35:53,123 9701 INFO ajmdb odoo.modules.loading: loading website/wizard/website_robots.xml 
+2025-10-27 20:35:53,142 9701 INFO ajmdb odoo.modules.loading: loading website/data/update_theme_images.xml 
+2025-10-27 20:35:53,154 9701 INFO ajmdb odoo.modules.loading: loading website/views/website_templates_svg.xml 
+2025-10-27 20:35:53,340 9701 INFO ajmdb odoo.modules.loading: Module website loaded in 17.38s, 12642 queries (+12642 other) 
+2025-10-27 20:35:53,340 9701 INFO ajmdb odoo.modules.loading: Loading module account_debit_note (61/106) 
+2025-10-27 20:35:53,395 9701 INFO ajmdb odoo.registry: module account_debit_note: creating or updating database tables 
+2025-10-27 20:35:53,559 9701 INFO ajmdb odoo.modules.loading: loading account_debit_note/wizard/account_debit_note_view.xml 
+2025-10-27 20:35:53,599 9701 INFO ajmdb odoo.modules.loading: loading account_debit_note/views/account_move_view.xml 
+2025-10-27 20:35:53,830 9701 INFO ajmdb odoo.modules.loading: loading account_debit_note/views/account_journal_views.xml 
+2025-10-27 20:35:53,890 9701 INFO ajmdb odoo.modules.loading: loading account_debit_note/security/ir.model.access.csv 
+2025-10-27 20:35:53,931 9701 INFO ajmdb odoo.modules.loading: Module account_debit_note loaded in 0.59s, 257 queries (+257 other) 
+2025-10-27 20:35:53,931 9701 INFO ajmdb odoo.modules.loading: Loading module account_edi_ubl_cii (62/106) 
+2025-10-27 20:35:54,025 9701 INFO ajmdb odoo.registry: module account_edi_ubl_cii: creating or updating database tables 
+2025-10-27 20:35:54,303 9701 INFO ajmdb odoo.modules.loading: loading account_edi_ubl_cii/data/cii_22_templates.xml 
+2025-10-27 20:35:54,384 9701 INFO ajmdb odoo.modules.loading: loading account_edi_ubl_cii/views/account_tax_views.xml 
+2025-10-27 20:35:54,442 9701 INFO ajmdb odoo.modules.loading: loading account_edi_ubl_cii/views/res_partner_views.xml 
+2025-10-27 20:35:54,637 9701 INFO ajmdb odoo.modules.loading: Module account_edi_ubl_cii loaded in 0.71s, 322 queries (+322 other) 
+2025-10-27 20:35:54,638 9701 INFO ajmdb odoo.modules.loading: Loading module account_payment (63/106) 
+2025-10-27 20:35:54,735 9701 INFO ajmdb odoo.registry: module account_payment: creating or updating database tables 
+2025-10-27 20:35:54,989 9701 INFO ajmdb odoo.modules.loading: loading account_payment/data/ir_config_parameter.xml 
+2025-10-27 20:35:55,043 9701 INFO ajmdb odoo.modules.loading: loading account_payment/security/ir.model.access.csv 
+2025-10-27 20:35:55,093 9701 INFO ajmdb odoo.modules.loading: loading account_payment/security/ir_rules.xml 
+2025-10-27 20:35:55,153 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/account_payment_menus.xml 
+2025-10-27 20:35:55,274 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/account_portal_templates.xml 
+2025-10-27 20:35:55,492 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/account_move_views.xml 
+2025-10-27 20:35:55,655 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/account_journal_views.xml 
+2025-10-27 20:35:55,740 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/account_payment_views.xml 
+2025-10-27 20:35:55,804 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/payment_form_templates.xml 
+2025-10-27 20:35:55,848 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/payment_provider_views.xml 
+2025-10-27 20:35:55,905 9701 INFO ajmdb odoo.modules.loading: loading account_payment/views/payment_transaction_views.xml 
+2025-10-27 20:35:55,961 9701 INFO ajmdb odoo.modules.loading: loading account_payment/wizards/account_payment_register_views.xml 
+2025-10-27 20:35:56,026 9701 INFO ajmdb odoo.modules.loading: loading account_payment/wizards/payment_link_wizard_views.xml 
+2025-10-27 20:35:56,070 9701 INFO ajmdb odoo.modules.loading: loading account_payment/wizards/payment_refund_wizard_views.xml 
+2025-10-27 20:35:56,106 9701 INFO ajmdb odoo.modules.loading: loading account_payment/wizards/res_config_settings_views.xml 
+2025-10-27 20:35:56,304 9701 INFO ajmdb odoo.modules.loading: Module account_payment loaded in 1.67s, 655 queries (+655 other) 
+2025-10-27 20:35:56,304 9701 INFO ajmdb odoo.modules.loading: Loading module account_qr_code_emv (64/106) 
+2025-10-27 20:35:56,345 9701 INFO ajmdb odoo.registry: module account_qr_code_emv: creating or updating database tables 
+2025-10-27 20:35:56,442 9701 INFO ajmdb odoo.modules.loading: loading account_qr_code_emv/views/res_bank_views.xml 
+2025-10-27 20:35:56,596 9701 INFO ajmdb odoo.modules.loading: Module account_qr_code_emv loaded in 0.29s, 79 queries (+79 other) 
+2025-10-27 20:35:56,596 9701 INFO ajmdb odoo.modules.loading: Loading module base_vat (65/106) 
+2025-10-27 20:35:56,691 9701 INFO ajmdb odoo.registry: module base_vat: creating or updating database tables 
+2025-10-27 20:35:56,922 9701 INFO ajmdb odoo.modules.loading: loading base_vat/views/res_config_settings_views.xml 
+2025-10-27 20:35:57,092 9701 INFO ajmdb odoo.modules.loading: loading base_vat/views/res_partner_views.xml 
+2025-10-27 20:35:57,225 9701 INFO ajmdb odoo.modules.loading: Module base_vat loaded in 0.63s, 213 queries (+213 other) 
+2025-10-27 20:35:57,225 9701 INFO ajmdb odoo.modules.loading: Loading module crm_sms (66/106) 
+2025-10-27 20:35:57,310 9701 INFO ajmdb odoo.modules.loading: loading crm_sms/views/crm_lead_views.xml 
+2025-10-27 20:35:57,452 9701 INFO ajmdb odoo.modules.loading: loading crm_sms/security/ir.model.access.csv 
+2025-10-27 20:35:57,486 9701 INFO ajmdb odoo.modules.loading: loading crm_sms/security/sms_security.xml 
+2025-10-27 20:35:57,557 9701 INFO ajmdb odoo.modules.loading: Module crm_sms loaded in 0.33s, 103 queries (+103 other) 
+2025-10-27 20:35:57,557 9701 INFO ajmdb odoo.modules.loading: Loading module hr_attendance (67/106) 
+2025-10-27 20:35:57,663 9701 INFO ajmdb odoo.registry: module hr_attendance: creating or updating database tables 
+2025-10-27 20:35:57,953 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/data/hr_attendance_data.xml 
+2025-10-27 20:35:58,046 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/security/hr_attendance_security.xml 
+2025-10-27 20:35:58,184 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/security/ir.model.access.csv 
+2025-10-27 20:35:58,250 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/hr_attendance_view.xml 
+2025-10-27 20:35:58,536 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/hr_department_view.xml 
+2025-10-27 20:35:58,609 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/hr_employee_view.xml 
+2025-10-27 20:35:58,854 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/hr_employee_public_views.xml 
+2025-10-27 20:35:58,897 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/res_config_settings_views.xml 
+2025-10-27 20:35:59,055 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/hr_attendance_kiosk_templates.xml 
+2025-10-27 20:35:59,091 9701 INFO ajmdb odoo.modules.loading: loading hr_attendance/views/hr_attendance_overtime_rule_views.xml 
+2025-10-27 20:35:59,299 9701 INFO ajmdb odoo.modules.loading: Module hr_attendance loaded in 1.74s, 805 queries (+805 other) 
+2025-10-27 20:35:59,300 9701 INFO ajmdb odoo.modules.loading: Loading module hr_calendar (68/106) 
+2025-10-27 20:35:59,360 9701 INFO ajmdb odoo.registry: module hr_calendar: creating or updating database tables 
+2025-10-27 20:35:59,524 9701 INFO ajmdb odoo.modules.loading: loading hr_calendar/views/calendar_views_calendarApp.xml 
+2025-10-27 20:35:59,788 9701 INFO ajmdb odoo.modules.loading: loading hr_calendar/views/res_partner_views.xml 
+2025-10-27 20:35:59,955 9701 INFO ajmdb odoo.modules.loading: Module hr_calendar loaded in 0.66s, 137 queries (+137 other) 
+2025-10-27 20:35:59,955 9701 INFO ajmdb odoo.modules.loading: Loading module hr_holidays (69/106) 
+2025-10-27 20:36:00,081 9701 INFO ajmdb odoo.registry: module hr_holidays: creating or updating database tables 
+2025-10-27 20:36:00,574 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/report_paperformat.xml 
+2025-10-27 20:36:00,605 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/mail_activity_type_data.xml 
+2025-10-27 20:36:00,623 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/mail_message_subtype_data.xml 
+2025-10-27 20:36:00,654 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/ir_attachment_data.xml 
+2025-10-27 20:36:00,697 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/hr_leave_type_data.xml 
+2025-10-27 20:36:00,813 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/ir_cron_data.xml 
+2025-10-27 20:36:00,877 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/data/hr_holidays_tour.xml 
+2025-10-27 20:36:00,901 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/security/hr_holidays_security.xml 
+2025-10-27 20:36:01,063 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/security/ir.model.access.csv 
+2025-10-27 20:36:01,185 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/wizard/hr_holidays_cancel_leave_views.xml 
+2025-10-27 20:36:01,228 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/wizard/hr_holidays_summary_employees_views.xml 
+2025-10-27 20:36:01,262 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/wizard/hr_leave_generate_multi_wizard_views.xml 
+2025-10-27 20:36:01,412 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/wizard/hr_leave_allocation_generate_multi_wizard_views.xml 
+2025-10-27 20:36:01,450 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/resource_views.xml 
+2025-10-27 20:36:01,602 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_leave_views.xml 
+2025-10-27 20:36:02,133 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.model.data records with IDs: [68281, 68280] 
+2025-10-27 20:36:02,134 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [149, 150, 148] 
+2025-10-27 20:36:02,192 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_leave_type_views.xml 
+2025-10-27 20:36:02,274 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_leave_allocation_views.xml 
+2025-10-27 20:36:02,553 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_leave_accrual_views.xml 
+2025-10-27 20:36:02,645 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_leave_mandatory_day_views.xml 
+2025-10-27 20:36:02,707 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/mail_activity_views.xml 
+2025-10-27 20:36:02,775 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/calendar_views.xml 
+2025-10-27 20:36:02,870 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/report/hr_holidays_templates.xml 
+2025-10-27 20:36:02,901 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/report/hr_holidays_reports.xml 
+2025-10-27 20:36:02,919 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/report/hr_leave_reports.xml 
+2025-10-27 20:36:03,002 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/report/hr_leave_report_calendar.xml 
+2025-10-27 20:36:03,092 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/report/hr_leave_employee_type_report.xml 
+2025-10-27 20:36:03,139 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_views.xml 
+2025-10-27 20:36:03,430 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays/views/hr_holidays_views.xml 
+2025-10-27 20:36:04,179 9701 INFO ajmdb odoo.modules.loading: Module hr_holidays loaded in 4.22s, 1988 queries (+1988 other) 
+2025-10-27 20:36:04,179 9701 INFO ajmdb odoo.modules.loading: Loading module hr_homeworking (70/106) 
+2025-10-27 20:36:04,280 9701 INFO ajmdb odoo.registry: module hr_homeworking: creating or updating database tables 
+2025-10-27 20:36:04,461 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking/security/security.xml 
+2025-10-27 20:36:04,628 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking/security/ir.model.access.csv 
+2025-10-27 20:36:04,714 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking/views/hr_employee_views.xml 
+2025-10-27 20:36:05,056 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking/views/res_users.xml 
+2025-10-27 20:36:05,543 9701 INFO ajmdb odoo.modules.loading: Module hr_homeworking loaded in 1.36s, 265 queries (+265 other) 
+2025-10-27 20:36:05,543 9701 INFO ajmdb odoo.modules.loading: Loading module hr_org_chart (71/106) 
+2025-10-27 20:36:05,616 9701 INFO ajmdb odoo.registry: module hr_org_chart: creating or updating database tables 
+2025-10-27 20:36:05,751 9701 INFO ajmdb odoo.modules.loading: loading hr_org_chart/views/hr_department_views.xml 
+2025-10-27 20:36:05,986 9701 INFO ajmdb odoo.modules.loading: loading hr_org_chart/views/hr_employee_public_views.xml 
+2025-10-27 20:36:06,161 9701 INFO ajmdb odoo.modules.loading: loading hr_org_chart/views/hr_views.xml 
+2025-10-27 20:36:06,570 9701 INFO ajmdb odoo.modules.loading: Module hr_org_chart loaded in 1.03s, 205 queries (+205 other) 
+2025-10-27 20:36:06,570 9701 INFO ajmdb odoo.modules.loading: Loading module hr_skills (72/106) 
+2025-10-27 20:36:06,643 9701 INFO ajmdb odoo.registry: module hr_skills: creating or updating database tables 
+2025-10-27 20:36:07,440 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/security/ir.model.access.csv 
+2025-10-27 20:36:07,773 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/security/hr_skills_security.xml 
+2025-10-27 20:36:07,932 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/views/hr_views.xml 
+2025-10-27 20:36:08,470 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [138, 139, 140, 141] 
+2025-10-27 20:36:08,659 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [142, 143] 
+2025-10-27 20:36:08,687 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/views/hr_job_views.xml 
+2025-10-27 20:36:08,835 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/views/hr_job_skill_views.xml 
+2025-10-27 20:36:10,379 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/data/hr_resume_data.xml 
+2025-10-27 20:36:11,436 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/data/hr_skill_data.xml 
+2025-10-27 20:36:11,548 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/data/ir_actions_server_data.xml 
+2025-10-27 20:36:11,588 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/data/ir_cron_data.xml 
+2025-10-27 20:36:11,665 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/data/mail_activity_type_data.xml 
+2025-10-27 20:36:11,686 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/data/report_paperformat.xml 
+2025-10-27 20:36:11,739 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/report/hr_employee_certification_report_views.xml 
+2025-10-27 20:36:11,808 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/report/hr_employee_skill_history_report_views.xml 
+2025-10-27 20:36:11,852 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/report/hr_employee_skill_report_views.xml 
+2025-10-27 20:36:11,918 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/report/hr_employee_cv_report.xml 
+2025-10-27 20:36:11,925 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/views/hr_department_views.xml 
+2025-10-27 20:36:11,959 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/views/hr_employee_cv_templates.xml 
+2025-10-27 20:36:12,010 9701 INFO ajmdb odoo.modules.loading: loading hr_skills/wizard/hr_employee_cv_wizard_views.xml 
+2025-10-27 20:36:12,104 9701 INFO ajmdb odoo.modules.loading: Module hr_skills loaded in 5.53s, 1005 queries (+1005 other) 
+2025-10-27 20:36:12,104 9701 INFO ajmdb odoo.modules.loading: Loading module iap_crm (73/106) 
+2025-10-27 20:36:12,140 9701 INFO ajmdb odoo.registry: module iap_crm: creating or updating database tables 
+2025-10-27 20:36:12,320 9701 INFO ajmdb odoo.modules.loading: Module iap_crm loaded in 0.22s, 63 queries (+63 other) 
+2025-10-27 20:36:12,320 9701 INFO ajmdb odoo.modules.loading: Loading module mail_bot_hr (74/106) 
+2025-10-27 20:36:12,407 9701 INFO ajmdb odoo.modules.loading: loading mail_bot_hr/views/res_users_views.xml 
+2025-10-27 20:36:12,532 9701 INFO ajmdb odoo.modules.loading: Module mail_bot_hr loaded in 0.21s, 61 queries (+61 other) 
+2025-10-27 20:36:12,532 9701 INFO ajmdb odoo.modules.loading: Loading module project_account (75/106) 
+2025-10-27 20:36:12,565 9701 INFO ajmdb odoo.registry: module project_account: creating or updating database tables 
+2025-10-27 20:36:12,654 9701 INFO ajmdb odoo.modules.loading: loading project_account/views/account_analytic_line_views.xml 
+2025-10-27 20:36:12,706 9701 INFO ajmdb odoo.modules.loading: loading project_account/views/project_project_views.xml 
+2025-10-27 20:36:12,801 9701 INFO ajmdb odoo.modules.loading: loading project_account/views/project_task_views.xml 
+2025-10-27 20:36:12,920 9701 INFO ajmdb odoo.modules.loading: loading project_account/views/project_sharing_project_task_views.xml 
+2025-10-27 20:36:12,977 9701 INFO ajmdb odoo.modules.loading: Module project_account loaded in 0.45s, 225 queries (+225 other) 
+2025-10-27 20:36:12,978 9701 INFO ajmdb odoo.modules.loading: Loading module project_sms (76/106) 
+2025-10-27 20:36:13,014 9701 INFO ajmdb odoo.registry: module project_sms: creating or updating database tables 
+2025-10-27 20:36:13,155 9701 INFO ajmdb odoo.modules.loading: loading project_sms/views/project_stage_views.xml 
+2025-10-27 20:36:13,226 9701 INFO ajmdb odoo.modules.loading: loading project_sms/views/project_task_type_views.xml 
+2025-10-27 20:36:13,294 9701 INFO ajmdb odoo.modules.loading: loading project_sms/views/project_project_views.xml 
+2025-10-27 20:36:13,302 9701 INFO ajmdb odoo.modules.loading: loading project_sms/views/project_task_views.xml 
+2025-10-27 20:36:13,308 9701 INFO ajmdb odoo.modules.loading: loading project_sms/security/ir.model.access.csv 
+2025-10-27 20:36:13,319 9701 INFO ajmdb odoo.modules.loading: loading project_sms/security/project_sms_security.xml 
+2025-10-27 20:36:13,347 9701 INFO ajmdb odoo.modules.loading: Module project_sms loaded in 0.37s, 235 queries (+235 other) 
+2025-10-27 20:36:13,348 9701 INFO ajmdb odoo.modules.loading: Loading module project_todo (77/106) 
+2025-10-27 20:36:13,403 9701 INFO ajmdb odoo.registry: module project_todo: creating or updating database tables 
+2025-10-27 20:36:13,538 9701 INFO ajmdb odoo.modules.loading: loading project_todo/security/ir.model.access.csv 
+2025-10-27 20:36:13,553 9701 INFO ajmdb odoo.modules.loading: loading project_todo/security/project_todo_security.xml 
+2025-10-27 20:36:13,557 9701 INFO ajmdb odoo.modules.loading: loading project_todo/data/todo_template.xml 
+2025-10-27 20:36:13,561 9701 INFO ajmdb odoo.modules.loading: loading project_todo/views/project_task_views.xml 
+2025-10-27 20:36:13,693 9701 INFO ajmdb odoo.modules.loading: loading project_todo/views/project_todo_menus.xml 
+2025-10-27 20:36:13,706 9701 INFO ajmdb odoo.modules.loading: loading project_todo/wizard/mail_activity_todo_create.xml 
+2025-10-27 20:36:13,747 9701 INFO ajmdb odoo.modules.loading: Module project_todo loaded in 0.40s, 253 queries (+253 other) 
+2025-10-27 20:36:13,747 9701 INFO ajmdb odoo.modules.loading: Loading module snailmail_account (78/106) 
+2025-10-27 20:36:13,835 9701 INFO ajmdb odoo.registry: module snailmail_account: creating or updating database tables 
+2025-10-27 20:36:14,066 9701 INFO ajmdb odoo.modules.loading: loading snailmail_account/views/res_config_settings_views.xml 
+2025-10-27 20:36:14,246 9701 INFO ajmdb odoo.modules.loading: Module snailmail_account loaded in 0.50s, 239 queries (+239 other) 
+2025-10-27 20:36:14,246 9701 INFO ajmdb odoo.modules.loading: Loading module spreadsheet_account (79/106) 
+2025-10-27 20:36:14,296 9701 INFO ajmdb odoo.registry: module spreadsheet_account: creating or updating database tables 
+2025-10-27 20:36:14,444 9701 INFO ajmdb odoo.modules.loading: Module spreadsheet_account loaded in 0.20s, 57 queries (+57 other) 
+2025-10-27 20:36:14,444 9701 INFO ajmdb odoo.modules.loading: Loading module spreadsheet_dashboard_account (80/106) 
+2025-10-27 20:36:14,526 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard_account/data/dashboards.xml 
+2025-10-27 20:36:14,608 9701 INFO ajmdb odoo.modules.loading: Module spreadsheet_dashboard_account loaded in 0.16s, 28 queries (+28 other) 
+2025-10-27 20:36:14,608 9701 INFO ajmdb odoo.modules.loading: Loading module theme_common (81/106) 
+2025-10-27 20:36:14,639 9701 INFO ajmdb odoo.registry: module theme_common: creating or updating database tables 
+2025-10-27 20:36:14,707 9701 INFO ajmdb odoo.modules.loading: loading theme_common/data/data.xml 
+2025-10-27 20:36:14,723 9701 INFO ajmdb odoo.modules.loading: loading theme_common/views/old_snippets/s_column.xml 
+2025-10-27 20:36:14,726 9701 INFO ajmdb odoo.modules.loading: loading theme_common/views/old_snippets/s_page_header.xml 
+2025-10-27 20:36:14,728 9701 INFO ajmdb odoo.modules.loading: loading theme_common/views/old_snippets/s_three_columns_circle.xml 
+2025-10-27 20:36:14,741 9701 INFO ajmdb odoo.addons.website.models.ir_module_module: Module theme_common has been loaded as theme template (to upgrade) 
+2025-10-27 20:36:14,753 9701 INFO ajmdb odoo.addons.website.models.ir_module_module: Load theme ['theme_common'] for website 1 from template. 
+2025-10-27 20:36:14,794 9701 INFO ajmdb odoo.modules.loading: Module theme_common loaded in 0.19s, 47 queries (+47 other) 
+2025-10-27 20:36:14,796 9701 INFO ajmdb odoo.modules.loading: Loading module website_crm (82/106) 
+2025-10-27 20:36:14,834 9701 INFO ajmdb odoo.registry: module website_crm: creating or updating database tables 
+2025-10-27 20:36:14,953 9701 INFO ajmdb odoo.modules.loading: loading website_crm/security/ir.model.access.csv 
+2025-10-27 20:36:14,974 9701 INFO ajmdb odoo.modules.loading: loading website_crm/data/crm_lead_merge_template.xml 
+2025-10-27 20:36:14,998 9701 INFO ajmdb odoo.modules.loading: loading website_crm/data/ir_actions_data.xml 
+2025-10-27 20:36:15,002 9701 INFO ajmdb odoo.modules.loading: loading website_crm/data/ir_model_data.xml 
+2025-10-27 20:36:15,023 9701 INFO ajmdb odoo.modules.loading: loading website_crm/views/crm_lead_views.xml 
+2025-10-27 20:36:15,086 9701 INFO ajmdb odoo.modules.loading: loading website_crm/views/website_visitor_views.xml 
+2025-10-27 20:36:15,189 9701 INFO ajmdb odoo.modules.loading: loading website_crm/views/website_templates_contactus.xml 
+2025-10-27 20:36:15,243 9701 INFO ajmdb odoo.modules.loading: Module website_crm loaded in 0.45s, 260 queries (+260 other) 
+2025-10-27 20:36:15,244 9701 INFO ajmdb odoo.modules.loading: Loading module website_mail (83/106) 
+2025-10-27 20:36:15,273 9701 INFO ajmdb odoo.registry: module website_mail: creating or updating database tables 
+2025-10-27 20:36:15,339 9701 INFO ajmdb odoo.modules.loading: loading website_mail/views/website_mail_templates.xml 
+2025-10-27 20:36:15,410 9701 INFO ajmdb odoo.modules.loading: Module website_mail loaded in 0.17s, 37 queries (+37 other) 
+2025-10-27 20:36:15,410 9701 INFO ajmdb odoo.modules.loading: Loading module website_project (84/106) 
+2025-10-27 20:36:15,448 9701 INFO ajmdb odoo.registry: module website_project: creating or updating database tables 
+2025-10-27 20:36:15,556 9701 INFO ajmdb odoo.modules.loading: loading website_project/data/website_project_data.xml 
+2025-10-27 20:36:15,668 9701 INFO ajmdb odoo.modules.loading: loading website_project/views/project_portal_project_task_template.xml 
+2025-10-27 20:36:15,745 9701 INFO ajmdb odoo.modules.loading: loading website_project/views/project_portal_project_project_template.xml 
+2025-10-27 20:36:15,823 9701 INFO ajmdb odoo.modules.loading: Module website_project loaded in 0.41s, 141 queries (+141 other) 
+2025-10-27 20:36:15,823 9701 INFO ajmdb odoo.modules.loading: Loading module website_sms (85/106) 
+2025-10-27 20:36:15,852 9701 INFO ajmdb odoo.registry: module website_sms: creating or updating database tables 
+2025-10-27 20:36:15,940 9701 INFO ajmdb odoo.modules.loading: loading website_sms/views/website_visitor_views.xml 
+2025-10-27 20:36:16,099 9701 INFO ajmdb odoo.modules.loading: Module website_sms loaded in 0.28s, 99 queries (+99 other) 
+2025-10-27 20:36:16,099 9701 INFO ajmdb odoo.modules.loading: Loading module crm_iap_enrich (86/106) 
+2025-10-27 20:36:16,143 9701 INFO ajmdb odoo.registry: module crm_iap_enrich: creating or updating database tables 
+2025-10-27 20:36:16,265 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_enrich/data/ir_cron.xml 
+2025-10-27 20:36:16,324 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_enrich/data/ir_action.xml 
+2025-10-27 20:36:16,355 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_enrich/data/mail_templates.xml 
+2025-10-27 20:36:16,378 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_enrich/views/crm_lead_views.xml 
+2025-10-27 20:36:16,483 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_enrich/views/res_config_settings_view.xml 
+2025-10-27 20:36:16,767 9701 INFO ajmdb odoo.modules.loading: Module crm_iap_enrich loaded in 0.67s, 206 queries (+206 other) 
+2025-10-27 20:36:16,767 9701 INFO ajmdb odoo.modules.loading: Loading module crm_iap_mine (87/106) 
+2025-10-27 20:36:16,803 9701 INFO ajmdb odoo.registry: module crm_iap_mine: creating or updating database tables 
+2025-10-27 20:36:16,930 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/data/crm.iap.lead.industry.csv 
+2025-10-27 20:36:17,105 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/data/crm.iap.lead.role.csv 
+2025-10-27 20:36:17,179 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/data/crm.iap.lead.seniority.csv 
+2025-10-27 20:36:17,266 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/data/mail_template_data.xml 
+2025-10-27 20:36:17,282 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/data/ir_sequence_data.xml 
+2025-10-27 20:36:17,297 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/security/ir.model.access.csv 
+2025-10-27 20:36:17,343 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/views/crm_lead_views.xml 
+2025-10-27 20:36:17,511 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/views/crm_iap_lead_mining_request_views.xml 
+2025-10-27 20:36:17,566 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/views/res_config_settings_views.xml 
+2025-10-27 20:36:17,707 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/views/mail_templates.xml 
+2025-10-27 20:36:17,753 9701 INFO ajmdb odoo.modules.loading: loading crm_iap_mine/views/crm_menus.xml 
+2025-10-27 20:36:17,833 9701 INFO ajmdb odoo.modules.loading: Module crm_iap_mine loaded in 1.07s, 397 queries (+397 other) 
+2025-10-27 20:36:17,833 9701 INFO ajmdb odoo.modules.loading: Loading module hr_holidays_attendance (88/106) 
+2025-10-27 20:36:17,894 9701 INFO ajmdb odoo.registry: module hr_holidays_attendance: creating or updating database tables 
+2025-10-27 20:36:18,250 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/security/ir.model.access.csv 
+2025-10-27 20:36:18,285 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_leave_allocation_views.xml 
+2025-10-27 20:36:18,422 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [161] 
+2025-10-27 20:36:18,434 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_leave_type_views.xml 
+2025-10-27 20:36:18,481 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_leave_views.xml 
+2025-10-27 20:36:18,536 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_employee_views.xml 
+2025-10-27 20:36:18,648 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_leave_accrual_level_views.xml 
+2025-10-27 20:36:18,696 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_leave_attendance_report_views.xml 
+2025-10-27 20:36:18,772 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/views/hr_attendance_overtime_views.xml 
+2025-10-27 20:36:18,850 9701 INFO ajmdb odoo.modules.loading: loading hr_holidays_attendance/data/hr_holidays_attendance_data.xml 
+2025-10-27 20:36:18,968 9701 INFO ajmdb odoo.modules.loading: Module hr_holidays_attendance loaded in 1.13s, 439 queries (+439 other) 
+2025-10-27 20:36:18,968 9701 INFO ajmdb odoo.modules.loading: Loading module hr_homeworking_calendar (89/106) 
+2025-10-27 20:36:19,059 9701 INFO ajmdb odoo.registry: module hr_homeworking_calendar: creating or updating database tables 
+2025-10-27 20:36:19,271 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking_calendar/security/security.xml 
+2025-10-27 20:36:19,305 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking_calendar/security/ir.model.access.csv 
+2025-10-27 20:36:19,326 9701 INFO ajmdb odoo.modules.loading: loading hr_homeworking_calendar/wizard/homework_location_wizard.xml 
+2025-10-27 20:36:19,429 9701 INFO ajmdb odoo.modules.loading: Module hr_homeworking_calendar loaded in 0.46s, 151 queries (+151 other) 
+2025-10-27 20:36:19,429 9701 INFO ajmdb odoo.modules.loading: Loading module l10n_latam_base (90/106) 
+2025-10-27 20:36:19,508 9701 INFO ajmdb odoo.registry: module l10n_latam_base: creating or updating database tables 
+2025-10-27 20:36:19,726 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_base/data/res_country_group.xml 
+2025-10-27 20:36:19,746 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_base/data/l10n_latam.identification.type.csv 
+2025-10-27 20:36:19,763 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_base/views/res_partner_view.xml 
+2025-10-27 20:36:19,878 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_base/views/l10n_latam_identification_type_view.xml 
+2025-10-27 20:36:19,936 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_base/views/portal_address_templates.xml 
+2025-10-27 20:36:20,032 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_base/security/ir.model.access.csv 
+2025-10-27 20:36:20,172 9701 INFO ajmdb odoo.modules.loading: Module l10n_latam_base loaded in 0.74s, 221 queries (+221 other) 
+2025-10-27 20:36:20,173 9701 INFO ajmdb odoo.modules.loading: Loading module l10n_latam_invoice_document (91/106) 
+2025-10-27 20:36:20,251 9701 INFO ajmdb odoo.registry: module l10n_latam_invoice_document: creating or updating database tables 
+2025-10-27 20:36:20,541 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/views/account_journal_view.xml 
+2025-10-27 20:36:20,660 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/views/account_move_line_view.xml 
+2025-10-27 20:36:20,709 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/views/account_move_view.xml 
+2025-10-27 20:36:20,906 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/views/l10n_latam_document_type_view.xml 
+2025-10-27 20:36:20,973 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/views/report_templates.xml 
+2025-10-27 20:36:21,165 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/report/invoice_report_view.xml 
+2025-10-27 20:36:21,221 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/wizards/account_move_reversal_view.xml 
+2025-10-27 20:36:21,263 9701 INFO ajmdb odoo.modules.loading: loading l10n_latam_invoice_document/security/ir.model.access.csv 
+2025-10-27 20:36:21,445 9701 INFO ajmdb odoo.modules.loading: Module l10n_latam_invoice_document loaded in 1.27s, 533 queries (+533 other) 
+2025-10-27 20:36:21,446 9701 INFO ajmdb odoo.modules.loading: Loading module project_hr_skills (92/106) 
+2025-10-27 20:36:21,507 9701 INFO ajmdb odoo.registry: module project_hr_skills: creating or updating database tables 
+2025-10-27 20:36:21,658 9701 INFO ajmdb odoo.modules.loading: loading project_hr_skills/views/project_task_views.xml 
+2025-10-27 20:36:21,801 9701 INFO ajmdb odoo.modules.loading: Module project_hr_skills loaded in 0.35s, 129 queries (+129 other) 
+2025-10-27 20:36:21,801 9701 INFO ajmdb odoo.modules.loading: Loading module sale (93/106) 
+2025-10-27 20:36:21,952 9701 INFO ajmdb odoo.registry: module sale: creating or updating database tables 
+2025-10-27 20:36:22,556 9701 INFO ajmdb odoo.modules.loading: loading sale/security/ir.model.access.csv 
+2025-10-27 20:36:22,654 9701 INFO ajmdb odoo.modules.loading: loading sale/security/res_groups.xml 
+2025-10-27 20:36:22,685 9701 INFO ajmdb odoo.modules.loading: loading sale/security/ir_rules.xml 
+2025-10-27 20:36:22,742 9701 INFO ajmdb odoo.modules.loading: loading sale/report/account_invoice_report_views.xml 
+2025-10-27 20:36:22,821 9701 INFO ajmdb odoo.modules.loading: loading sale/report/ir_actions_report_templates.xml 
+2025-10-27 20:36:22,928 9701 INFO ajmdb odoo.modules.loading: loading sale/report/ir_actions_report.xml 
+2025-10-27 20:36:22,953 9701 INFO ajmdb odoo.modules.loading: loading sale/report/sale_report_views.xml 
+2025-10-27 20:36:23,077 9701 INFO ajmdb odoo.modules.loading: loading sale/data/ir_cron.xml 
+2025-10-27 20:36:23,118 9701 INFO ajmdb odoo.modules.loading: loading sale/data/ir_sequence_data.xml 
+2025-10-27 20:36:23,133 9701 INFO ajmdb odoo.modules.loading: loading sale/data/mail_message_subtype_data.xml 
+2025-10-27 20:36:23,157 9701 INFO ajmdb odoo.modules.loading: loading sale/data/mail_template_data.xml 
+2025-10-27 20:36:23,202 9701 INFO ajmdb odoo.modules.loading: loading sale/data/sale_tour.xml 
+2025-10-27 20:36:23,216 9701 INFO ajmdb odoo.modules.loading: loading sale/data/ir_config_parameter.xml 
+2025-10-27 20:36:23,234 9701 INFO ajmdb odoo.modules.loading: loading sale/wizard/account_accrued_orders_wizard_views.xml 
+2025-10-27 20:36:23,256 9701 INFO ajmdb odoo.modules.loading: loading sale/wizard/mass_cancel_orders_views.xml 
+2025-10-27 20:36:23,282 9701 INFO ajmdb odoo.modules.loading: loading sale/wizard/payment_link_wizard_views.xml 
+2025-10-27 20:36:23,318 9701 INFO ajmdb odoo.modules.loading: loading sale/wizard/res_config_settings_views.xml 
+2025-10-27 20:36:23,622 9701 INFO ajmdb odoo.modules.loading: loading sale/wizard/sale_make_invoice_advance_views.xml 
+2025-10-27 20:36:23,654 9701 INFO ajmdb odoo.modules.loading: loading sale/wizard/sale_order_discount_views.xml 
+2025-10-27 20:36:23,684 9701 INFO ajmdb odoo.modules.loading: loading sale/views/sale_order_views.xml 
+2025-10-27 20:36:24,166 9701 INFO ajmdb odoo.modules.loading: loading sale/views/account_views.xml 
+2025-10-27 20:36:24,406 9701 INFO ajmdb odoo.modules.loading: loading sale/views/crm_team_views.xml 
+2025-10-27 20:36:24,508 9701 INFO ajmdb odoo.modules.loading: loading sale/views/mail_activity_views.xml 
+2025-10-27 20:36:24,529 9701 INFO ajmdb odoo.modules.loading: loading sale/views/mail_activity_plan_views.xml 
+2025-10-27 20:36:24,548 9701 INFO ajmdb odoo.modules.loading: loading sale/views/payment_views.xml 
+2025-10-27 20:36:24,627 9701 INFO ajmdb odoo.modules.loading: loading sale/views/product_document_views.xml 
+2025-10-27 20:36:24,778 9701 INFO ajmdb odoo.modules.loading: loading sale/views/product_pricelist_item_views.xml 
+2025-10-27 20:36:24,845 9701 INFO ajmdb odoo.modules.loading: loading sale/views/product_template_views.xml 
+2025-10-27 20:36:24,934 9701 INFO ajmdb odoo.modules.loading: loading sale/views/product_views.xml 
+2025-10-27 20:36:25,124 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [99, 100, 101, 102] 
+2025-10-27 20:36:25,189 9701 INFO ajmdb odoo.modules.loading: loading sale/views/res_partner_views.xml 
+2025-10-27 20:36:25,408 9701 INFO ajmdb odoo.modules.loading: loading sale/views/sale_order_line_views.xml 
+2025-10-27 20:36:25,468 9701 INFO ajmdb odoo.modules.loading: loading sale/views/sale_portal_templates.xml 
+2025-10-27 20:36:25,655 9701 INFO ajmdb odoo.modules.loading: loading sale/views/utm_campaign_views.xml 
+2025-10-27 20:36:25,714 9701 INFO ajmdb odoo.modules.loading: loading sale/views/sale_menus.xml 
+2025-10-27 20:36:27,006 9701 INFO ajmdb odoo.modules.loading: Module sale loaded in 5.21s, 2409 queries (+2409 other) 
+2025-10-27 20:36:27,006 9701 INFO ajmdb odoo.modules.loading: Loading module theme_zap (94/106) 
+2025-10-27 20:36:27,035 9701 INFO ajmdb odoo.registry: module theme_zap: creating or updating database tables 
+2025-10-27 20:36:27,259 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/data/generate_primary_template.xml 
+2025-10-27 20:36:27,519 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/data/ir_asset.xml 
+2025-10-27 20:36:28,489 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/images_library.xml 
+2025-10-27 20:36:29,555 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_cta_box.xml 
+2025-10-27 20:36:30,267 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_banner.xml 
+2025-10-27 20:36:30,379 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_discovery.xml 
+2025-10-27 20:36:30,572 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_comparisons.xml 
+2025-10-27 20:36:30,679 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_comparisons_horizontal.xml 
+2025-10-27 20:36:30,876 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_showcase.xml 
+2025-10-27 20:36:31,031 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_cta_card.xml 
+2025-10-27 20:36:31,263 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_striped_top.xml 
+2025-10-27 20:36:31,373 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_call_to_action.xml 
+2025-10-27 20:36:31,574 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_sidegrid.xml 
+2025-10-27 20:36:31,679 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_carousel_intro.xml 
+2025-10-27 20:36:31,787 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_color_blocks_2.xml 
+2025-10-27 20:36:31,898 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_company_team_basic.xml 
+2025-10-27 20:36:32,008 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_cover.xml 
+2025-10-27 20:36:32,114 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_card_offset.xml 
+2025-10-27 20:36:32,221 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_features.xml 
+2025-10-27 20:36:32,332 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_masonry_block.xml 
+2025-10-27 20:36:32,444 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_media_list.xml 
+2025-10-27 20:36:32,553 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_numbers.xml 
+2025-10-27 20:36:32,665 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_numbers_charts.xml 
+2025-10-27 20:36:32,771 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_references.xml 
+2025-10-27 20:36:32,975 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_references_social.xml 
+2025-10-27 20:36:33,277 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_references_grid.xml 
+2025-10-27 20:36:33,313 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_image_text.xml 
+2025-10-27 20:36:33,319 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_key_images.xml 
+2025-10-27 20:36:33,327 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_three_columns.xml 
+2025-10-27 20:36:33,371 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_image_gallery.xml 
+2025-10-27 20:36:33,399 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_freegrid.xml 
+2025-10-27 20:36:33,428 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_quadrant.xml 
+2025-10-27 20:36:33,459 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_framed_intro.xml 
+2025-10-27 20:36:33,487 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_unveil.xml 
+2025-10-27 20:36:33,493 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_numbers_showcase.xml 
+2025-10-27 20:36:33,504 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_key_benefits.xml 
+2025-10-27 20:36:33,512 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_pricelist_boxed.xml 
+2025-10-27 20:36:33,522 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_striped_center_top.xml 
+2025-10-27 20:36:33,529 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_striped.xml 
+2025-10-27 20:36:33,536 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_company_team_card.xml 
+2025-10-27 20:36:33,541 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_image_title.xml 
+2025-10-27 20:36:33,548 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_big_number.xml 
+2025-10-27 20:36:33,553 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_images_constellation.xml 
+2025-10-27 20:36:33,558 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_empowerment.xml 
+2025-10-27 20:36:33,566 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/snippets/s_numbers_framed.xml 
+2025-10-27 20:36:33,581 9701 INFO ajmdb odoo.modules.loading: loading theme_zap/views/new_page_template.xml 
+2025-10-27 20:36:33,667 9701 INFO ajmdb odoo.addons.website.models.ir_module_module: Module theme_zap has been loaded as theme template (to upgrade) 
+2025-10-27 20:36:33,682 9701 INFO ajmdb odoo.addons.website.models.ir_module_module: Load theme ['theme_zap'] for website 1 from template. 
+2025-10-27 20:36:35,733 9701 INFO ajmdb odoo.modules.loading: Module theme_zap loaded in 8.73s, 2297 queries (+2297 other) 
+2025-10-27 20:36:35,733 9701 INFO ajmdb odoo.modules.loading: Loading module website_crm_sms (95/106) 
+2025-10-27 20:36:35,763 9701 INFO ajmdb odoo.registry: module website_crm_sms: creating or updating database tables 
+2025-10-27 20:36:35,885 9701 INFO ajmdb odoo.modules.loading: Module website_crm_sms loaded in 0.15s, 34 queries (+34 other) 
+2025-10-27 20:36:35,885 9701 INFO ajmdb odoo.modules.loading: Loading module website_payment (96/106) 
+2025-10-27 20:36:35,929 9701 INFO ajmdb odoo.registry: module website_payment: creating or updating database tables 
+2025-10-27 20:36:36,069 9701 INFO ajmdb odoo.modules.loading: loading website_payment/data/mail_templates.xml 
+2025-10-27 20:36:36,086 9701 INFO ajmdb odoo.modules.loading: loading website_payment/views/payment_form_templates.xml 
+2025-10-27 20:36:36,143 9701 INFO ajmdb odoo.modules.loading: loading website_payment/views/payment_provider.xml 
+2025-10-27 20:36:36,206 9701 INFO ajmdb odoo.modules.loading: loading website_payment/views/res_config_settings_views.xml 
+2025-10-27 20:36:36,342 9701 INFO ajmdb odoo.modules.loading: loading website_payment/views/snippets/snippets.xml 
+2025-10-27 20:36:36,410 9701 INFO ajmdb odoo.modules.loading: loading website_payment/views/snippets/s_donation.xml 
+2025-10-27 20:36:36,433 9701 INFO ajmdb odoo.modules.loading: loading website_payment/views/snippets/s_supported_payment_methods.xml 
+2025-10-27 20:36:36,486 9701 INFO ajmdb odoo.modules.loading: Module website_payment loaded in 0.60s, 302 queries (+302 other) 
+2025-10-27 20:36:36,487 9701 INFO ajmdb odoo.modules.loading: Loading module l10n_br (97/106) 
+2025-10-27 20:36:36,601 9701 INFO ajmdb odoo.registry: module l10n_br: creating or updating database tables 
+2025-10-27 20:36:36,967 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/security/ir.model.access.csv 
+2025-10-27 20:36:37,000 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/res_partner_views.xml 
+2025-10-27 20:36:37,110 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/data/account_tax_report_data.xml 
+2025-10-27 20:36:37,486 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/data/res_country_data.xml 
+2025-10-27 20:36:37,502 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/data/res.city.csv 
+2025-10-27 20:36:39,984 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/data/l10n_br.zip.range.csv 
+2025-10-27 20:36:43,670 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/data/l10n_latam.identification.type.csv 
+2025-10-27 20:36:43,685 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/data/l10n_latam.document.type.csv 
+2025-10-27 20:36:43,720 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/account_view.xml 
+2025-10-27 20:36:43,750 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/account_fiscal_position_views.xml 
+2025-10-27 20:36:43,791 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/ir_ui_menu_brazil.xml 
+2025-10-27 20:36:43,813 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/portal_address_templates.xml 
+2025-10-27 20:36:43,840 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/res_company_views.xml 
+2025-10-27 20:36:43,871 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/account_journal_views.xml 
+2025-10-27 20:36:43,940 9701 INFO ajmdb odoo.modules.loading: loading l10n_br/views/res_bank_views.xml 
+2025-10-27 20:36:44,275 9701 INFO ajmdb odoo.modules.loading: Module l10n_br loaded in 7.79s, 6558 queries (+6558 other) 
+2025-10-27 20:36:44,275 9701 INFO ajmdb odoo.modules.loading: Loading module sale_crm (98/106) 
+2025-10-27 20:36:44,323 9701 INFO ajmdb odoo.registry: module sale_crm: creating or updating database tables 
+2025-10-27 20:36:44,469 9701 INFO ajmdb odoo.modules.loading: loading sale_crm/security/ir.model.access.csv 
+2025-10-27 20:36:44,490 9701 INFO ajmdb odoo.modules.loading: loading sale_crm/data/crm_lead_merge_template.xml 
+2025-10-27 20:36:44,518 9701 INFO ajmdb odoo.modules.loading: loading sale_crm/views/sale_order_views.xml 
+2025-10-27 20:36:44,637 9701 INFO ajmdb odoo.modules.loading: loading sale_crm/views/crm_lead_views.xml 
+2025-10-27 20:36:44,695 9701 INFO ajmdb odoo.modules.loading: loading sale_crm/views/crm_team_views.xml 
+2025-10-27 20:36:44,739 9701 INFO ajmdb odoo.modules.loading: loading sale_crm/wizard/crm_opportunity_to_quotation_views.xml 
+2025-10-27 20:36:44,803 9701 INFO ajmdb odoo.modules.loading: Module sale_crm loaded in 0.53s, 271 queries (+271 other) 
+2025-10-27 20:36:44,804 9701 INFO ajmdb odoo.modules.loading: Loading module sale_edi_ubl (99/106) 
+2025-10-27 20:36:44,845 9701 INFO ajmdb odoo.registry: module sale_edi_ubl: creating or updating database tables 
+2025-10-27 20:36:45,028 9701 INFO ajmdb odoo.modules.loading: Module sale_edi_ubl loaded in 0.22s, 79 queries (+79 other) 
+2025-10-27 20:36:45,028 9701 INFO ajmdb odoo.modules.loading: Loading module sale_management (100/106) 
+2025-10-27 20:36:45,090 9701 INFO ajmdb odoo.registry: module sale_management: creating or updating database tables 
+2025-10-27 20:36:45,283 9701 INFO ajmdb odoo.modules.loading: loading sale_management/data/digest_data.xml 
+2025-10-27 20:36:45,334 9701 INFO ajmdb odoo.modules.loading: loading sale_management/security/ir.model.access.csv 
+2025-10-27 20:36:45,397 9701 INFO ajmdb odoo.modules.loading: loading sale_management/security/sale_management_security.xml 
+2025-10-27 20:36:45,424 9701 INFO ajmdb odoo.modules.loading: loading sale_management/views/sale_order_template_views.xml 
+2025-10-27 20:36:45,546 9701 INFO ajmdb odoo.modules.loading: loading sale_management/views/digest_views.xml 
+2025-10-27 20:36:45,611 9701 INFO ajmdb odoo.modules.loading: loading sale_management/views/res_config_settings_views.xml 
+2025-10-27 20:36:45,805 9701 INFO ajmdb odoo.modules.loading: loading sale_management/views/sale_order_views.xml 
+2025-10-27 20:36:45,924 9701 INFO ajmdb odoo.modules.loading: loading sale_management/views/sale_portal_templates.xml 
+2025-10-27 20:36:45,985 9701 INFO ajmdb odoo.modules.loading: loading sale_management/views/sale_management_menus.xml 
+2025-10-27 20:36:46,092 9701 INFO ajmdb odoo.modules.loading: Module sale_management loaded in 1.06s, 394 queries (+394 other) 
+2025-10-27 20:36:46,092 9701 INFO ajmdb odoo.modules.loading: Loading module sale_sms (101/106) 
+2025-10-27 20:36:46,190 9701 INFO ajmdb odoo.modules.loading: loading sale_sms/security/ir.model.access.csv 
+2025-10-27 20:36:46,227 9701 INFO ajmdb odoo.modules.loading: loading sale_sms/security/security.xml 
+2025-10-27 20:36:46,289 9701 INFO ajmdb odoo.modules.loading: Module sale_sms loaded in 0.20s, 36 queries (+36 other) 
+2025-10-27 20:36:46,290 9701 INFO ajmdb odoo.modules.loading: Loading module spreadsheet_dashboard_sale (102/106) 
+2025-10-27 20:36:46,383 9701 INFO ajmdb odoo.modules.loading: loading spreadsheet_dashboard_sale/data/dashboards.xml 
+2025-10-27 20:36:46,731 9701 INFO ajmdb odoo.modules.loading: Module spreadsheet_dashboard_sale loaded in 0.44s, 34 queries (+34 other) 
+2025-10-27 20:36:46,731 9701 INFO ajmdb odoo.modules.loading: Loading module l10n_br_sales (103/106) 
+2025-10-27 20:36:46,766 9701 INFO ajmdb odoo.registry: module l10n_br_sales: creating or updating database tables 
+2025-10-27 20:36:46,875 9701 INFO ajmdb odoo.modules.loading: loading l10n_br_sales/views/sale_portal_templates.xml 
+2025-10-27 20:36:46,933 9701 INFO ajmdb odoo.modules.loading: loading l10n_br_sales/report/sale_order_templates.xml 
+2025-10-27 20:36:47,000 9701 INFO ajmdb odoo.modules.loading: loading l10n_br_sales/report/report_invoice_templates.xml 
+2025-10-27 20:36:47,087 9701 INFO ajmdb odoo.modules.loading: Module l10n_br_sales loaded in 0.36s, 118 queries (+118 other) 
+2025-10-27 20:36:47,088 9701 INFO ajmdb odoo.modules.loading: Loading module sale_pdf_quote_builder (104/106) 
+2025-10-27 20:36:47,150 9701 INFO ajmdb odoo.registry: module sale_pdf_quote_builder: creating or updating database tables 
+2025-10-27 20:36:47,308 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/data/ir_cron.xml 
+2025-10-27 20:36:47,350 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/data/sale_pdf_form_field.xml 
+2025-10-27 20:36:47,352 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/report/ir_actions_report.xml 
+2025-10-27 20:36:47,363 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/security/ir.model.access.csv 
+2025-10-27 20:36:47,392 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/security/ir_rules.xml 
+2025-10-27 20:36:47,395 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/views/product_document_views.xml 
+2025-10-27 20:36:47,432 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/views/quotation_document_views.xml 
+2025-10-27 20:36:47,500 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/views/sale_order_template_views.xml 
+2025-10-27 20:36:47,535 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/views/sale_order_views.xml 
+2025-10-27 20:36:47,720 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/views/sale_pdf_form_field_views.xml 
+2025-10-27 20:36:47,759 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/views/sale_pdf_quote_builder_menus.xml 
+2025-10-27 20:36:47,781 9701 INFO ajmdb odoo.modules.loading: loading sale_pdf_quote_builder/wizards/res_config_settings_views.xml 
+2025-10-27 20:36:47,980 9701 INFO ajmdb odoo.modules.loading: Module sale_pdf_quote_builder loaded in 0.89s, 433 queries (+433 other) 
+2025-10-27 20:36:47,980 9701 INFO ajmdb odoo.modules.loading: Loading module sale_service (105/106) 
+2025-10-27 20:36:48,019 9701 INFO ajmdb odoo.registry: module sale_service: creating or updating database tables 
+2025-10-27 20:36:48,173 9701 INFO ajmdb odoo.modules.loading: Module sale_service loaded in 0.19s, 58 queries (+58 other) 
+2025-10-27 20:36:48,173 9701 INFO ajmdb odoo.modules.loading: Loading module sale_project (106/106) 
+2025-10-27 20:36:48,278 9701 INFO ajmdb odoo.registry: module sale_project: creating or updating database tables 
+2025-10-27 20:36:48,677 9701 INFO ajmdb odoo.modules.loading: loading sale_project/security/ir.model.access.csv 
+2025-10-27 20:36:48,713 9701 INFO ajmdb odoo.modules.loading: loading sale_project/security/sale_project_security.xml 
+2025-10-27 20:36:48,719 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/product_views.xml 
+2025-10-27 20:36:48,883 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/project_task_views.xml 
+2025-10-27 20:36:49,418 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/sale_order_line_views.xml 
+2025-10-27 20:36:49,492 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/sale_order_views.xml 
+2025-10-27 20:36:49,757 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/sale_project_portal_templates.xml 
+2025-10-27 20:36:49,795 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/project_update_template.xml 
+2025-10-27 20:36:49,860 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/project_sharing_views.xml 
+2025-10-27 20:36:49,975 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/project_views.xml 
+2025-10-27 20:36:50,084 9701 INFO ajmdb odoo.modules.loading: loading sale_project/views/project_task_type_views.xml 
+2025-10-27 20:36:50,124 9701 INFO ajmdb odoo.modules.loading: loading sale_project/data/sale_project_data.xml 
+2025-10-27 20:36:50,142 9701 INFO ajmdb odoo.modules.loading: loading sale_project/wizard/project_template_create_wizard.xml 
+2025-10-27 20:36:50,398 9701 INFO ajmdb odoo.modules.loading: Module sale_project loaded in 2.23s, 1091 queries (+1091 other) 
+2025-10-27 20:36:50,399 9701 INFO ajmdb odoo.modules.loading: 106 modules loaded in 127.65s, 74856 queries (+74856 extra) 
+2025-10-27 20:36:50,400 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_user_gmail: not installable, skipped 
+2025-10-27 20:36:50,401 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_employee_portal: not installable, skipped 
+2025-10-27 20:36:50,401 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_sales_service_portal: not installable, skipped 
+2025-10-27 20:36:50,401 9701 WARNING ajmdb odoo.modules.module_graph: module ajm_document_generator: not installable, skipped 
+2025-10-27 20:36:50,410 9701 INFO ajmdb odoo.modules.loading: loading 106 modules... 
+2025-10-27 20:36:50,410 9701 INFO ajmdb odoo.modules.loading: 106 modules loaded in 0.00s, 0 queries (+0 extra) 
+2025-10-27 20:36:50,728 9701 ERROR ajmdb odoo.modules.loading: Some modules have inconsistent states, some dependencies may be missing: ['ajm_document_generator', 'ajm_employee_portal', 'ajm_sales_service_portal', 'ajm_user_gmail'] 
+2025-10-27 20:36:50,951 9701 INFO ajmdb odoo.modules.loading: Model ajm.company.lookup is declared but cannot be loaded! (Perhaps a module was partially removed or renamed) 
+2025-10-27 20:36:50,960 9701 INFO ajmdb odoo.modules.loading: Model ajm.department.portal is declared but cannot be loaded! (Perhaps a module was partially removed or renamed) 
+2025-10-27 20:36:50,960 9701 INFO ajmdb odoo.modules.loading: Model ajm.mail.template is declared but cannot be loaded! (Perhaps a module was partially removed or renamed) 
+2025-10-27 20:36:50,961 9701 INFO ajmdb odoo.modules.loading: Model ajm.service.application is declared but cannot be loaded! (Perhaps a module was partially removed or renamed) 
+2025-10-27 20:36:51,137 9701 INFO ajmdb odoo.models.unlink: User #1 deleted ir.model.data records with IDs: [68714, 68712, 68711, 68710, 68709, 68708, 68707, 68702, 68701, 68700, 68699, 68698, 68697, 68696, 68695, 68694, 68693, 68692, 68691, 68690, 68689, 68651, 68650, 56779, 56778, 52850, 52849, 52848, 25339, 25338, 25242, 25241, 25110, 25109, 25036, 25035, 24839, 24838] 
+2025-10-27 20:36:51,921 9701 INFO ajmdb odoo.modules.loading: Modules loaded. 
+2025-10-27 20:36:54,602 9701 INFO ajmdb odoo.registry: Registry changed, signaling through the database 
+2025-10-27 20:36:54,606 9701 INFO ajmdb odoo.registry: Registry loaded in 146.994s 
+2025-10-27 20:36:54,606 9701 INFO ajmdb odoo.service.server: Initiating shutdown 
+2025-10-27 20:36:54,606 9701 INFO ajmdb odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2025-10-27 20:36:54,607 9701 INFO ajmdb odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections  

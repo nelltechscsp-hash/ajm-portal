@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Clients Home Page -->
+    <template id="portal_clients_home" name="Clients Portal">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Insurance Clients</h2>
+                    </div>
+                </div>
+
+                <!-- Client Type Filter Buttons -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="btn-group" role="group">
+                            <a t-att-href="'/my/sales/clients'" 
+                               t-attf-class="btn btn-#{'' if not client_type else 'outline-'}primary">
+                                All Clients
+                            </a>
+                            <a t-att-href="'/my/sales/clients?client_type=transport'" 
+                               t-attf-class="btn btn-#{client_type == 'transport' and 'primary' or 'outline-primary'}">
+                                <i class="fa fa-truck"/> Transport (<t t-esc="transport_count"/>)
+                            </a>
+                            <a t-att-href="'/my/sales/clients?client_type=health'" 
+                               t-attf-class="btn btn-#{client_type == 'health' and 'primary' or 'outline-primary'}">
+                                <i class="fa fa-heartbeat"/> Health (<t t-esc="health_count"/>)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Box -->
+                <div class="row mb-4">
+                    <div class="col-md-8 offset-md-2">
+                        <form action="/my/sales/clients" method="get" class="form-inline">
+                            <input type="hidden" name="client_type" t-att-value="client_type or ''"/>
+                            <div class="input-group w-100">
+                                <input type="text" 
+                                       name="search" 
+                                       class="form-control" 
+                                       placeholder="Search by company name, USDOT, or MC number..."
+                                       t-att-value="search_term"/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search"/> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Clients List -->
+                <div class="row">
+                    <div class="col-12">
+                        <t t-if="clients">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Company / Name</th>
+                                            <th class="text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="clients" t-as="client">
+                                            <tr>
+                                                <td>
+                                                    <t t-if="client.client_type == 'transport'">
+                                                        <i class="fa fa-truck text-info"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <i class="fa fa-heartbeat text-success"/>
+                                                    </t>
+                                                    <strong t-esc="client.name"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <t t-set="last_interview" t-value="request.env['ajm.service.application'].sudo().search([('partner_id','=',client.id)], order='create_date desc', limit=1)"/>
+                                                    <t t-if="last_interview">
+                                                        <a t-attf-href="/my/sales/interviews/#{last_interview.id}" class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-folder-open"/> Open
+                                                        </a>
+                                                    </t>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" t-att-data-client-id="client.id" t-att-data-client-name="client.name" onclick="showDeleteConfirmModal(this)">
+                                                        <i class="fa fa-trash"/> Delete
+                                                    </button>
+                                                    <a t-attf-href="/my/sales/clients/#{client.id}/pdf" class="btn btn-sm btn-success ml-2">
+                                                        <i class="fa fa-file-pdf-o"/> Generate PDF
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="alert alert-info">
+                                <i class="fa fa-info-circle"/> 
+                                <t t-if="search_term">
+                                    No clients found matching "<t t-esc="search_term"/>". Try a different search term.
+                                </t>
+                                <t t-else="">
+                                    No clients found. Clients are automatically created when insurance application forms are submitted.
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Confirmation Modal with Password -->
+            <div class="modal fade" id="deleteClientModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Delete</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>×</span>
+                            </button>
+                        </div>
+                        <form id="deleteClientForm" method="post" action="">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="modal-body">
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle"/> This will delete client <strong id="deleteClientName"></strong> and all related interviews. This action cannot be undone.
+                                </div>
+                                <div class="form-group">
+                                    <label for="deletePassword">Enter your password to confirm:</label>
+                                    <input type="password" class="form-control" id="deletePassword" name="password" required="required" placeholder="Your password"/>
+                                </div>
+                                <div id="deleteError" class="alert alert-danger" style="display:none;"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmDelete()">
+                                    <i class="fa fa-trash"/> Delete Client
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                var currentClientId = null;
+                var currentClientName = '';
+
+                function showDeleteConfirmModal(btn) {
+                    currentClientId = btn.getAttribute('data-client-id');
+                    currentClientName = btn.getAttribute('data-client-name');
+                    document.getElementById('deleteClientName').textContent = currentClientName;
+                    document.getElementById('deletePassword').value = '';
+                    document.getElementById('deleteError').style.display = 'none';
+                    $('#deleteClientModal').modal('show');
+                }
+
+                function confirmDelete() {
+                    var password = document.getElementById('deletePassword').value;
+                    if (!password) {
+                        document.getElementById('deleteError').textContent = 'Password is required';
+                        document.getElementById('deleteError').style.display = 'block';
+                        return;
+                    }
+
+                    // Verify password via AJAX
+                    fetch('/my/sales/clients/verify-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({
+                            jsonrpc: '2.0',
+                            method: 'call',
+                            params: {
+                                password: password
+                            }
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.result &amp;&amp; data.result.valid) {
+                            // Password correct, submit delete form
+                            var form = document.getElementById('deleteClientForm');
+                            form.action = '/my/sales/clients/' + currentClientId + '/delete';
+                            form.submit();
+                        } else {
+                            // Password incorrect
+                            document.getElementById('deleteError').textContent = 'Incorrect password. Please try again.';
+                            document.getElementById('deleteError').style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('deleteError').textContent = 'Error verifying password. Please try again.';
+                        document.getElementById('deleteError').style.display = 'block';
+                    });
+                }
+            </script>
+        </t>
+    </template>
+</odoo>

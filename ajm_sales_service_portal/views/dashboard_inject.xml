@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inject links in Sales dashboard Quick Links -->
+    <template id="inject_sales_service_link" inherit_id="ajm_employee_portal.employee_dashboard">
+        <xpath expr="//a[@href='#' and contains(., 'Forms')]" position="replace">
+            <a href="/my/sales/forms" class="list-group-item list-group-item-action">
+                <i class="fa fa-life-ring me-2"/>Customer Service
+            </a>
+            <a href="/my/sales/clients" class="list-group-item list-group-item-action">
+                <i class="fa fa-users me-2"/>Clients
+            </a>
+        </xpath>
+    </template>
+</odoo>
+

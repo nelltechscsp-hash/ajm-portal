@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Header fijo para todas las cartas (logo y nombre de la empresa) -->
+    <template id="carta_header" name="Header de Carta">
+        <div class="ajm-header-content" style="display: flex; align-items: center; gap: 16px; padding: 8px 0;">
+            <img src="/ajm_pdf_workbench/static/src/img/logo.png" alt="Logo" style="height: 60px; max-width: 120px; object-fit: contain;"/>
+            <div style="font-size: 1.5em; font-weight: bold; color: #003366;">ASEGURANZAS J&amp;M</div>
+        </div>
+        <hr style="margin: 0.5em 0 0.5em 0; border-top: 2px solid #003366;"/>
+    </template>
+</odoo>

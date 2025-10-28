@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Home index for Sales service forms -->
+    <template id="portal_sales_forms_home" name="Sales Service Forms">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/my">My Account</a></li>
+                    <li class="breadcrumb-item"><a href="/my/sales">Sales</a></li>
+                    <li class="breadcrumb-item active">Service Desk</li>
+                </ul>
+            </t>
+            <div class="container o_portal_wrap mt-4">
+                <h2>Service Desk</h2>
+                <p class="text-muted">Select a service:</p>
+                <div class="list-group">
+                    <t t-foreach="menu" t-as="m">
+                        <a t-att-href="m.get('url')" class="list-group-item list-group-item-action">
+                            <t t-esc="m.get('label')"/>
+                            <span class="badge bg-secondary float-end" t-if="m.get('key') != 'contract_insurance'">Coming soon</span>
+                        </a>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Contract Insurance Form -->
+    <template id="portal_form_contract" name="Insurance Application">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/my">My Account</a></li>
+                    <li class="breadcrumb-item"><a href="/my/sales">Sales</a></li>
+                    <li class="breadcrumb-item"><a href="/my/sales/forms">Services</a></li>
+                    <li class="breadcrumb-item active">Insurance Application</li>
+                </ul>
+            </t>
+            <div class="container o_portal_wrap mt-4">
+                <h2 class="mb-3">Insurance Application</h2>
+                <form action="/my/sales/forms/contract/submit" method="post" enctype="multipart/form-data" id="contract_form">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    
+                    <!-- Shared Insurance Application body -->
+                    <t t-call="ajm_sales_service_portal.portal_insurance_form_body"/>
+
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fa fa-paperclip me-2"></i>Attachments</span>
+                            <span class="badge bg-secondary section-status" data-section="attachments">Optional</span>
+                        </div>
+                        <div class="card-body">
+                            <input type="file" name="attachments" class="form-control" multiple="multiple"/>
+                            <div class="form-text">You can attach licenses, registrations, lists, etc.</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Shared Insurance Application scripts (tables, JSON, lookups, statuses) -->
+            <t t-call="ajm_sales_service_portal.portal_insurance_form_scripts"/>
+        </t>
+    </template>
+
+    <template id="portal_form_success" name="Form Success">
+        <t t-call="portal.portal_layout">
+            <div class="container o_portal_wrap mt-4">
+                <div class="alert alert-success">
+                    <h4 class="alert-heading"><i class="fa fa-check-circle me-2"></i>Application Submitted Successfully!</h4>
+                    <p class="mb-0">Your insurance application has been received. Our team will review it and contact you shortly.</p>
+                </div>
+                <a href="/my/sales/forms" class="btn btn-primary"><i class="fa fa-arrow-left me-2"></i>Back to Services</a>
+            </div>
+        </t>
+    </template>
+</odoo>

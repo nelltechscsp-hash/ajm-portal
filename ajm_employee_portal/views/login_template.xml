@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit web.login template to customize for AJM -->
+    <template id="login" inherit_id="web.login">
+        <!-- Add custom branding -->
+        <xpath expr="//form" position="before">
+            <h4 class="text-center mb-3">AJM Employee Portal</h4>
+        </xpath>
+    </template>
+</odoo>

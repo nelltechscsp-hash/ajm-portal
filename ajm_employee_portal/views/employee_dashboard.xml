@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Employee Dashboard Template -->
+    <template id="employee_dashboard" name="AJM Employee Dashboard">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-set="tz" t-value="tz or user.tz or 'America/Chicago'"/>
+            <!-- Editable zone for Website Builder (top of Sales page) -->
+            <section id="sales_top_zone" class="oe_structure"/>
+            
+            <div class="container mt-4" data-oe-model="ir.ui.view" data-oe-id="ajm_employee_portal.employee_dashboard">
+                <!-- Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h1 class="mb-3">Welcome, <t t-esc="user.name"/></h1>
+                        <p class="lead text-muted">AJM Insurance &amp; Trucking Services - Employee Portal</p>
+                    </div>
+                </div>
+
+                <!-- Timecard Section -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-clock-o me-2"/>Timecard
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center py-4" id="timecard-container">
+                                    <t t-if="is_checked_in">
+                                        <div class="alert alert-success">
+                                            <i class="fa fa-check-circle fa-2x mb-2"/>
+                                            <p class="mb-2"><strong>You are checked in</strong></p>
+                                            <p class="text-muted small mb-0">
+                                                Since: <t t-esc="ci_time_display or '-'"/>
+                                            </p>
+                                        </div>
+                                        <a href="/my/sales/checkout" class="btn btn-danger btn-lg" id="btn-check-out">
+                                            <i class="fa fa-sign-out me-2"/>Check Out
+                                        </a>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="alert alert-info">
+                                            <i class="fa fa-info-circle fa-2x mb-2"/>
+                                            <p class="mb-0">You are not checked in</p>
+                                        </div>
+                                        <a href="/my/sales/checkin" class="btn btn-success btn-lg" id="btn-check-in">
+                                            <i class="fa fa-sign-in me-2"/>Check In
+                                        </a>
+                                    </t>
+                                </div>
+                                
+                                <!-- Last attendance info -->
+                                <t t-if="last_attendance and last_attendance.check_out">
+                                    <hr/>
+                                    <div class="text-muted small">
+                                        <strong>Last attendance:</strong><br/>
+                                        Check-in: <t t-esc="ci_display or '-'"/><br/>
+                                        Check-out: <t t-esc="co_display or '-'"/><br/>
+                                        Hours: <t t-esc="'%.2f' % last_attendance.worked_hours"/>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">
+                                    <i class="fa fa-list me-2"/>Quick Links
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="/my/account" class="list-group-item list-group-item-action">
+                                        <i class="fa fa-home me-2"/>My Account
+                                    </a>
+                                    <!-- Gmail links injected by ajm_user_gmail -->
+                                    
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <i class="fa fa-file-text me-2"/>Forms &amp; Documents
+                                        <span class="badge bg-secondary float-end">Coming soon</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-user fa-3x text-primary mb-2"/>
+                                <h6 class="card-title">Employee ID</h6>
+                                <p class="card-text text-muted"><t t-esc="user.login"/></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-envelope fa-3x text-info mb-2"/>
+                                <h6 class="card-title">Email</h6>
+                                <p class="card-text text-muted"><t t-esc="user.email or 'Not set'"/></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center shadow-sm">
+                            <div class="card-body">
+                                <i class="fa fa-phone fa-3x text-success mb-2"/>
+                                <h6 class="card-title">Phone</h6>
+                                <p class="card-text text-muted"><t t-esc="user.phone or 'Not set'"/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Editable zone for Website Builder (bottom of Sales page) -->
+            <section id="sales_bottom_zone" class="oe_structure"/>
+        </t>
+    </template>
+</odoo>

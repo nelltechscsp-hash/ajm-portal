@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_gmail_settings_page" name="AJM Gmail Settings Page">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/my">My Account</a></li>
+                    <li class="breadcrumb-item active">Gmail Settings</li>
+                </ul>
+            </t>
+            <div class="container o_portal_wrap mt-4">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="/ajm_user_gmail/static/img/mail_logo.png" alt="Mail Logo" style="height:50px; margin-right:1rem;"/>
+                    <h3 class="mb-0">Gmail Settings</h3>
+                </div>
+                <t t-if="request.session.get('portal_status_message')">
+                    <div class="alert alert-success" role="alert">
+                        <t t-esc="request.session.pop('portal_status_message')"/>
+                    </div>
+                </t>
+                <t t-if="needs_gmail_setup">
+                    <div class="alert alert-warning" role="alert">
+                        Please provide your Gmail App Password to enable email features in the portal.
+                    </div>
+                </t>
+                <form action="/my/settings/gmail/save" method="post" class="o_portal_form mt-3">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Gmail Address</label>
+                            <input type="email" name="gmail_address" class="form-control" t-att-value="gmail_address or ''" required="required"/>
+                            <div class="form-text">Usually the same as your login email.</div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Gmail App Password</label>
+                            <input type="password" name="gmail_app_password" class="form-control" placeholder="16-character app password"/>
+                            <div class="form-text">
+                                Generate in Google Account: Security → App passwords. Paste the 16-character code here.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <a class="btn btn-secondary ms-2" href="/my">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Página del menú de cartas -->
+    <template id="cartas_menu_page" name="Menú de Cartas">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h2 class="mb-4">Cartas y Documentos - <t t-esc="client.name"/></h2>
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Cartas de Compromiso</h4>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <t t-foreach="cartas" t-as="carta">
+                                    <a t-attf-href="/my/sales/clients/#{client.id}/cartas/#{carta['id']}" class="list-group-item list-group-item-action">
+                                        <t t-esc="carta['name']"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h4 class="mb-0">Documentos para Rellenar</h4>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <t t-foreach="docs" t-as="doc">
+                                    <a t-attf-href="/my/sales/clients/#{client.id}/cartas/#{doc['id']}" class="list-group-item list-group-item-action">
+                                        <t t-esc="doc['name']"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Vista individual simplificada (mantener header/footer) -->
+    <template id="carta_view_page" name="Vista de Carta">
+        <t t-call="portal.portal_layout">
+            <div class="container-fluid">
+                <div class="row mb-3 web-only">
+                    <div class="col-12">
+                        <a t-attf-href="/my/sales/clients/#{client.id}/cartas" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Volver al Menú
+                        </a>
+                    </div>
+                </div>
+                <!-- Renderiza la plantilla de carta seleccionada dinámicamente -->
+                <t t-if="doc_type">
+                    <!-- Build the template name as a string so QWeb evaluates it -->
+                    <t t-set="tpl_name">'ajm_pdf_workbench.' + doc_type + '_template'</t>
+                    <t t-call="tpl_name"/>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <!-- Plantillas de cartas/documentos: llaman a la plantilla reusable de 10 páginas en blanco -->
+    <template id="carta1_template" name="Carta 1: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta2_template" name="Carta 2: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta3_template" name="Carta 3: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta4_template" name="Carta 4: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta5_template" name="Carta 5: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta6_template" name="Carta 6: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta7_template" name="Carta 7: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="carta8_template" name="Carta 8: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+
+    <template id="info_sheet_template" name="Information Sheet: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="new_venture_template" name="New Venture: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="qeo_trucking_template" name="QEO Trucking: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+    <template id="quit_quote_template" name="Quit Quote: Blank Pages"><t t-call="ajm_pdf_workbench.blank_10_a4"/></template>
+
+    <!-- Reusable: 10 páginas A4 en blanco -->
+    <template id="blank_10_a4" name="Blank 10 A4 Pages">
+        <div class="ajm-blank-pages">
+            <t t-foreach="range(10)" t-as="i">
+                <div class="ajm-pdf-page ajm-a4" style="width:210mm; height:297mm; page-break-after:always; display: flex; flex-direction: column; justify-content: space-between;">
+                    <!-- Header fijo -->
+                    <div class="ajm-pdf-header-fixed" style="padding-top: 16px;">
+                        <t t-call="ajm_pdf_workbench.carta_header"/>
+                    </div>
+                    <!-- Zona central en blanco para contenido manual -->
+                    <div class="ajm-pdf-content" style="flex:1;"></div>
+                    <!-- Footer fijo: bloque de firma y fecha -->
+                    <div class="ajm-pdf-footer-fixed" style="padding-bottom: 16px;">
+                        <div class="ajm-signature-block ajm-no-break">
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label><strong>FIRMA:</strong></label>
+                                    <div style="border-bottom: 2px solid #000; height: 40px; width: 90%;"></div>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>NOMBRE:</strong></label>
+                                    <div style="border-bottom: 2px solid #000; height: 40px; width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label><strong>FECHA:</strong></label>
+                                    <div style="border-bottom: 2px solid #000; height: 40px; width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </template>
+
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Force the website header brand to display AJM logo by overriding the logo option template -->
+    <template id="portal_layout_logo" name="Portal Layout - AJM Logo" inherit_id="website.option_header_brand_logo" priority="99">
+        <xpath expr="//a[@data-name='Navbar Logo']/*[@t-field='website.logo']" position="replace">
+            <img src="/ajm_user_gmail/static/img/mail_logo.png?v=2" alt="AJM Logo" style="height:120px; max-height:120px; width:auto;"/>
+        </xpath>
+    </template>
+</odoo>

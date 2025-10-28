@@ -1,0 +1,284 @@
+/* Estilos globales para el PDF Workbench */
+.ajm-pdf-page {
+    width: 210mm;
+    min-height: 297mm;
+    max-width: 210mm;
+    max-height: 297mm;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 0 8px #eee;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    box-sizing: border-box;
+}
+
+.ajm-pdf-header-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 2;
+    padding: 0 10mm;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.ajm-pdf-footer-fixed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    z-index: 2;
+    padding: 0 10mm;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.ajm-pdf-content {
+    position: relative;
+    z-index: 1;
+    margin-top: 90px;
+    margin-bottom: 100px;
+    height: auto;
+    min-height: calc(297mm - 180px);
+    max-height: calc(297mm - 180px);
+    overflow: visible;
+    padding: 0 2mm;
+    box-sizing: border-box;
+}
+.ajm-pdf-header-fixed {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 60px;
+    max-height: 90px;
+    z-index: 2;
+    margin-bottom: 10px;
+}
+
+.ajm-pdf-content {
+    flex: 1 1 auto;
+    overflow: visible;
+    margin-bottom: 10px;
+    padding: 0 2mm;
+    /* El contenido se ajusta entre header y footer */
+}
+
+.ajm-pdf-footer-fixed {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 70px;
+    max-height: 100px;
+    z-index: 2;
+    margin-top: 10px;
+}
+@media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        background: #fff !important;
+    }
+    .ajm-pdf-page {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        max-width: 210mm !important;
+        max-height: 297mm !important;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        overflow: hidden !important;
+        background: #fff !important;
+    }
+    .ajm-pdf-header-fixed {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 80px !important;
+        padding: 0 10mm !important;
+        background: #fff !important;
+        border-bottom: 1px solid #ccc !important;
+        box-sizing: border-box !important;
+    }
+    .ajm-pdf-footer-fixed {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 90px !important;
+        padding: 0 10mm !important;
+        background: #fff !important;
+        border-top: 1px solid #ccc !important;
+        box-sizing: border-box !important;
+    }
+    .ajm-pdf-content {
+        position: relative !important;
+        z-index: 1 !important;
+        margin-top: 90px !important;
+        margin-bottom: 100px !important;
+        min-height: calc(297mm - 180px) !important;
+        max-height: calc(297mm - 180px) !important;
+        overflow: visible !important;
+        padding: 0 2mm !important;
+        box-sizing: border-box !important;
+    }
+    .web-only, .btn, button, .o_main_navbar, .o_portal_sidebar, .ajm-break-visual {
+        display: none !important;
+    }
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}
+.ajm-pdf-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #17243B;
+    margin-bottom: 6px;
+}
+.ajm-pdf-header__logo {
+    height: 140px;
+    margin-right: 12px;
+}
+.ajm-pdf-header__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #17243B;
+    line-height: 1.1;
+}
+.ajm-pdf-section-title {
+    font-size: 18px;
+    color: #17243B;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+.ajm-pdf-label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+.ajm-pdf-form .form-control {
+    margin-bottom: 14px;
+    font-size: 14px;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.ajm-pdf-form textarea.form-control {
+    resize: vertical;
+}
+.ajm-pdf-form input[type="text"],
+.ajm-pdf-form input[type="date"],
+.ajm-pdf-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+.ajm-pdf-form table.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+.ajm-pdf-form table.table th,
+.ajm-pdf-form table.table td {
+    padding: 8px;
+    border: 1px solid #dee2e6;
+    font-size: 14px;
+}
+.ajm-pdf-form table.table input.form-control {
+    margin-bottom: 0;
+    padding: 4px 8px;
+}
+
+/* Fuerza salto de página entre versiones ES/EN al exportar */
+.ajm-page-break { page-break-before: always; }
+
+/* Separador visible en la web para indicar salto de página futuro en PDF */
+.ajm-break-visual {
+    border: 0;
+    border-top: 3px dashed #9aa1ad;
+    margin: 24px 0 28px 0;
+}
+
+/* Evita que se corten bloques sensibles entre páginas */
+.ajm-no-break { page-break-inside: avoid; break-inside: avoid; }
+.ajm-no-break table, .ajm-no-break tr, .ajm-no-break td, .ajm-no-break th { page-break-inside: avoid; }
+
+/* Firma/nombre/fecha debe aparecer en cada hoja */
+.ajm-signature-block { margin-top: 16px; page-break-inside: avoid; }
+
+/* Estilos específicos para impresión (Guardar como PDF del navegador) */
+@media print {
+    /* Ocultar elementos que no deben aparecer en el PDF */
+    .o_main_navbar,
+    .o_portal_sidebar,
+    .btn,
+    button,
+    .ajm-break-visual,
+    .web-only {
+        display: none !important;
+    }
+    
+    /* Ajustar página para impresión */
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+    
+    .ajm-pdf-page {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 15mm 20mm;
+        box-shadow: none;
+        page-break-after: always;
+    }
+    
+    .ajm-pdf-page:last-child {
+        page-break-after: auto;
+    }
+    
+    /* Asegurar que los campos se vean como en pantalla */
+    input, textarea, select {
+        border: 1px solid #000 !important;
+        background: white !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+    /* Forzar saltos de página donde corresponde */
+    .ajm-page-break {
+        page-break-before: always;
+        break-before: page;
+    }
+    
+    /* Evitar que elementos se corten entre páginas */
+    .ajm-no-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    .ajm-signature-block {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    /* Asegurar que las tablas no se corten */
+    table {
+        page-break-inside: avoid;
+    }
+}

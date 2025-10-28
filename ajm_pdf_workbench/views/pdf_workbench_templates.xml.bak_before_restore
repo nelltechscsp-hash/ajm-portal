@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pdf_workbench_main" name="PDF Workbench Main">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="list-group mb-4">
+                            <div class="list-group-item active">Cartas de Compromiso</div>
+                            <t t-foreach="cartas" t-as="carta">
+                                <a t-att-href="'/my/sales/clients/%d/pdf?doc_type=%s' % (client.id, carta['id'])" t-att-class="'list-group-item list-group-item-action' + (' active' if doc_type == carta['id'] else '')">
+                                    <t t-esc="carta['name']"/>
+                                </a>
+                            </t>
+                            <div class="list-group-item active mt-3">Documentos para Rellenar</div>
+                            <t t-foreach="docs" t-as="doc">
+                                <a t-att-href="'/my/sales/clients/%d/pdf?doc_type=%s' % (client.id, doc['id'])" t-att-class="'list-group-item list-group-item-action' + (' active' if doc_type == doc['id'] else '')">
+                                    <t t-esc="doc['name']"/>
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <t t-if="doc_type == 'carta1'">
+                            <t t-call="ajm_pdf_workbench.carta1_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta2'">
+                            <t t-call="ajm_pdf_workbench.carta2_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta3'">
+                            <t t-call="ajm_pdf_workbench.carta3_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta4'">
+                            <t t-call="ajm_pdf_workbench.carta4_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta5'">
+                            <t t-call="ajm_pdf_workbench.carta5_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta6'">
+                            <t t-call="ajm_pdf_workbench.carta6_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta7'">
+                            <t t-call="ajm_pdf_workbench.carta7_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta8'">
+                            <t t-call="ajm_pdf_workbench.carta8_template"/>
+                        </t>
+                        <t t-if="doc_type == 'info_sheet'">
+                            <t t-call="ajm_pdf_workbench.info_sheet_template"/>
+                        </t>
+                        <t t-if="doc_type == 'new_venture'">
+                            <t t-call="ajm_pdf_workbench.new_venture_template"/>
+                        </t>
+                        <t t-if="doc_type == 'qeo_trucking'">
+                            <t t-call="ajm_pdf_workbench.qeo_trucking_template"/>
+                        </t>
+                        <t t-if="doc_type == 'quit_quote'">
+                            <t t-call="ajm_pdf_workbench.quit_quote_template"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Ejemplo: Carta 1 -->
+    <template id="carta1_template" name="Carta 1: Cotización y DownPayment">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" style="height: 48px; margin-right: 18px;"/>
+                <div style="font-size: 22px; font-weight: 700; color: #17243B;">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 style="font-size: 18px; color: #17243B; margin-bottom: 18px;">Cotización y DownPayment</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta1"/>
+                <div class="mb-3">
+                    <label>Cliente:</label>
+                    <input type="text" class="form-control" name="client_name" t-att-value="client.name"/>
+                </div>
+                <div class="mb-3">
+                    <label>Monto:</label>
+                    <input type="text" class="form-control" name="amount" value=""/>
+                </div>
+                <div class="mb-3">
+                    <label>Fecha:</label>
+                    <input type="date" class="form-control" name="date" t-att-value="interview.effective_date or ''"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 2 -->
+    <template id="carta2_template" name="Carta 2">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 2 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 3 -->
+    <template id="carta3_template" name="Carta 3">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 3 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 4 -->
+    <template id="carta4_template" name="Carta 4">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 4 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 5 -->
+    <template id="carta5_template" name="Carta 5">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 5 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 6 -->
+    <template id="carta6_template" name="Carta 6">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 6 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 7 -->
+    <template id="carta7_template" name="Carta 7">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 7 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Carta 8 -->
+    <template id="carta8_template" name="Carta 8">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para la Carta 8 -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Information Sheet -->
+    <template id="info_sheet_template" name="Information Sheet">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" style="height: 48px; margin-right: 18px;"/>
+                <div style="font-size: 22px; font-weight: 700; color: #17243B;">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 style="font-size: 18px; color: #17243B; margin-bottom: 18px;">Information Sheet</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="info_sheet"/>
+                <div class="mb-3">
+                    <label>Agente:</label>
+                    <input type="text" class="form-control" name="agent" t-att-value="interview.agent or ''"/>
+                </div>
+                <div class="mb-3">
+                    <label>Compañía:</label>
+                    <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 2: Endoso de Póliza -->
+    <template id="carta2_template" name="Carta 2: Endoso de Póliza">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Política de Endoso</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta2"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Asegurado:</label>
+                    <input type="text" class="form-control" name="insured" t-att-value="client.name"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 3: Renuncia a Physical Damage -->
+    <template id="carta3_template" name="Carta 3: Renuncia a Physical Damage">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Renuncia a Physical Damage</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta3"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Propietario/Compañía:</label>
+                    <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 4: Autorización de Commodities -->
+    <template id="carta4_template" name="Carta 4: Autorización de Commodities">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Autorización de Commodities</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta4"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Commodities autorizados:</label>
+                    <textarea class="form-control" name="commodities"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 5: Lista de Choferes Asegurados -->
+    <template id="carta5_template" name="Carta 5: Lista de Choferes Asegurados">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Choferes Asegurados</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta5"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Lista de choferes:</label>
+                    <textarea class="form-control" name="drivers"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 6: Pagaré (Promissory Note) -->
+    <template id="carta6_template" name="Carta 6: Pagaré (Promissory Note)">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Pagaré (Promissory Note)</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta6"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Monto total a pagar:</label>
+                    <input type="text" class="form-control" name="total_amount"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 7: Avisos y Responsabilidades -->
+    <template id="carta7_template" name="Carta 7: Avisos y Responsabilidades">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Avisos y Responsabilidades</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta7"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Observaciones:</label>
+                    <textarea class="form-control" name="notes"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Carta 8: Firmas Finales -->
+    <template id="carta8_template" name="Carta 8: Firmas Finales">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Firmas Finales</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta8"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Nombre del solicitante:</label>
+                    <input type="text" class="form-control" name="applicant_name" t-att-value="interview.owner or ''"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- NEW VENTURE QUESTIONNAIRE -->
+    <template id="new_venture_template" name="NEW VENTURE QUESTIONNAIRE">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">NEW VENTURE QUESTIONNAIRE</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="new_venture"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Name of applicant:</label>
+                    <input type="text" class="form-control" name="owner" t-att-value="interview.owner or client.name"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- QEO Trucking Supplemental -->
+    <template id="qeo_trucking_template" name="QEO Trucking Supplemental">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">QEO Trucking Supplemental</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="qeo_trucking"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Operation details:</label>
+                    <textarea class="form-control" name="ops"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Quit Quote v2025 -->
+    <template id="quit_quote_template" name="Quit Quote v2025">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <div style="display: flex; align-items: center; border-bottom: 2px solid #17243B; margin-bottom: 24px;">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Quit Quote v2025</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="quit_quote"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Reason:</label>
+                    <textarea class="form-control" name="reason"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Exportar en PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Ejemplo: Nueva Empresa -->
+    <template id="new_venture_template" name="Nueva Empresa">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para Nueva Empresa -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: QEO Trucking -->
+    <template id="qeo_trucking_template" name="QEO Trucking">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para QEO Trucking -->
+        </div>
+    </template>
+
+    <!-- Ejemplo: Cotización Rechazada -->
+    <template id="quit_quote_template" name="Cotización Rechazada">
+        <div class="ajm-pdf-page" style="width: 816px; min-height: 1056px; margin: auto; background: #fff; padding: 32px; box-shadow: 0 0 8px #eee;">
+            <!-- Contenido específico para Cotización Rechazada -->
+        </div>
+    </template>
+</odoo>

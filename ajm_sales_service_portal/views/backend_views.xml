@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view - Interview list with key fields -->
+    <record id="view_ajm_service_application_tree" model="ir.ui.view">
+        <field name="name">ajm.service.application.tree</field>
+        <field name="model">ajm.service.application</field>
+        <field name="arch" type="xml">
+            <list string="Insurance Interviews">
+                <field name="name" string="Interview #"/>
+                <field name="service_type" string="Service Type"/>
+                <field name="name_insured" string="Client Name"/>
+                <field name="partner_id" string="Client Record"/>
+                <field name="effective_date" string="Effective Date"/>
+                <field name="agent" string="Agent"/>
+                <field name="user_id" string="Portal User"/>
+                <field name="create_date" string="Submitted On"/>
+                <field name="state" widget="badge" decoration-info="state=='draft'" decoration-success="state=='completed'" decoration-muted="state=='archived'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view - Complete interview editor with client linking -->
+    <record id="view_ajm_service_application_form" model="ir.ui.view">
+        <field name="name">ajm.service.application.form</field>
+        <field name="model">ajm.service.application</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Interview">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,completed,archived"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- Archive button -->
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    
+                    <!-- Client Link Section -->
+                    <group>
+                        <group string="Client Information">
+                            <field name="partner_id" string="Linked Client" 
+                                   options="{'no_create': True, 'no_open': False}"
+                                   help="Auto-created from interview data"/>
+                            <field name="service_type"/>
+                            <field name="effective_date"/>
+                        </group>
+                        <group string="Agent Information">
+                            <field name="agent" string="Assigned Agent"/>
+                            <field name="user_id" string="Portal User (if any)"/>
+                            <field name="create_date" string="Interview Date"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Basic Information Tab -->
+                        <page string="Basic Information" name="basic_info">
+                            <group>
+                                <group string="Business Details">
+                                    <field name="name_insured" string="Company/Insured Name"/>
+                                    <field name="dba" string="DBA (Doing Business As)"/>
+                                    <field name="owner" string="Owner Name"/>
+                                    <field name="entity_type"/>
+                                    <field name="entity_type_other" invisible="entity_type != 'other'"/>
+                                    <field name="entity_number" string="USDOT/MC Number"/>
+                                    <field name="years_in_business"/>
+                                    <field name="ein" string="EIN/Tax ID"/>
+                                </group>
+                                <group string="Contact Information">
+                                    <field name="phone"/>
+                                    <field name="email" widget="email"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Physical/Mailing Address">
+                                    <field name="mailing_street" string="Street"/>
+                                    <field name="mailing_city" string="City"/>
+                                    <field name="mailing_state" string="State"/>
+                                    <field name="mailing_zip" string="ZIP"/>
+                                </group>
+                                <group string="Garaging Address">
+                                    <field name="garaging_street" string="Street"/>
+                                    <field name="garaging_city" string="City"/>
+                                    <field name="garaging_state" string="State"/>
+                                    <field name="garaging_zip" string="ZIP"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Coverages Tab -->
+                        <page string="Coverages" name="coverages">
+                            <group>
+                                <field name="coverages_json" widget="ace" options="{'mode': 'json'}" 
+                                       placeholder='{"auto_liability": {...}, "general_liability": {...}, ...}'
+                                       nolabel="1"/>
+                            </group>
+                            <group>
+                                <p class="text-muted">
+                                    Coverage data captured from the insurance application form. 
+                                    This will be used to populate PDF documents.
+                                </p>
+                            </group>
+                        </page>
+
+                        <!-- Commodities Tab -->
+                        <page string="Commodities" name="commodities">
+                            <group>
+                                <field name="commodities_json" widget="ace" options="{'mode': 'json'}" 
+                                       placeholder='["General Freight", "Refrigerated", ...]'
+                                       nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <!-- Filings & Drivers Tab -->
+                        <page string="Filings &amp; Drivers" name="filings_drivers">
+                            <group>
+                                <group string="Required Filings">
+                                    <field name="filings_json" widget="ace" options="{'mode': 'json'}" 
+                                           placeholder='{"mc_filing": true, "ca_filing": {...}, ...}'
+                                           nolabel="1"/>
+                                </group>
+                                <group string="Drivers List">
+                                    <field name="drivers_json" widget="ace" options="{'mode': 'json'}" 
+                                           placeholder='[{"name": "John Doe", "dob": "1980-01-01", "cdl": "12345"}, ...]'
+                                           nolabel="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Vehicles Tab -->
+                        <page string="Vehicles" name="vehicles">
+                            <group>
+                                <field name="vehicles_json" widget="ace" options="{'mode': 'json'}" 
+                                       placeholder='[{"vin": "...", "year": 2020, "make": "Peterbilt", ...}, ...]'
+                                       nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <!-- Insurance History Tab -->
+                        <page string="Insurance History" name="history">
+                            <group>
+                                <field name="history_json" widget="ace" options="{'mode': 'json'}" 
+                                       placeholder='{"losses_3_years": [...], "prior_insurance": {...}}'
+                                       nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <!-- Attachments & Notes Tab -->
+                        <page string="Attachments &amp; Notes" name="attachments">
+                            <group>
+                                <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                            </group>
+                            <group>
+                                <separator string="Internal Notes"/>
+                                <field name="notes" widget="text" placeholder="Add internal notes here..." nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view - Filters for agents to find interviews -->
+    <record id="view_ajm_service_application_search" model="ir.ui.view">
+        <field name="name">ajm.service.application.search</field>
+        <field name="model">ajm.service.application</field>
+        <field name="arch" type="xml">
+            <search string="Search Interviews">
+                <field name="name"/>
+                <field name="name_insured"/>
+                <field name="partner_id"/>
+                <field name="agent"/>
+                <field name="user_id"/>
+                
+                <filter string="Draft" name="filter_draft" domain="[('state','=','draft')]"/>
+                <filter string="Completed" name="filter_completed" domain="[('state','=','completed')]"/>
+                <filter string="Archived" name="filter_archived" domain="[('state','=','archived')]"/>
+                <separator/>
+                
+                <group>
+                    <filter string="Agent" name="group_agent" context="{'group_by':'agent'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action - Main window action for interviews -->
+    <record id="action_ajm_service_application" model="ir.actions.act_window">
+        <field name="name">Insurance Interviews</field>
+        <field name="res_model">ajm.service.application</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_completed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No insurance interviews found
+            </p>
+            <p>
+                Insurance interviews are automatically created when clients submit 
+                insurance application forms through the portal.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu structure under Sales -->
+    <menuitem id="menu_ajm_sales_service_root"
+              name="Insurance Portal"
+              sequence="50"/>
+    
+    <menuitem id="menu_ajm_service_applications"
+              name="Interviews"
+              parent="menu_ajm_sales_service_root"
+              action="action_ajm_service_application"
+              sequence="10"/>
+</odoo>

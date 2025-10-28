@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend res.users form to add AJM Portal Access selection -->
+    <record id="view_users_form_inherit_ajm_portal" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.ajm.portal</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- Add AJM Portal Access after Access Rights page -->
+            <xpath expr="//page[@name='access_rights']//group[last()]" position="after">
+                <separator string="AJM Portal Access"/>
+                <group>
+                    <field name="ajm_portal_access" widget="radio"/>
+                    <div class="alert alert-info" role="alert" style="margin-top: 8px;">
+                        <strong>Note:</strong> Selecting a portal automatically sets the user as <em>Portal</em> (removes backend access) and grants access only to the selected department portal.
+                    </div>
+                </group>
+                <!-- Gmail Configuration moved to ajm_user_gmail -->
+            </xpath>
+        </field>
+    </record>
+</odoo>

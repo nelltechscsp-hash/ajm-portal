@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view for Transport Clients -->
+    <record id="view_res_partner_transport_tree" model="ir.ui.view">
+        <field name="name">res.partner.transport.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Transport Clients">
+                <field name="name" string="Company Name"/>
+                <field name="usdot" string="USDOT"/>
+                <field name="mc_number" string="MC #"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="create_date" string="Created"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Tree view for Health Clients -->
+    <record id="view_res_partner_health_tree" model="ir.ui.view">
+        <field name="name">res.partner.health.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Health Clients">
+                <field name="name" string="Client Name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="create_date" string="Created"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Extended form view for clients -->
+    <record id="view_res_partner_client_form" model="ir.ui.view">
+        <field name="name">res.partner.client.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Add client type after name -->
+            <field name="name" position="after">
+                <field name="client_type" widget="badge" decoration-info="client_type=='transport'" decoration-success="client_type=='health'"/>
+            </field>
+            
+            <!-- Add Transport client fields in a new page -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Transport Client Info" invisible="client_type != 'transport'">
+                    <group>
+                        <group string="DOT &amp; MC Information">
+                            <field name="usdot"/>
+                            <field name="mc_number"/>
+                            <field name="entity_type"/>
+                            <field name="carrier_type"/>
+                            <field name="operation_scope"/>
+                        </group>
+                        <group string="Operations">
+                            <field name="trailer_type"/>
+                            <field name="years_in_business"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Physical Address">
+                            <field name="physical_street"/>
+                            <field name="physical_city"/>
+                            <field name="physical_state_id" options="{'no_create': True}"/>
+                            <field name="physical_zip"/>
+                        </group>
+                        <group string="Garaging Address">
+                            <field name="garaging_street"/>
+                            <field name="garaging_city"/>
+                            <field name="garaging_state_id" options="{'no_create': True}"/>
+                            <field name="garaging_zip"/>
+                        </group>
+                    </group>
+                </page>
+                
+                <page string="Health Client Info" invisible="client_type != 'health'">
+                    <group>
+                        <group string="Health Information">
+                            <field name="date_of_birth"/>
+                            <field name="gender"/>
+                            <field name="ssn"/>
+                        </group>
+                    </group>
+                </page>
+                
+                <!-- Link to interviews -->
+                <page string="Interviews" name="interviews">
+                    <field name="application_ids">
+                        <list>
+                            <field name="name"/>
+                            <field name="service_type"/>
+                            <field name="effective_date"/>
+                            <field name="agent"/>
+                            <field name="state" widget="badge"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search view with USDOT and company name filters -->
+    <record id="view_res_partner_client_search" model="ir.ui.view">
+        <field name="name">res.partner.client.search</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Search Clients">
+                <field name="name" string="Company/Client Name"/>
+                <field name="usdot" string="USDOT Number"/>
+                <field name="mc_number" string="MC Number"/>
+                <field name="phone"/>
+                <field name="email"/>
+                
+                <filter string="Transport Clients" name="filter_transport" domain="[('client_type','=','transport')]"/>
+                <filter string="Health Clients" name="filter_health" domain="[('client_type','=','health')]"/>
+                <separator/>
+                <filter string="Recent (Last 30 Days)" name="filter_recent" 
+                        domain="[('create_date','&gt;=', (context_today() - relativedelta(days=30)).strftime('%%Y-%%m-%%d'))]"/>
+                <separator/>
+                
+                <group>
+                    <filter string="Client Type" name="group_client_type" context="{'group_by':'client_type'}"/>
+                    <filter string="State" name="group_state" context="{'group_by':'state_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Transport Clients -->
+    <record id="action_transport_clients" model="ir.actions.act_window">
+        <field name="name">Transport Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('client_type', '=', 'transport')]</field>
+        <field name="context">{'default_client_type': 'transport', 'search_default_filter_recent': 1}</field>
+        <field name="view_id" ref="view_res_partner_transport_tree"/>
+        <field name="search_view_id" ref="view_res_partner_client_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No transport clients found
+            </p>
+            <p>
+                Transport clients are automatically created when insurance application forms are submitted.
+                You can also create them manually from here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action for Health Clients -->
+    <record id="action_health_clients" model="ir.actions.act_window">
+        <field name="name">Health Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('client_type', '=', 'health')]</field>
+        <field name="context">{'default_client_type': 'health', 'search_default_filter_recent': 1}</field>
+        <field name="view_id" ref="view_res_partner_health_tree"/>
+        <field name="search_view_id" ref="view_res_partner_client_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No health clients found
+            </p>
+            <p>
+                Health clients will be created when health insurance forms are submitted.
+                You can also create them manually from here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action for All Clients -->
+    <record id="action_all_clients" model="ir.actions.act_window">
+        <field name="name">All Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('client_type', 'in', ['transport', 'health'])]</field>
+        <field name="context">{'search_default_filter_recent': 1}</field>
+        <field name="search_view_id" ref="view_res_partner_client_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No clients found
+            </p>
+            <p>
+                Clients are automatically created when insurance application forms are submitted.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu structure -->
+    <menuitem id="menu_clients"
+              name="Clients"
+              parent="menu_ajm_sales_service_root"
+              sequence="5"/>
+    
+    <menuitem id="menu_all_clients"
+              name="All Clients"
+              parent="menu_clients"
+              action="action_all_clients"
+              sequence="1"/>
+    
+    <menuitem id="menu_transport_clients"
+              name="Transport Clients"
+              parent="menu_clients"
+              action="action_transport_clients"
+              sequence="10"/>
+    
+    <menuitem id="menu_health_clients"
+              name="Health Clients"
+              parent="menu_clients"
+              action="action_health_clients"
+              sequence="20"/>
+</odoo>

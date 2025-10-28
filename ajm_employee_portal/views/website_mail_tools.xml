@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add a top menu entry for Mail (Gmail) visible to all Portal users -->
+    <record id="menu_top_mail" model="website.menu">
+        <field name="name">Correo</field>
+        <field name="url">https://mail.google.com</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" eval="50"/>
+        <field name="group_ids" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <!-- Optional: Link to the Gmail Settings page under My Account dropdown if available -->
+    <template id="portal_my_home_gmail_link" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[contains(@class,'o_portal_my_details')]/ul" position="inside">
+            <li>
+                <a href="/my/settings/gmail">Gmail Settings</a>
+            </li>
+        </xpath>
+    </template>
+</odoo>

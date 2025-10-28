@@ -1,0 +1,1148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pdf_workbench_main" name="PDF Workbench Main">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <t t-call="ajm_pdf_workbench.pdf_workbench_sidebar"/>
+                    </div>
+                    <div class="col-md-9">
+                        <t t-if="doc_type == 'carta1'">
+                            <t t-call="ajm_pdf_workbench.carta1_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta2'">
+                            <t t-call="ajm_pdf_workbench.carta2_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta3'">
+                            <t t-call="ajm_pdf_workbench.carta3_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta4'">
+                            <t t-call="ajm_pdf_workbench.carta4_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta5'">
+                            <t t-call="ajm_pdf_workbench.carta5_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta6'">
+                            <t t-call="ajm_pdf_workbench.carta6_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta7'">
+                            <t t-call="ajm_pdf_workbench.carta7_template"/>
+                        </t>
+                        <t t-if="doc_type == 'carta8'">
+                            <t t-call="ajm_pdf_workbench.carta8_template"/>
+                        </t>
+                        <t t-if="doc_type == 'info_sheet'">
+                            <t t-call="ajm_pdf_workbench.info_sheet_template"/>
+                        </t>
+                        <t t-if="doc_type == 'new_venture'">
+                            <t t-call="ajm_pdf_workbench.new_venture_template"/>
+                        </t>
+                        <t t-if="doc_type == 'qeo_trucking'">
+                            <t t-call="ajm_pdf_workbench.qeo_trucking_template"/>
+                        </t>
+                        <t t-if="doc_type == 'quit_quote'">
+                            <t t-call="ajm_pdf_workbench.quit_quote_template"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Carta 1: Cotización y DownPayment (ES + EN en export) -->
+    <template id="carta1_template" name="Carta 1: Cotización y DownPayment">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 1 (ES): Propuesta y Down Payment</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta1"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                
+                <p class="mb-3"><strong>EL DownPayment NUNCA:</strong></p>
+                <ul>
+                    <li>Cubrirá su primera y última mensualidad,</li>
+                    <li>El downpayment no es reembolsable</li>
+                    <li>El downpayment es un porcentaje de lo que le cubrirá el total de su póliza</li>
+                </ul>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
+                    <input type="text" class="form-control" name="client_name" t-att-value="client.name"/>
+                </div>
+
+                <p>Por medio de la presente le informamos que usted está comprando una póliza bajo las siguientes condiciones:</p>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="ajm-pdf-label">REPRESENTANTE:</label>
+                        <input type="text" class="form-control" name="agent" t-att-value="interview.agent or ''"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="ajm-pdf-label">ASEGURANZAS:</label>
+                        <input type="text" class="form-control" name="insurers" placeholder="Compañías aseguradoras"/>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">COBERTURAS:</label>
+                    <textarea class="form-control" name="coverages" rows="3" placeholder="Auto Liability Limit $..., Motor Truck Cargo..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">MILLAS:</label>
+                    <input type="text" class="form-control" name="millas" placeholder="Interstate / Intrastate"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">LISTA DE CHOFERES:</label>
+                    <textarea class="form-control" name="drivers_list" rows="3" placeholder="Nombre, DOB, DL#, State"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">UNIDADES:</label>
+                    <textarea class="form-control" name="units" rows="2" placeholder="Año/Marca/Tipo/VIN"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">COMODIDADES:</label>
+                    <textarea class="form-control" name="commodities_carta1" rows="2" placeholder="Lista de commodities"></textarea>
+                </div>
+
+                <div class="alert alert-warning">
+                    <p><strong>IMPORTANTE:</strong></p>
+                    <p>En esta carta están listados los drivers que están cubiertos por su seguro, si en caso de accidentes o incidentes no se encontraron ellos manejando, el seguro no cubrirá ningún daño y automáticamente le cancelaran su póliza.</p>
+                </div>
+
+                <div class="alert alert-info">
+                    <p><strong>CERTIFICADO MC:</strong></p>
+                    <p>Se hace la notificación de que el Certificado de MC demora hasta 21 días en ser activado, el cual se le notificara cuando el SAFER nos indique que su compañía este con la AUTORIZACIÓN ACEPTADA para poder solicitar este documento.</p>
+                    <ul>
+                        <li>Driver y Unidad que no esté en la póliza no será cubierto por el seguro</li>
+                        <li>Respecto a la póliza de Physical Damage que está comprando, le informamos que en caso de accidente u otra circunstancia en la que corresponda pago por parte del seguro, la aseguranza solo pagara el valor real en efectivo de la unidad. Nuestra oficina no conoce el valor real de la misma. Por favor confirmar el costo real para que no pague innecesariamente en exceso.</li>
+                    </ul>
+                </div>
+
+                <p class="mt-4">Al firmar este documento aclaro que he entendido correctamente todo lo que estaré comprando.</p>
+
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>FIRMA:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                        <div class="col-6">
+                            <label>FECHA:</label>
+                            <input type="date" class="form-control" name="signature_date"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 1 (EN): Proposal and Down Payment</h2>
+                <form>
+                    <p class="mb-3"><strong>The DownPayment NEVER:</strong></p>
+                    <ul>
+                        <li>Will cover your first and last monthly payment,</li>
+                        <li>The downpayment is non-refundable</li>
+                        <li>The downpayment is a percentage of what your total policy will cover</li>
+                    </ul>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">COMPANY NAME:</label>
+                        <input type="text" class="form-control" t-att-value="client_name or client.name" readonly="readonly"/>
+                    </div>
+
+                    <p>Through this letter we inform you that you are purchasing a policy under the following conditions:</p>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="ajm-pdf-label">REPRESENTATIVE:</label>
+                            <input type="text" class="form-control" t-att-value="agent or (interview.agent or '')" readonly="readonly"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="ajm-pdf-label">INSURANCE CARRIERS:</label>
+                            <input type="text" class="form-control" t-att-value="insurers or ''" readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">COVERAGES:</label>
+                        <textarea class="form-control" rows="3" t-esc="coverages or ''" readonly="readonly"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">MILES:</label>
+                        <input type="text" class="form-control" t-att-value="millas or ''" readonly="readonly"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">DRIVERS LIST:</label>
+                        <textarea class="form-control" rows="3" t-esc="drivers_list or ''" readonly="readonly"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">UNITS:</label>
+                        <textarea class="form-control" rows="2" t-esc="units or ''" readonly="readonly"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">COMMODITIES:</label>
+                        <textarea class="form-control" rows="2" t-esc="commodities_carta1 or ''" readonly="readonly"></textarea>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <p><strong>IMPORTANT:</strong></p>
+                        <p>This letter lists the drivers covered by your insurance. If, in the event of accidents or incidents, they were not found driving, the insurance will not cover any damage and your policy will be automatically canceled.</p>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <p><strong>MC CERTIFICATE:</strong></p>
+                        <p>Notification is made that the MC Certificate takes up to 21 days to be activated, which will be notified to you when SAFER indicates that your company has ACCEPTED AUTHORIZATION to request this document.</p>
+                        <ul>
+                            <li>Driver and Unit that are not on the policy will not be covered by insurance</li>
+                            <li>Regarding the Physical Damage policy you are purchasing, we inform you that in the event of an accident or other circumstance in which payment by the insurance is appropriate, the insurance will only pay the actual cash value of the unit. Our office does not know its real value. Please confirm the actual cost so you do not unnecessarily overpay.</li>
+                        </ul>
+                    </div>
+
+                    <p class="mt-4">By signing this document I clarify that I have correctly understood everything I will be purchasing.</p>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>SIGNATURE:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                            <div class="col-6">
+                                <label>DATE:</label>
+                                <input type="date" class="form-control" t-att-value="signature_date or ''" readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 2: Endoso de Póliza (ES + EN en export) -->
+    <template id="carta2_template" name="Carta 2: Endoso de Póliza">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 2 (ES): Cambio de Póliza (Endorsement)</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta2"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
+                    <input type="text" class="form-control" name="insured" t-att-value="client.name"/>
+                </div>
+
+                <p class="mb-3">Mediante este documento estoy siendo consciente que cuando se hace un <strong>endorsement (Cambio en mi póliza)</strong>, tanto sea cambio de vehículo, añadir un driver, aumento o disminución de una cobertura <strong>no estará aprobado hasta que yo reciba un email de mi agente de Seguro</strong> donde especifique que mi cambio ha sido aprobado, cualquier acción de mi parte sin ser aprobado por mi agente seguro será totalmente mi responsabilidad.</p>
+
+                <p class="mb-3">Estoy siendo informado que a la hora de retirar vehículos de mi póliza el periodo para este trámite puede demorar de <strong>30 hasta 60 días</strong> se ajustaran mis pagos hasta que no transcurra este periodo; la compañía de seguros y la financiera son los encargados en realizar este trámite, por lo cual hasta que ellos no notifiquen que ya retiraron el vehículo no se verá reflejado en sus pagos.</p>
+
+                <p class="mb-3"><strong>El downpayment recibido no es reembolsable.</strong></p>
+
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label>FIRMA:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>NOMBRE:</label>
+                            <input type="text" name="owner_name" class="form-control" style="width: 80%;"/>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>FECHA:</label>
+                            <input type="date" name="signature_date" class="form-control" style="width: 80%;"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 2 (EN): Policy Change (Endorsement)</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">COMPANY NAME:</label>
+                        <input type="text" class="form-control" t-att-value="insured or client.name" readonly="readonly"/>
+                    </div>
+
+                    <p class="mb-3">Through this document I am aware that when an <strong>endorsement is made (Change in my policy)</strong>, whether it is a change of vehicle, adding a driver, increase or decrease in coverage, <strong>it will not be approved until I receive an email from my Insurance agent</strong> where specify that my change has been approved, any action on my part without being approved by my insurance agent will be entirely my responsibility.</p>
+
+                    <p class="mb-3">I am being informed that when removing vehicles from my policy, the period for this procedure can take from <strong>30 to 60 days</strong>, my payments will be adjusted until this period has passed; The insurance company and the financial company are responsible for carrying out this procedure, so until they notify that they have already removed the vehicle, it will not be reflected in their payments.</p>
+
+                    <p class="mb-3"><strong>The downpayment received is not refundable.</strong></p>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label>SIGNED:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label>NAME:</label>
+                                <input type="text" class="form-control" t-att-value="owner_name or ''" readonly="readonly" style="width: 80%;"/>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label>DATE:</label>
+                                <input type="date" class="form-control" t-att-value="signature_date or ''" readonly="readonly" style="width: 80%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 3: Renuncia a Physical Damage (ES + EN en export) -->
+    <template id="carta3_template" name="Carta 3: Renuncia a Physical Damage">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 3 (ES): Renuncia a Physical Damage</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta3"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
+                    <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
+                </div>
+
+                <p class="mb-3">Por medio de la presente, yo, <input type="text" name="owner_name" style="border:none; border-bottom:1px solid #000; width:250px;"/>, declaro bajo protesta de decir verdad que he sido debidamente informado y entiendo que la póliza de seguro comercial que estoy adquiriendo incluye únicamente las siguientes coberturas:</p>
+
+                <ul class="mb-3">
+                    <li>Auto Liability (Responsabilidad Civil Vehicular)</li>
+                    <li>Motor Truck Cargo (Carga)</li>
+                </ul>
+
+                <p class="mb-3"><strong>Confirmo que NO estoy contratando la cobertura de Physical Damage</strong>, la cual cubre los daños físicos a mi unidad en caso de accidente, colisión, robo, vandalismo o pérdida total.</p>
+
+                <p class="mb-3">Entiendo y acepto que, en caso de un accidente o siniestro en el cual mi unidad resulte dañada, los costos de reparación, reemplazo o pérdida total de dicha unidad serán de mi entera responsabilidad, ya que no contaré con cobertura de Physical Damage bajo esta póliza.</p>
+
+                <p class="mb-3">Asumo total responsabilidad financiera por cualquier daño que pueda sufrir mi vehículo, y libero a la agencia de seguros y a la aseguradora de toda obligación relacionada con dicho riesgo no cubierto.</p>
+
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label>Firma:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>Nombre:</label>
+                            <input type="text" name="signer_name" class="form-control" style="width: 80%;"/>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>Fecha:</label>
+                            <input type="date" class="form-control" name="signature_date" style="width: 80%;"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 3 (EN): Waiver of Physical Damage</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">COMPANY NAME:</label>
+                        <input type="text" class="form-control" t-att-value="company_name or client.name" readonly="readonly"/>
+                    </div>
+
+                    <p class="mb-3">I, <input type="text" t-att-value="owner_name or ''" style="border:none; border-bottom:1px solid #000; width:250px;" readonly="readonly"/>, hereby declare and acknowledge that I have been fully informed and understand that the commercial insurance policy I am purchasing includes only the following coverages:</p>
+
+                    <ul class="mb-3">
+                        <li>Auto Liability</li>
+                        <li>Motor Truck Cargo</li>
+                    </ul>
+
+                    <p class="mb-3"><strong>I confirm that I am NOT purchasing Physical Damage coverage</strong>, which would cover my unit for damages resulting from accidents, collisions, theft, vandalism, or total loss.</p>
+
+                    <p class="mb-3">I fully understand and accept that in the event of an accident or incident resulting in damage to my unit, all repair, replacement, or total loss costs will be my sole responsibility, as there will be no Physical Damage coverage in effect under this policy.</p>
+
+                    <p class="mb-3">I voluntarily assume full financial responsibility for any potential damage to my vehicle and release both the insurance agency and the insurance carrier from any liability regarding this uncovered risk.</p>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label>Signature:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label>Name:</label>
+                                <input type="text" class="form-control" t-att-value="signer_name or ''" readonly="readonly" style="width: 80%;"/>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label>Date:</label>
+                                <input type="date" class="form-control" t-att-value="signature_date or ''" readonly="readonly" style="width: 80%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 4: Autorización de Commodities (ES + EN en export) -->
+    <template id="carta4_template" name="Carta 4: Autorización de Commodities">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 4 (ES): Autorización de Commodities</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta4"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
+                    <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
+                </div>
+
+                <p class="mb-3">Yo: <input type="text" name="owner_name" style="border:none; border-bottom:1px solid #000; width:250px;"/>, propietario de la compañía: <input type="text" name="company_name_inline" t-att-value="client.name" style="border:none; border-bottom:1px solid #000; width:250px;"/>, mediante mi firma confirmo que estas son las comodidades autorizadas y solicitadas por mí, que estarán incluidas en la póliza de Seguro comercial que estoy comprando.</p>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Comodidades:</label>
+                    <textarea class="form-control" name="commodities" rows="3" placeholder="METALS (NON-FERROUS), BUILDING MATERIALS, COILS, LIGHT MACHINERY, PIPES, LUMBER"></textarea>
+                </div>
+
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label>FIRMA:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>FECHA:</label>
+                            <input type="date" class="form-control" name="signature_date" style="width: 80%;"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 4 (EN): Authorized Commodities</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">COMPANY NAME:</label>
+                        <input type="text" class="form-control" t-att-value="company_name or client.name" readonly="readonly"/>
+                    </div>
+
+                    <p class="mb-3">Me <input type="text" t-att-value="owner_name or ''" style="border:none; border-bottom:1px solid #000; width:250px;" readonly="readonly"/>, owner of the company: <input type="text" t-att-value="company_name_inline or client.name" style="border:none; border-bottom:1px solid #000; width:250px;" readonly="readonly"/>, by my signature I confirm that these are the commodities authorized and requested by me, which will be included in the commercial insurance policy that I am buying:</p>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">Commodities:</label>
+                        <textarea class="form-control" rows="3" t-esc="commodities or ''" readonly="readonly"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label>SIGNED:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label>DATE:</label>
+                                <input type="date" class="form-control" t-att-value="signature_date or ''" readonly="readonly" style="width: 80%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 5: Lista de Choferes Asegurados (ES + EN en export; dinámica en web, estática en PDF) -->
+    <template id="carta5_template" name="Carta 5: Lista de Choferes Asegurados">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español (web con dinámica; export con tabla estática si hay datos) -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <span><i class="fa fa-id-card me-2"></i>Carta 5 (ES): Lista de Choferes Asegurados</span>
+                    <span class="text-muted small">Agregar y eliminar filas como en la entrevista</span>
+                </div>
+                <div class="card-body">
+                    <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                        <input type="hidden" name="doc_type" value="carta5"/>
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="drivers_json" id="drivers_json"/>
+
+                        <div class="mb-3">
+                            <label class="ajm-pdf-label">NOMBRE DE LA COMPAÑÍA:</label>
+                            <input type="text" class="form-control" t-att-value="client.name" readonly="readonly"/>
+                        </div>
+
+                        <p class="mb-3">Yo <input type="text" name="owner_name" style="border:none; border-bottom:1px solid #000; width:250px;"/>, propietario de la compañía: <strong><span t-esc="client.name"/></strong>, mediante mi firma confirmo que estos son los choferes asegurados en la póliza de Seguro comercial que estoy comprando:</p>
+
+                        <t t-if="not is_export">
+                            <div class="table-responsive">
+                                <table class="table" id="tbl_drivers">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>State</th>
+                                            <th>DL#</th>
+                                            <th>CDL#</th>
+                                            <th>DOB</th>
+                                            <th>EXP (yrs)</th>
+                                            <th>Hired</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <button class="btn btn-sm btn-outline-primary" type="button" onclick="addRowDrivers()">
+                                    Add driver
+                                </button>
+                            </div>
+                        </t>
+                        <t t-if="is_export">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>State</th>
+                                            <th>DL#</th>
+                                            <th>CDL#</th>
+                                            <th>DOB</th>
+                                            <th>EXP (yrs)</th>
+                                            <th>Hired</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="drivers_rows or []" t-as="d">
+                                            <td><span t-esc="d.get('name','')"/></td>
+                                            <td><span t-esc="d.get('state','')"/></td>
+                                            <td><span t-esc="d.get('dl','')"/></td>
+                                            <td><span t-esc="d.get('cdl','')"/></td>
+                                            <td><span t-esc="d.get('dob','')"/></td>
+                                            <td><span t-esc="d.get('exp','')"/></td>
+                                            <td><span t-esc="d.get('hired','')"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Firma del Propietario:</label>
+                                    <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                                </div>
+                                <div class="col-6">
+                                    <label>Fecha:</label>
+                                    <input type="date" class="form-control" name="signature_date"/>
+                                </div>
+                            </div>
+                        </div>
+                        <t t-if="not is_export">
+                            <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+                        </t>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Script para dinámica y serialización (solo en web) -->
+            <t t-if="not is_export" t-jquery="body" t-operation="append">
+                <script><![CDATA[
+                (function(){
+                    function row(tds){
+                        const tr = document.createElement('tr');
+                        tds.forEach(td => tr.appendChild(td));
+                        const tdDel = document.createElement('td');
+                        const btn = document.createElement('button');
+                        btn.type = 'button'; btn.className = 'btn btn-sm btn-outline-danger'; btn.innerText = 'Delete';
+                        btn.onclick = function(){ tr.remove(); };
+                        tdDel.appendChild(btn); tr.appendChild(tdDel); return tr;
+                    }
+                    function tdInput(ph, type, val){ const td=document.createElement('td'); const i=document.createElement('input'); i.className='form-control form-control-sm'; i.placeholder=ph||''; i.type=type||'text'; if(val!=null) i.value=val; td.appendChild(i); return td; }
+
+                    window.addRowDrivers = function(data){
+                        const tbl = document.getElementById('tbl_drivers');
+                        if (!tbl) return;
+                        const tbody = tbl.getElementsByTagName('tbody')[0];
+                        const tds = [
+                            tdInput('Name','text',data?.name||''),
+                            tdInput('State','text',data?.state||''),
+                            tdInput('DL#','text',data?.dl||''),
+                            tdInput('CDL#','text',data?.cdl||''),
+                            tdInput('DOB','date',data?.dob||''),
+                            tdInput('EXP','number',data?.exp||''),
+                            tdInput('Hired','date',data?.hired||'')
+                        ];
+                        tbody.appendChild(row(tds));
+                    }
+
+                    // Inicial
+                    document.addEventListener('DOMContentLoaded', function(){ addRowDrivers({}); });
+
+                    // Serializar en submit
+                    document.addEventListener('submit', function(e){
+                        const form = e.target.closest('form');
+                        if (!form || !document.getElementById('drivers_json')) return;
+                        const rows=[...document.querySelectorAll('#tbl_drivers tbody tr')];
+                        const out = rows.map(r=>{
+                            const cells=[...r.querySelectorAll('td')];
+                            return {
+                                name: cells[0].querySelector('input')?.value||'',
+                                state: cells[1].querySelector('input')?.value||'',
+                                dl: cells[2].querySelector('input')?.value||'',
+                                cdl: cells[3].querySelector('input')?.value||'',
+                                dob: cells[4].querySelector('input')?.value||'',
+                                exp: cells[5].querySelector('input')?.value||'',
+                                hired: cells[6].querySelector('input')?.value||''
+                            };
+                        });
+                        document.getElementById('drivers_json').value = JSON.stringify(out);
+                    }, true);
+                })();
+                ]]></script>
+            </t>
+        </div>
+
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <span><i class="fa fa-id-card me-2"></i>Letter 5 (EN): Insured Drivers List</span>
+                        <span class="text-muted small">Rendered for PDF export</span>
+                    </div>
+                    <div class="card-body">
+                        <t t-if="is_export">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>State</th>
+                                            <th>DL#</th>
+                                            <th>CDL#</th>
+                                            <th>DOB</th>
+                                            <th>EXP (yrs)</th>
+                                            <th>Hired</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="drivers_rows or []" t-as="d">
+                                            <td><span t-esc="d.get('name','')"/></td>
+                                            <td><span t-esc="d.get('state','')"/></td>
+                                            <td><span t-esc="d.get('dl','')"/></td>
+                                            <td><span t-esc="d.get('cdl','')"/></td>
+                                            <td><span t-esc="d.get('dob','')"/></td>
+                                            <td><span t-esc="d.get('exp','')"/></td>
+                                            <td><span t-esc="d.get('hired','')"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                        <t t-if="not is_export">
+                            <p class="mb-3"><em>Me, <input type="text" t-att-value="owner_name or ''" style="border:none; border-bottom:1px solid #000; width:250px;" readonly="readonly"/>, owner of the company: <strong><span t-esc="client.name"/></strong>, through my signature I confirm that these are the drivers insured in the commercial insurance policy that I am buying.</em></p>
+                            <p class="mb-0">This English section mirrors the drivers listed above. Names and details are the same and will appear in the exported document in both languages.</p>
+                        </t>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Owner Signature:</label>
+                                    <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                                </div>
+                                <div class="col-6">
+                                    <label>Date:</label>
+                                    <input type="date" class="form-control" t-att-value="signature_date or ''"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 6: Pagaré (ES + EN en export) -->
+    <template id="carta6_template" name="Carta 6: Pagaré">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 6 (ES): Pagaré (Promissory Note)</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta6"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                
+                <p class="mb-3"><strong>Fecha:</strong> <input type="date" name="doc_date" class="form-control d-inline-block" style="width: 200px;"/></p>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Company Name:</label>
+                    <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Owner:</label>
+                    <input type="text" class="form-control" name="owner_name"/>
+                </div>
+
+                <p class="mb-3">Por este medio <input type="text" name="debtor_name_inline" style="border:none; border-bottom:1px solid #000; width:250px;"/> yo con número de identificación <input type="text" name="id_number" style="border:none; border-bottom:1px solid #000; width:200px;"/> con domicilio legal reconocido en <input type="text" name="address" style="border:none; border-bottom:1px solid #000; width:400px;"/>. Hago constar que debo a la compañía de <strong>AJM Insurance &amp; Trucking Service LLC</strong> el monto ascendente a <input type="text" name="amount" style="border:none; border-bottom:1px solid #000; width:150px;"/> por haber adquirido la Póliza de Seguro No <input type="text" name="policy_number" style="border:none; border-bottom:1px solid #000; width:250px;"/> en fecha la cual debo pagar en el periodo de <strong>15 días</strong> contados a partir del día siguiente de ser activada la póliza <input type="date" name="activation_date" style="border:none; border-bottom:1px solid #000; width:150px;"/>, la cual me comprometo a pagar en el plazo acordado, la cual autorizo me sea cancelada una vez transcurrido el término establecido y yo no haber honrado la deuda contraída.</p>
+
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Insured Signature:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                        <div class="col-6">
+                            <label>Pay before:</label>
+                            <input type="date" name="pay_before" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-6">
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 6 (EN): Promissory Note</h2>
+                <form>
+                    <p class="mb-3"><strong>Date:</strong> <input type="date" t-att-value="doc_date or ''" class="form-control d-inline-block" style="width: 200px;" readonly="readonly"/></p>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">Company Name:</label>
+                        <input type="text" class="form-control" t-att-value="company_name or client.name" readonly="readonly"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="ajm-pdf-label">Owner:</label>
+                        <input type="text" class="form-control" t-att-value="owner_name or ''" readonly="readonly"/>
+                    </div>
+
+                    <p class="mb-3">By this means <input type="text" t-att-value="debtor_name_inline or ''" style="border:none; border-bottom:1px solid #000; width:250px;" readonly="readonly"/> with identification number <input type="text" t-att-value="id_number or ''" style="border:none; border-bottom:1px solid #000; width:200px;" readonly="readonly"/> with recognized legal address at <input type="text" t-att-value="address or ''" style="border:none; border-bottom:1px solid #000; width:400px;" readonly="readonly"/>. I certify that I owe the company <strong>AJM Insurance &amp; Trucking Service LLC</strong> the amount of <input type="text" t-att-value="amount or ''" style="border:none; border-bottom:1px solid #000; width:150px;" readonly="readonly"/> for having acquired the Insurance Policy No <input type="text" t-att-value="policy_number or ''" style="border:none; border-bottom:1px solid #000; width:250px;" readonly="readonly"/> on the date which I must pay in the period of <strong>15 days</strong>, counted from the day after the policy is activated <input type="date" t-att-value="activation_date or ''" style="border:none; border-bottom:1px solid #000; width:150px;" readonly="readonly"/>, which I promise to pay within the agreed term, which I authorize to be canceled once the established term has elapsed and I have not honored the debt contracted.</p>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Insured Signature:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                            <div class="col-6">
+                                <label>Pay before:</label>
+                                <input type="date" class="form-control" t-att-value="pay_before or ''" readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 7: Avisos y Responsabilidades (ES + EN en export) -->
+    <template id="carta7_template" name="Carta 7: Avisos y Responsabilidades">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 7 (ES): Avisos Legales y Responsabilidades</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta7"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="mb-3">
+                    <p><strong>Avisos Importantes (Traducción):</strong></p>
+                    <p class="mb-2"><strong>LA AGENCIA RECONOCE QUE SERÁ RESPONSABLE DEL SALDO TOTAL DE CUALQUIER FACTURA PENDIENTE EN CASO DE PROBLEMAS RELACIONADOS CON EL PAGO O FINANCIAMIENTO.</strong> Si ocurre alguna falla de pago, retraso o complicación de financiamiento, la agencia acepta liquidar el saldo restante directamente con Dynamic Specialty Inc. Si hay alguna preocupación o problema, la agencia puede comunicarse con accounting@dynamicmga.com.</p>
+                    
+                    <p class="mb-2"><strong>TODO EQUIPO Y CONDUCTORES NO REPORTADOS PUEDE RESULTAR EN UNA DENEGACIÓN DE COBERTURA.</strong></p>
+                    
+                    <p class="mb-2">HE LEÍDO, ENTENDIDO Y ACEPTO CUMPLIR CON TODAS LAS EXENCIONES DE RESPONSABILIDAD Y PAUTAS DE ACEPTACIÓN DE CONDUCTORES DESCRITAS EN ESTA SOLICITUD. RECONOZCO QUE ESTOS TÉRMINOS RIGEN MIS RESPONSABILIDADES Y ACEPTO EL CUMPLIMIENTO TOTAL DE LAS CONDICIONES ESTABLECIDAS.</p>
+                    
+                    <p class="mb-2">EN RETORNO POR EL PAGO DE LA PRIMA, Y SUJETO A TODOS LOS TÉRMINOS DE ESTE CERTIFICADO, ACEPTAMOS PROPORCIONARLE EL SEGURO COMO SE ESTABLECE EN ESTE CERTIFICADO. SE EMITE UNA PÓLIZA ORIGINAL Y COMPLETA QUE INCLUYE TÉRMINOS, CONDICIONES Y EXCLUSIONES A LA CONTINENTAL TRUCKING ASSOCIATION DONDE ESTÁ DISPONIBLE PARA INSPECCIÓN. EN CASO DE CUALQUIER CONFLICTO ENTRE ESTE RESUMEN DE EVIDENCIA DE SEGURO Y LA PÓLIZA REAL EN VIGOR, LOS TÉRMINOS DE LA PÓLIZA EFECTIVA REAL PREVALECERÁN.</p>
+                </div>
+
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Iniciales del Agente:</label>
+                            <input type="text" name="agent_initials" class="form-control" style="width: 100px;"/>
+                        </div>
+                        <div class="col-6">
+                            <label>Iniciales del Solicitante:</label>
+                            <input type="text" name="applicant_initials" class="form-control" style="width: 100px;"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 7 (EN): Legal Disclaimers and Responsibilities</h2>
+                <form>
+                    <div class="mb-3">
+                        <p><strong>Disclaimers:</strong></p>
+                        <p class="mb-2"><strong>THE AGENCY ACKNOWLEDGES THAT THEY WILL BE RESPONSIBLE FOR THE FULL BALANCE OF ANY OUTSTANDING INVOICES IN THE EVENT OF ISSUES RELATED TO PAYMENT OR FINANCING.</strong> SHOULD ANY PAYMENT FAILURE, DELAY, OR FINANCING COMPLICATION OCCUR, THE AGENCY AGREES TO PROMPTLY SETTLE THE REMAINING BALANCE DIRECTLY WITH DYNAMIC SPECIALTY INC. IF THERE ARE ANY CONCERNS OR ISSUES, THE AGENCY CAN REACH OUT TO ACCOUNTING@DYNAMICMGA.COM.</p>
+                        
+                        <p class="mb-2"><strong>ALL UNREPORTED EQUIPMENT AND DRIVERS MAY RESULT IN A DENIAL OF COVERAGE.</strong></p>
+                        
+                        <p class="mb-2">I HAVE READ, UNDERSTOOD, AND AGREE TO ABIDE BY ALL THE DISCLAIMERS AND DRIVER ACCEPTANCE GUIDELINES OUTLINED IN THIS APPLICATION. I ACKNOWLEDGE THAT THESE TERMS GOVERN MY RESPONSIBILITIES, AND I ACCEPT FULL COMPLIANCE WITH THE STATED CONDITIONS.</p>
+                        
+                        <p class="mb-2">IN RETURN FOR THE PAYMENT OF THE PREMIUM, AND SUBJECT TO ALL THE TERMS OF THIS CERTIFICATE, WE AGREE WITH YOU TO PROVIDE THE INSURANCE AS STATED IN THIS CERTIFICATE. AN ORIGINAL, COMPLETE POLICY INCLUDING TERMS, CONDITIONS, AND EXCLUSIONS IS ISSUED TO THE CONTINENTAL TRUCKING ASSOCIATION WHERE IT IS AVAILABLE FOR INSPECTION. IN THE EVENT OF ANY CONFLICT BETWEEN THIS EVIDENCE OF INSURANCE SUMMARY AND THE ACTUAL POLICY IN EFFECT, THE TERMS OF THE ACTUAL EFFECTIVE POLICY WILL GOVERN.</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Agent Initials:</label>
+                                <input type="text" class="form-control" t-att-value="agent_initials or ''" readonly="readonly" style="width: 100px;"/>
+                            </div>
+                            <div class="col-6">
+                                <label>Applicant Initials:</label>
+                                <input type="text" class="form-control" t-att-value="applicant_initials or ''" readonly="readonly" style="width: 100px;"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Carta 8: Firmas Finales (ES + EN en export) -->
+    <template id="carta8_template" name="Carta 8: Firmas Finales">
+        <t t-set="is_export" t-value="export_mode or False"/>
+        <!-- Español -->
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Carta 8 (ES): Firmas Finales y Aceptación</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="carta8"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                
+                <p class="mb-3">He leído, entendido y acepto cumplir con todas las exenciones de responsabilidad y pautas de aceptación de conductores descritas en esta solicitud. Reconozco que estos términos rigen mis responsabilidades y acepto el cumplimiento total de las condiciones establecidas.</p>
+
+                <div class="mt-4">
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label><strong>Nombre del Productor:</strong></label>
+                            <input type="text" class="form-control" name="producer_name" placeholder="IRINA CABALLERO"/>
+                        </div>
+                        <div class="col-6">
+                            <label><strong>Nombre del Solicitante:</strong></label>
+                            <input type="text" class="form-control" name="applicant_name" t-att-value="client.name"/>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label>Firma del Productor:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                        <div class="col-6">
+                            <label>Firma del Solicitante:</label>
+                            <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Fecha:</label>
+                            <input type="date" class="form-control" name="producer_date"/>
+                        </div>
+                        <div class="col-6">
+                            <label>Fecha:</label>
+                            <input type="date" class="form-control" name="applicant_date"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+        <!-- Inglés (visible también en página) -->
+        <div>
+            <t t-if="is_export"><div class="ajm-page-break"></div></t>
+            <div class="ajm-pdf-page">
+                <div class="ajm-pdf-header">
+                    <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                    <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+                </div>
+                <h2 class="ajm-pdf-section-title">Letter 8 (EN): Final Signatures and Acceptance</h2>
+                <form>
+                    <p class="mb-3">I have read, understood, and agree to abide by all the disclaimers and driver acceptance guidelines outlined in this application. I acknowledge that these terms govern my responsibilities, and I accept full compliance with the stated conditions.</p>
+
+                    <div class="mt-4">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label><strong>Producer Name:</strong></label>
+                                <input type="text" class="form-control" t-att-value="producer_name or ''" readonly="readonly"/>
+                            </div>
+                            <div class="col-6">
+                                <label><strong>Applicant Name:</strong></label>
+                                <input type="text" class="form-control" t-att-value="applicant_name or client.name" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label>Producer Signature:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                            <div class="col-6">
+                                <label>Applicant Signature:</label>
+                                <div style="border-bottom: 1px solid #000; height: 50px; width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Date:</label>
+                                <input type="date" class="form-control" t-att-value="producer_date or ''" readonly="readonly"/>
+                            </div>
+                            <div class="col-6">
+                                <label>Date:</label>
+                                <input type="date" class="form-control" t-att-value="applicant_date or ''" readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Information Sheet -->
+    <template id="info_sheet_template" name="Information Sheet">
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Information Sheet</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="info_sheet"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label class="ajm-pdf-label">Agent:</label>
+                        <input type="text" class="form-control" name="agent" t-att-value="interview.agent or ''"/>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label class="ajm-pdf-label">Effective Date:</label>
+                        <input type="date" class="form-control" name="effective_date" t-att-value="interview.effective_date or ''"/>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Company Name:</label>
+                    <input type="text" class="form-control" name="company_name" t-att-value="client.name"/>
+                </div>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label class="ajm-pdf-label">Owner Name:</label>
+                        <input type="text" class="form-control" name="owner" t-att-value="interview.owner or ''"/>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label class="ajm-pdf-label">Phone:</label>
+                        <input type="text" class="form-control" name="phone" t-att-value="client.phone or ''"/>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Address:</label>
+                    <input type="text" class="form-control" name="address" t-att-value="'%s, %s, %s %s' % (client.street or '', client.city or '', client.state_id.name or '', client.zip or '')"/>
+                </div>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label class="ajm-pdf-label">DOT Number:</label>
+                        <input type="text" class="form-control" name="dot" t-att-value="interview.dot or ''"/>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label class="ajm-pdf-label">MC Number:</label>
+                        <input type="text" class="form-control" name="mc" t-att-value="interview.mc or ''"/>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- NEW VENTURE QUESTIONNAIRE -->
+    <template id="new_venture_template" name="NEW VENTURE QUESTIONNAIRE">
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">NEW VENTURE QUESTIONNAIRE</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="new_venture"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Name of Applicant:</label>
+                    <input type="text" class="form-control" name="owner" t-att-value="interview.owner or client.name"/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Type of Operation:</label>
+                    <textarea class="form-control" name="operation_type" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Experience in Trucking (years):</label>
+                    <input type="text" class="form-control" name="experience" value=""/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Number of Vehicles:</label>
+                    <input type="text" class="form-control" name="num_vehicles" t-att-value="interview.num_vehicles or ''"/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Radius of Operation:</label>
+                    <select class="form-control" name="radius">
+                        <option value="Local">Local (0-50 miles)</option>
+                        <option value="Intermediate">Intermediate (51-200 miles)</option>
+                        <option value="Long">Long Haul (200+ miles)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- QEO Trucking Supplemental -->
+    <template id="qeo_trucking_template" name="QEO Trucking Supplemental">
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">QEO Trucking Supplemental Application</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="qeo_trucking"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Applicant Name:</label>
+                    <input type="text" class="form-control" name="applicant" t-att-value="client.name"/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Operation Details:</label>
+                    <textarea class="form-control" name="ops" rows="4" placeholder="Describe operation type, commodities hauled, etc."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Number of Drivers:</label>
+                    <input type="text" class="form-control" name="num_drivers" value=""/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Safety Record (accidents in last 3 years):</label>
+                    <textarea class="form-control" name="safety_record" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+    </template>
+
+    <!-- Quit Quote v2025 -->
+    <template id="quit_quote_template" name="Quit Quote v2025">
+        <div class="ajm-pdf-page">
+            <div class="ajm-pdf-header">
+                <img t-att-src="'/web/image/res.company/%d/logo' % company.id" class="ajm-pdf-header__logo"/>
+                <div class="ajm-pdf-header__title">AJM Insurance &amp; Trucking Services LLC</div>
+            </div>
+            <h2 class="ajm-pdf-section-title">Quit Quote v2025</h2>
+            <form method="post" t-attf-action="/my/sales/clients/#{client.id}/pdf/export">
+                <input type="hidden" name="doc_type" value="quit_quote"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Client Name:</label>
+                    <input type="text" class="form-control" name="client_name" t-att-value="client.name"/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Reason for Decline:</label>
+                    <textarea class="form-control" name="reason" rows="5" placeholder="Explain why the quote was declined..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Date:</label>
+                    <input type="date" class="form-control" name="decline_date"/>
+                </div>
+                <div class="mb-3">
+                    <label class="ajm-pdf-label">Agent Notes:</label>
+                    <textarea class="form-control" name="agent_notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Exportar a PDF</button>
+            </form>
+        </div>
+    </template>
+
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_inherit_ajm_user_gmail" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.ajm.user.gmail</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']//group[last()]" position="after">
+                <separator string="Gmail Configuration"/>
+                <group col="2">
+                    <field name="gmail_address"/>
+                    <field name="gmail_app_password" password="True"/>
+                    <field name="needs_gmail_setup"/>
+                </group>
+                <div class="text-muted">
+                    Use <em>App Passwords</em> (Google Account → Security → App passwords). Saving a password clears the setup prompt for the user.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

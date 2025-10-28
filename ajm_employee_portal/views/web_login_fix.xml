@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Avoid rendering website navbar/menus on /web/login to prevent env.user singleton errors -->
+    <template id="web_login_layout_no_website" inherit_id="web.login_layout" name="Login Layout - No Website Navbar">
+        <!-- Replace entire root to force web.layout and avoid website.layout computations -->
+        <xpath expr="/t" position="replace">
+            <t t-call="web.layout">
+                <t t-raw="0"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>
