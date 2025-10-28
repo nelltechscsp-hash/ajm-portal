@@ -1,0 +1,2 @@
+nohup: ignoring input
+Falta inotifywait. Instálalo con: sudo apt-get install inotify-tools
